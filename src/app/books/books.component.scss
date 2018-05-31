@@ -1,0 +1,26 @@
+.lists-menu {
+  padding: 10px 50px;
+  .tab-item {
+    height: 55px;
+    padding: 0;
+    .list-group-item {
+      width: 100%;
+      border: none;
+      border-radius: 0;
+      text-transform: uppercase;
+      &.active {
+        color: #fff;
+        &:hover {
+          background: #007bff;
+        }
+      }
+      &:hover {
+        background: #64b5f6;
+        color: #fff;
+      }
+      .badge {
+        float: right;
+      }
+    }
+  }
+}

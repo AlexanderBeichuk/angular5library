@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
+import { BooksComponent } from './books/books.component';
+import { BooksListComponent } from './books-list/books-list.component';
 
 const appRoutes: Routes = [
   {
@@ -18,6 +20,10 @@ const appRoutes: Routes = [
     path: 'cabinet',
     component: CabinetComponent
   },
+  {
+      path: 'books',
+      component: BooksComponent
+  }
   /*{
    path: 'hero/:id',
    component: HeroDetailComponent
@@ -38,7 +44,9 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    CabinetComponent
+    CabinetComponent,
+    BooksComponent,
+    BooksListComponent
   ],
   imports: [
     BrowserModule,

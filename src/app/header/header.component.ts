@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+    tabs = [
+        {
+            name: 'Home',
+            path: '',
+            active: true
+        },
+        {
+            name: 'Books',
+            path: '/books',
+            active: false
+        },
+    ];
+
+    constructor(location: Location) {
+       this.getActiveTab(location.path());
+    }
+
+    getActiveTab(path) {
+        this.tabs.map(function (tab) {
+            if (path  === tab.path) {
+                tab.active = true;
+            } else {
+                tab.active = false;
+            }
+            return tab;
+        });
+    }
 
   ngOnInit() {
   }
