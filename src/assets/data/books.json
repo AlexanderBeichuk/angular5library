@@ -1,0 +1,83 @@
+[
+    {
+      "id": "1",
+      "name": "Совершенный код",
+      "author": "S. Mackonnel",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "2",
+      "name": "Native JS",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "3",
+      "name": "HTML and CSS",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "4",
+      "name": "Patterns",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "5",
+      "name": "Scratch",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "6",
+      "name": "Algoritm",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "7",
+      "name": "Python",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "8",
+      "name": "Ruby",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    },
+    {
+      "id": "9",
+      "name": "Java",
+      "author": "S. Krug",
+      "imageLink": "https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg",
+      "description": "qweqeqweqweqdasdasdqefrgdgergdgvdgdfsgrwfdsfksgwkgfwkfsdksgjwrkdsfskdfgwgkwksgkdgke",
+      "count": 2,
+      "status": "available"
+    }
+]

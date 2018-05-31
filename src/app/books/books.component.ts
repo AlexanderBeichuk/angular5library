@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BooksService } from './books.service';
 
 @Component({
   selector: 'app-books',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
 
-    tabs = [
+    public tabs = [
         {
             name: 'all',
             count: 15,
@@ -39,20 +40,28 @@ export class BooksComponent implements OnInit {
             active: false
         }
     ];
-  constructor() {
-  }
+    public books = [];
 
-  getActiveTab(name) {
-      this.tabs.map(function (tab) {
-          if (name  === tab.name) {
-              tab.active = true;
-          } else {
-              tab.active = false;
-          }
-          return tab;
-      });
-  }
+    constructor(private _booksService: BooksService) {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+      this._booksService.getBooks()
+          .subscribe( function(response) {
+             this.books = response;
+             console.log(this.books);
+          })
+    }
+
+    getActiveTab(name) {
+        this.tabs.map(function (tab) {
+            if (name  === tab.name) {
+                tab.active = true;
+            } else {
+                tab.active = false;
+            }
+            return tab;
+        });
+    }
 
 }
