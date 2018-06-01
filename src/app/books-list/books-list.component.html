@@ -1,4 +1,4 @@
-<div class="books-list">
+<!--<div class="books-list">
     <table class="table table-bordered table-responsive-md">
 
         <thead>
@@ -14,9 +14,9 @@
             <th>Username</th>
         </tr>
         </thead>
-        <!--Table head-->
+        &lt;!&ndash;Table head&ndash;&gt;
 
-        <!--Table body-->
+        &lt;!&ndash;Table body&ndash;&gt;
         <tbody>
         <tr>
             <th scope="row" class="pr-md-3 pr-5">
@@ -52,8 +52,13 @@
             <td>@fat</td>
         </tr>
         </tbody>
-        <!--Table body-->
+        &lt;!&ndash;Table body&ndash;&gt;
 
     </table>
+</div>-->
+
+<div class="tab-item col-2" *ngFor="let book of books">
+    {{book.name}}
+    {{book.author}}
 </div>
 <!--Table-->

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import { IBook } from './book';
+import { Book } from '../models/book';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
@@ -12,8 +12,8 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<IBook[]> {
-      return this.http.get<IBook[]>('/assets/data/books.json')
+  getBooks(): Observable<Book[]> {
+      return this.http.get<Book[]>('/assets/data/books.json')
           .catch(this.errorHandler);
 
   }
