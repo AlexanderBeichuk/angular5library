@@ -29,7 +29,6 @@ export class LabelsComponent implements OnInit {
 
     ngOnInit() {
         this.labelList = this.labelService.getLabelList();
-        console.log(this.labelList);
     }
 
     addLabel(labelForm: NgForm): void {

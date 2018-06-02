@@ -28,7 +28,6 @@ export class BookService {
     }
 
     addBook(book: Book) {
-        debugger;
         this.getConectToList().push({
             name: book.name,
             author: book.author,

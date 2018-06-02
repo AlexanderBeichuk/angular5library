@@ -3,6 +3,15 @@
   .title {
     text-transform: uppercase;
   }
+  .counter {
+    .button-counter {
+      margin-top: 1px;
+    }
+    .input-counter {
+      display: inline-block;
+      min-width: 150px;
+    }
+  }
   .labels-input {
     .labels-active {
       height: 50px;

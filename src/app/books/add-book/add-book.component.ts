@@ -29,7 +29,9 @@ export class AddBookComponent implements OnInit {
 
     resetForm(form): void {
         this.formService.resetForm(form);
+        this.allLabelList = this.labelService.getLabelList();
         this.book.labels = [];
+        this.book.count = 1;
     }
 
     constructor(private bookService: BookService, private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
@@ -40,7 +42,6 @@ export class AddBookComponent implements OnInit {
 
     addLabel(bookForm: NgForm): void {
         if (bookForm.value.$key == null) {
-            debugger;
             this.bookService.addBook(this.book);
         } else {
             this.bookService.updateBook(this.book);
@@ -58,8 +59,17 @@ export class AddBookComponent implements OnInit {
                 name: item.name,
                 color: item.color
             });
-            console.log(arrayTo);
         }
+    }
+
+    setCounterOfBooks(count): void {
+        if (this.validateCounter(count)) {
+            this.book.count = count;
+        }
+    }
+
+    validateCounter(count): boolean {
+        return count > 0 && count < 11 ? true : false;
     }
 
 }
