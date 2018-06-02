@@ -27,11 +27,18 @@ export class AddBookComponent implements OnInit {
 
     allLabelList: Label[];
 
-    resetForm(form): void {
-        this.formService.resetForm(form);
+    resetForm(): void {
+        this.book = {
+            $key: null,
+            name: '',
+            author: '',
+            imageLink: '',
+            description: '',
+            count: 1,
+            status: '',
+            labels: []
+        };
         this.allLabelList = this.labelService.getLabelList();
-        this.book.labels = [];
-        this.book.count = 1;
     }
 
     constructor(private bookService: BookService, private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
@@ -46,7 +53,7 @@ export class AddBookComponent implements OnInit {
         } else {
             this.bookService.updateBook(this.book);
         }
-        this.resetForm(bookForm);
+        /*this.resetForm();*/
         this.tostr.success('Success');
         this.allLabelList = this.labelService.getLabelList();
     }

@@ -21,7 +21,9 @@ export class LabelsComponent implements OnInit {
 
     labelList: Label[];
 
-    @ViewChild('addLabelModal') addLabelModal;
+    @ViewChild('labelModal') labelModal;
+
+    event: string;
 
     resetForm = this.formService.resetForm;
 
@@ -32,13 +34,29 @@ export class LabelsComponent implements OnInit {
     }
 
     addLabel(labelForm: NgForm): void {
-        if (labelForm.value.$key == null)
+        debugger;
+        if (this.label.$key == null) {
             this.labelService.addLabel(this.label);
-        else
+        } else {
             this.labelService.updateLabel(this.label);
-        this.resetForm(labelForm, this.addLabelModal);
+        }
+        this.resetForm(labelForm, this.labelModal);
         this.tostr.success('Success');
         this.labelList = this.labelService.getLabelList();
+    }
+
+    openPopup(event: string): void {
+        this.event = event + ' label';
+        this.labelModal.show();
+    }
+
+    readLabel(label): void {
+        this.label = {
+            $key: label.$key,
+            name: label.name,
+            color: label.color
+        };
+        this.openPopup('Edit');
     }
 
 

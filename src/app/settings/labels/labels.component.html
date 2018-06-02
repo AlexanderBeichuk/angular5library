@@ -1,20 +1,22 @@
-<button type="button" class="btn blue waves-light add-button" (click)="addLabelModal.show()" mdbWavesEffect>Add label</button>
+<p class="h4 mb-4 title">Labels</p>
+
+<button type="button" class="btn blue waves-light add-button" (click)="openPopup('Add')" mdbWavesEffect>Add label</button>
 
 <div class="label-list">
     <label>All Labels</label>
     <div class="labels-all">
-        <a class="badge badge-theme" *ngFor="let label of labelList" [ngStyle]="{'background': label.color}">{{label.name}}</a>
+        <a class="badge badge-theme" *ngFor="let label of labelList" (click)="readLabel(label)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
     </div>
 </div>
 
-<div mdbModal #addLabelModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addLabelModal" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+<div mdbModal #labelModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addLabelModal" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="addLabelModal.hide()">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="labelModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100" id="myModalLabel">Add label</h4>
+                <h4 class="modal-title w-100" id="myModalLabel">{{event}}</h4>
             </div>
             <form #labelForm="ngForm" (ngSubmit)="addLabel(labelForm)">
             <div class="modal-body">
@@ -25,7 +27,7 @@
                 <input type="text" id="colorInput" name="color" #color="ngModel" [(ngModel)]="label.color" class="form-control" required>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="addLabelModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="labelModal.hide()" mdbWavesEffect>Close</button>
                 <button type="submit" class="btn btn-primary relative waves-light" [disabled]="!labelForm.valid" mdbWavesEffect>Save changes</button>
             </div>
             </form>
