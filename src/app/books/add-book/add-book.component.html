@@ -19,7 +19,7 @@
         <div class="counter">
             <button type="button" (click)="setCounterOfBooks(book.count-1)" class="btn blue button-counter"><i class="fa fa-minus"></i></button>
             <input type="number" id="countInput" class="form-control col-1 input-counter"
-                   name="count" #name="ngModel" [(ngModel)]="book.count" (change)="setCounterOfBooks(book.count)" min="1" max="10">
+                   name="count" #name="ngModel" [(ngModel)]="book.count" min="1" max="10">
             <button type="button" (click)="setCounterOfBooks(book.count+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
         </div>
 

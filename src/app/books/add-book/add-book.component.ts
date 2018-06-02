@@ -63,13 +63,8 @@ export class AddBookComponent implements OnInit {
     }
 
     setCounterOfBooks(count): void {
-        if (this.validateCounter(count)) {
+        if (count > 0 && count < 11) {
             this.book.count = count;
         }
     }
-
-    validateCounter(count): boolean {
-        return count > 0 && count < 11 ? true : false;
-    }
-
 }
