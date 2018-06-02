@@ -1,3 +1,13 @@
+<div class="lists-menu row">
+    <div class="tab-item col-2" *ngFor="let tab of tabs">
+        <a class="list-group-item justify-content-between align-items-center waves-light" [ngClass]="{'active': tab.active}" (click)="getActiveTab(tab.name)" mdbWavesEffect>
+            {{tab.name}}
+            <span class="badge badge-primary badge-pill">{{tab.count}}</span>
+        </a>
+    </div>
+</div>
+
+<app-books-panel></app-books-panel>
 <!--<div class="books-list">
     <table class="table table-bordered table-responsive-md">
 

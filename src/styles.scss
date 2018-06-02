@@ -3,6 +3,9 @@
 body {
   max-width: 100%;
   overflow-x: hidden;
+  &.modal-open {
+    overflow-x: hidden;
+  }
 }
 
 .custom-checkbox {
@@ -17,4 +20,15 @@ body {
       background-size: 20px;
     }
   }
+}
+
+.form-control {
+  border-radius: 0;
+}
+label {
+  margin: 10px 0 0;
+  text-transform: uppercase;
+}
+input.ng-invalid.ng-dirty{
+  border: 1px solid red;
 }

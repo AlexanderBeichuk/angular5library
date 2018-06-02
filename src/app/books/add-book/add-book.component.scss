@@ -1,0 +1,17 @@
+.add-book-content {
+  padding: 10px 20px;
+  .title {
+    text-transform: uppercase;
+  }
+  .labels-input {
+    .labels-active {
+      height: 50px;
+      border: 1px solid #ced4da;
+    }
+    .badge-theme {
+      padding: 7px;
+      margin: 0 3px;
+      font-size: 14px;
+    }
+  }
+}

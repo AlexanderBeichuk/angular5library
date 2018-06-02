@@ -1,9 +1,12 @@
+import {Label} from "./label";
+
 export class Book {
-    id: string;
+    $key: string;
     name: string;
     author: string;
     imageLink: string;
     description: string;
     count: number;
-    status: strin;
+    status: string;
+    labels: Label[];
 }

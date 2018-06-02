@@ -19,6 +19,12 @@ export class HeaderComponent implements OnInit {
             path: '/books',
             active: false
         },
+        {
+            name: 'Settings',
+            path: '/settings',
+            active: false
+        }
+
     ];
 
     constructor(location: Location) {
