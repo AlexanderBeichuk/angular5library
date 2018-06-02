@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms'
 import { LabelService } from '../../services/label.service';
 import { ToastrService } from 'ngx-toastr';
 import {Label} from "../../models/label";
+import {FormService} from "../../services/form.service";
 
 
 @Component({
@@ -22,7 +23,9 @@ export class LabelsComponent implements OnInit {
 
     @ViewChild('addLabelModal') addLabelModal;
 
-    constructor(private labelService: LabelService, private tostr: ToastrService) { }
+    resetForm = this.formService.resetForm;
+
+    constructor(private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
         this.labelList = this.labelService.getLabelList();
@@ -34,17 +37,9 @@ export class LabelsComponent implements OnInit {
             this.labelService.addLabel(this.label);
         else
             this.labelService.updateLabel(this.label);
-        this.resetForm(labelForm);
-        this.tostr.success('Succcess');
+        this.resetForm(labelForm, this.addLabelModal);
+        this.tostr.success('Success');
         this.labelList = this.labelService.getLabelList();
-
-    }
-
-    resetForm(employeeForm?: NgForm) {
-        if (employeeForm != null) {
-            employeeForm.reset();
-            this.addLabelModal.hide();
-        }
     }
 
 

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {Book} from "../../models/book";
+import {Label} from "../../models/label";
+import { NgForm } from '@angular/forms'
+import { LabelService } from '../../services/label.service';
+import { ToastrService } from 'ngx-toastr';
+import {BookService} from "../../services/book.service";
+import {FormService} from "../../services/form.service";
 
 @Component({
   selector: 'app-add-book',
@@ -7,11 +14,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddBookComponent implements OnInit {
 
-    showAddBookContent:boolean = false
+    book: Book = {
+        $key: null,
+        name: '',
+        author: '',
+        imageLink: '',
+        description: '',
+        count: 1,
+        status: '',
+        labels: []
+    };
 
-    constructor() { }
+    allLabelList: Label[];
+
+    resetForm(form): void {
+        this.formService.resetForm(form);
+        this.book.labels = [];
+    }
+
+    constructor(private bookService: BookService, private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
+        this.allLabelList = this.labelService.getLabelList();
+    }
+
+    addLabel(bookForm: NgForm): void {
+        if (bookForm.value.$key == null) {
+            debugger;
+            this.bookService.addBook(this.book);
+        } else {
+            this.bookService.updateBook(this.book);
+        }
+        this.resetForm(bookForm);
+        this.tostr.success('Success');
+        this.allLabelList = this.labelService.getLabelList();
+    }
+
+    toggleLabelsInArray(arrayFrom, arrayTo, item): void {
+        var index = arrayFrom.indexOf(item);
+        if (index > -1) {
+            arrayFrom.splice(index, 1);
+            arrayTo.push({
+                name: item.name,
+                color: item.color
+            });
+            console.log(arrayTo);
+        }
     }
 
 }

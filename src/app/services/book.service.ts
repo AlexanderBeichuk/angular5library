@@ -28,6 +28,7 @@ export class BookService {
     }
 
     addBook(book: Book) {
+        debugger;
         this.getConectToList().push({
             name: book.name,
             author: book.author,
@@ -53,8 +54,8 @@ export class BookService {
         return null;
     }
 
-    updateBook($key: string, book: Book) {
-        this.getConectToList().update($key, {
+    updateBook(book: Book) {
+        this.getConectToList().update(book.$key, {
             name: book.name,
             author: book.author,
             imageLink: book.imageLink,

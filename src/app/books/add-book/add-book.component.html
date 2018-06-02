@@ -1,48 +1,48 @@
 
 <div class="add-book-content">
-    <form>
+    <form #bookForm="ngForm" (ngSubmit)="addLabel(bookForm)">
         <p class="h4 mb-4 title">Add book</p>
 
         <!-- Default input -->
         <label for="titleInput">Title</label>
-        <input type="text" id="titleInput" class="form-control">
+        <input type="text" id="titleInput" name="name" #name="ngModel" [(ngModel)]="book.name" class="form-control" required>
 
         <label for="authorInput">Author</label>
-        <input type="text" id="authorInput" class="form-control">
+        <input type="text" id="authorInput" name="author" #name="ngModel" [(ngModel)]="book.author" class="form-control">
 
         <label for="descriptionInput">Description</label>
-        <textarea class="form-control rounded-0" id="descriptionInput" rows="6"></textarea>
+        <textarea class="form-control rounded-0" id="descriptionInput" name="description" #name="ngModel" [(ngModel)]="book.description" rows="6"></textarea>
 
         <label for="imageInput">Image</label>
         <input type="file" id="imageInput" class="form-control">
 
         <label for="countInput">Count</label>
-        <input type="text" id="countInput" class="form-control">
+        <input type="text" id="countInput" class="form-control" name="count" #name="ngModel" [(ngModel)]="book.count">
 
         <label for="statusInput">Status</label>
-        <input type="text" id="statusInput" class="form-control">
+        <input type="text" id="statusInput" class="form-control" name="status" #name="ngModel" [(ngModel)]="book.status">
 
         <label>Labels</label>
         <div class="labels-input row">
             <div class="col-6">
-                <div class="labels-active"></div>
+                <div class="labels-active">
+                    <a class="badge badge-theme" *ngFor="let label of book.labels"
+                       [ngStyle]="{'background': label.color}" (click)="toggleLabelsInArray(book.labels, allLabelList, label)">{{label.name}}</a>
+                </div>
             </div>
             <div class="col-6">
                 <div class="labels-all">
-                    <a class="badge badge-primary badge-theme">Primary</a>
-                    <a class="badge badge-secondary badge-theme">Secondary</a>
-                    <a class="badge badge-success badge-theme">Success</a>
-                    <a class="badge badge-danger badge-theme">Danger</a>
-                    <a class="badge badge-warning badge-theme">Warning</a>
-                    <a class="badge badge-info badge-theme">Info</a>
+                    <a class="badge badge-theme" *ngFor="let label of allLabelList"
+                       [ngStyle]="{'background': label.color}" (click)="toggleLabelsInArray(allLabelList, book.labels, label)">{{label.name}}</a>
                 </div>
             </div>
         </div>
 
 
         <div class="text-right mt-4">
+            <button class="btn btn-warning" type="button" (click)="resetForm(bookForm)">Reset form</button>
             <button class="btn btn-warning" type="submit">Cancel</button>
-            <button class="btn blue" type="submit">Add book</button>
+            <button class="btn blue" type="submit" [disabled]="!bookForm.valid">Add book</button>
         </div>
     </form>
 </div>
