@@ -13,6 +13,7 @@ import {StatusService} from "../../services/status.service";
 export class StatusesComponent implements OnInit {
 
     status: Status = this.resetStatus();
+    selectStatus: Status = this.resetStatus();
 
     statusList: Status[];
 
@@ -29,10 +30,10 @@ export class StatusesComponent implements OnInit {
     }
 
     addStatus(statusForm: NgForm): void {
-        if (this.status.$key == null) {
-            this.statusService.add(this.status);
+        if (this.selectStatus.$key == null) {
+            this.statusService.add(this.selectStatus);
         } else {
-            this.statusService.update(this.status);
+            this.statusService.update(this.selectStatus);
         }
         this.resetForm(statusForm, this.statusModal);
         this.tostr.success('Success');
@@ -40,7 +41,7 @@ export class StatusesComponent implements OnInit {
     }
 
     readstatus(status): void {
-        this.status = {
+        this.selectStatus = {
             $key: status.$key,
             name: status.name,
             color: status.color

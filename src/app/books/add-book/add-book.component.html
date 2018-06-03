@@ -13,22 +13,19 @@
         <textarea class="form-control rounded-0" id="descriptionInput" name="description" #name="ngModel" [(ngModel)]="book.description" rows="6"></textarea>
 
         <label for="imageInput">Image</label>
-        <div *ngIf="currentUpload">
+        <input id="imageInput" class="form-control col-12 col-md-4" type="file" (change)="detectFiles($event)">
+
+        <div class="upload-image row">
+            <div *ngIf="currentUpload" class="progress-content col-12 col-md-4">
             <div class="progress">
                 <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
             </div>
-            Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+                <span *ngIf="currentUpload?.progress < 100; else span_complete">Progress: {{currentUpload?.progress - currentUpload?.progress % 1}}%</span>
+                <ng-template #span_complete>
+                    <span class="font-weight-bold text-success">Complete</span>
+                </ng-template>
+            </div>
         </div>
-        <label>
-            <input id="imageInput" type="file" (change)="detectFiles($event)">
-        </label>
-
-        <button
-            [disabled]="!selectedFiles"
-            (click)="uploadSingle()">
-
-            Upload Single
-        </button>
 
         <label for="countInput">Count</label>
         <div class="counter">

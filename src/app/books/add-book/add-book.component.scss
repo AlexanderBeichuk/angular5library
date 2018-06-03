@@ -3,6 +3,16 @@
   .title {
     text-transform: uppercase;
   }
+
+  .upload-image {
+    .progress-content {
+      padding-right: 0;
+      .progress {
+        margin-top: 10px;
+        border-radius: 0;
+      }
+    }
+  }
   .counter {
     .button-counter {
       margin-top: 1px;

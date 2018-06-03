@@ -14,6 +14,7 @@ import {FormService} from "../../services/form.service";
 export class LabelsComponent implements OnInit {
 
     label:Label = this.resetLabel();
+    selectLabel:Label = this.resetLabel();
 
     labelList: Label[];
 
@@ -30,11 +31,10 @@ export class LabelsComponent implements OnInit {
     }
 
     addLabel(labelForm: NgForm): void {
-        debugger;
-        if (this.label.$key == null) {
-            this.labelService.add(this.label);
+        if (this.selectLabel.$key == null) {
+            this.labelService.add(this.selectLabel);
         } else {
-            this.labelService.update(this.label);
+            this.labelService.update(this.selectLabel);
         }
         this.resetForm(labelForm, this.labelModal);
         this.tostr.success('Success');
@@ -42,7 +42,7 @@ export class LabelsComponent implements OnInit {
     }
 
     readLabel(label): void {
-        this.label = {
+        this.selectLabel = {
             $key: label.$key,
             name: label.name,
             color: label.color

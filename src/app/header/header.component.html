@@ -1,67 +1,28 @@
-<!--Main Navigation-->
-<header class="header">
-
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue">
-
-        <!-- Navbar brand -->
-
-        <!-- Collapsible content -->
-        <links>
-            <a class="navbar-brand" routerLink="" (click)="getActiveTab('')"><strong>Library</strong></a>
-
-            <!-- Links -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item" *ngFor="let tab of tabs" [ngClass]="{'active': tab.active}">
-                    <a class="nav-link" routerLink="{{tab.path}}" (click)="getActiveTab(tab.path)">{{tab.name}}</a>
-                </li>
-            </ul>
-            <!-- Links -->
-
-            <ul class="navbar-nav nav-flex-icons">
-                <li class="nav-item account">
-                    <form class="form-inline ml-auto">
-                        <div class="md-form mt-0 search__book">
-                            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                        </div>
-                        <i class="fa fa-search text-white" aria-hidden="true"></i>
-                    </form>
-                </li>
-                <li class="nav-item account">
-                    <a class="nav-link" routerLink="/cabinet">
-                        <span class="name">Alex Beichuk</span><div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto white" class="img-fluid z-depth-1 rounded-circle"></div></a>
-                </li>
-            </ul>
-        </links>
-        <!-- Collapsible content -->
-
-    </mdb-navbar>
-  <!--<nav class="navbar fixed-top navbar-expand-lg navbar-dark blue scrolling-navbar">
-    <a class="navbar-brand" routerLink=""><strong>Library</strong></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" *ngFor="let tab of tabs" [ngClass]="{'active': tab.active}">
-          <a class="nav-link" routerLink="{{tab.path}}" (click)="getActiveTab(tab.path)">{{tab.name}}</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav nav-flex-icons">
-          <li class="nav-item account">
-              <form class="form-inline ml-auto">
-                  <div class="md-form mt-0 search__book">
-                      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                  </div>
-                  <i class="fa fa-search text-white" aria-hidden="true"></i>
-              </form>
-          </li>
-        <li class="nav-item account">
-          <a class="nav-link" routerLink="/cabinet">
-              <span class="name">Alex Beichuk</span><div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto white" class="img-fluid z-depth-1 rounded-circle"></div></a>
-        </li>
-      </ul>
-    </div>
-  </nav>-->
-
-</header>
-<!--Main Navigation-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue" class="header">
+    <logo><a class="navbar-brand text-white" (click)="getActiveTab('')">Library</a></logo>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngFor="let tab of tabs" [ngClass]="{'active': tab.active}">
+                <a class="nav-link" routerLink="{{tab.path}}" (click)="getActiveTab(tab.path)">{{tab.name}}</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item account">
+                <form class="form-inline ml-auto">
+                    <div class="md-form mt-0 search__book">
+                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    </div>
+                    <i class="fa fa-search text-white" aria-hidden="true"></i>
+                </form>
+            </li>
+            <li class="nav-item account">
+                <a class="nav-link" routerLink="/cabinet">
+                    <span class="name">Alex Beichuk</span>
+                    <div class="avatar mx-auto white">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto white" class="img-fluid z-depth-1 rounded-circle">
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>

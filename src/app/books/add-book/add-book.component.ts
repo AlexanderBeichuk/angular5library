@@ -79,6 +79,7 @@ export class AddBookComponent implements OnInit {
 
     detectFiles(event) {
         this.selectedFiles = event.target.files;
+        this.uploadSingle();
     }
 
     uploadSingle() {

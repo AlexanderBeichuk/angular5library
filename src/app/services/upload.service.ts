@@ -21,18 +21,15 @@ export class UploadService {
 
         this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             (snapshot) => {
-                // загрузка в процессе
                 var snapshotRef = snapshot as firebase.storage.UploadTaskSnapshot;
                 var bytesTransferred = (snapshotRef).bytesTransferred;
                 var totalBytes = (snapshotRef).totalBytes;
                 upload.progress = (bytesTransferred / totalBytes) * 100;
             },
             (error) => {
-                // ошибка при загрузке
                 console.warn(error);
             },
             () => {
-                // загрузка успешна
                 upload.url = this.uploadTask.snapshot.downloadURL;
                 upload.name = upload.file.name;
                 this.saveFileData(upload);
@@ -53,13 +50,10 @@ export class UploadService {
             .catch(error => console.log(error))
     }
 
-    // Deletes the file details from the realtime db
     private deleteFileData(key: string) {
         return this.db.list(`${this.basePath}/`).remove(key);
     }
 
-    // Firebase files must have unique names in their respective storage dir
-    // So the name serves as a unique key
     private deleteFileStorage(name:string) {
         let storageRef = firebase.storage().ref();
         storageRef.child(`${this.basePath}/${name}`).delete()
