@@ -22,7 +22,6 @@ export class LabelsAreaToggleComponent implements OnInit {
     ngOnInit() {
         this.labelTitle = this.title;
         this.componentLabels.all = this.labels;
-        console.log(this.labelTitle, '  ', this.componentLabels.all);
     }
 
     toggleLabelsInArray(arrayFrom, arrayTo, item): void {

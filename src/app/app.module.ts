@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,6 +21,7 @@ import { BooksPanelComponent } from './books/books-panel/books-panel.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LabelsComponent } from './settings/labels/labels.component';
 import { LabelsAreaToggleComponent } from './books/labels-area-toggle/labels-area-toggle.component';
+import { StatusesComponent } from './settings/statuses/statuses.component';
 
 const appRoutes: Routes = [
     {
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
       BooksPanelComponent,
       SettingsComponent,
       LabelsComponent,
-      LabelsAreaToggleComponent
+      LabelsAreaToggleComponent,
+      StatusesComponent
   ],
   imports: [
       BrowserModule,

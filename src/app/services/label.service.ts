@@ -13,7 +13,7 @@ export class LabelService {
         return this.firebase.list('labels');
     }
 
-    getLabelList() {
+    getList() {
         var x = this.getConectToList();
         var list = [];
         x.snapshotChanges().subscribe(item => {
@@ -26,7 +26,7 @@ export class LabelService {
         return list;
     }
 
-    addLabel(label: Label) {
+    add(label: Label) {
         this.getConectToList().push({
             name: label.name,
             color: label.color
@@ -48,14 +48,14 @@ export class LabelService {
         //return result;
      }*/
 
-    updateLabel(label: Label) {
+    update(label: Label) {
         this.getConectToList().update(label.$key, {
             name: label.name,
             color: label.color
         });
     }
 
-    deleteLabel($key: string) {
+    delete($key: string) {
         this.getConectToList().remove($key);
     }
 }

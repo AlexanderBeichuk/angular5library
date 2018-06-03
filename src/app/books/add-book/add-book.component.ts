@@ -6,6 +6,8 @@ import { LabelService } from '../../services/label.service';
 import { ToastrService } from 'ngx-toastr';
 import {BookService} from "../../services/book.service";
 import {FormService} from "../../services/form.service";
+import { UploadService } from '../../services/upload.service';
+import { Upload } from '../../models/upload';
 import {Status} from "../../models/status";
 import {StatusService} from "../../services/status.service";
 
@@ -20,23 +22,27 @@ export class AddBookComponent implements OnInit {
 
     allLabelList: Label[];
     allStatusesList: Status[];
+    selectedFiles: FileList;
+    currentUpload: Upload;
 
-    constructor(private bookService: BookService, private labelService: LabelService, private statusService: StatusService, private tostr: ToastrService, private formService: FormService) { }
+    constructor(private bookService: BookService, private labelService: LabelService, private statusService: StatusService,
+                private uploadService: UploadService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
-        this.allLabelList = this.labelService.getLabelList();
-        this.allStatusesList = this.statusService.getStatusList();
+        this.allLabelList = this.labelService.getList();
+        this.allStatusesList = this.statusService.getList();
     }
 
-    addLabel(bookForm: NgForm): void {
+    addBook(bookForm: NgForm): void {
+        this.book.imageLink = this.currentUpload.url;
         if (bookForm.value.$key == null) {
-            this.bookService.addBook(this.book);
+            this.bookService.add(this.book);
         } else {
-            this.bookService.updateBook(this.book);
+            this.bookService.update(this.book);
         }
         /*this.resetForm();*/
         this.tostr.success('Success');
-        this.allLabelList = this.labelService.getLabelList();
+        this.allLabelList = this.labelService.getList();
     }
 
     setCounterOfBooks(count): void {
@@ -47,7 +53,7 @@ export class AddBookComponent implements OnInit {
 
     resetForm(): void {
         this.book = this.resetBook();
-        this.allLabelList = this.labelService.getLabelList();
+        this.allLabelList = this.labelService.getList();
     }
 
     resetBook(): Book {
@@ -69,5 +75,15 @@ export class AddBookComponent implements OnInit {
 
     setActiveStatuses(statuses) {
         this.book.statuses = statuses;
+    }
+
+    detectFiles(event) {
+        this.selectedFiles = event.target.files;
+    }
+
+    uploadSingle() {
+        let file = this.selectedFiles.item(0);
+        this.currentUpload = new Upload(file);
+        this.uploadService.pushUpload(this.currentUpload)
     }
 }

@@ -13,7 +13,7 @@ export class StatusService {
         return this.firebase.list('statuses');
     }
 
-    getStatusList() {
+    getList() {
         var x = this.getConectToList();
         var list = [];
         x.snapshotChanges().subscribe(item => {
@@ -26,7 +26,7 @@ export class StatusService {
         return list;
     }
 
-    addStatus(status: Status) {
+    add(status: Status) {
         this.getConectToList().push({
             name: status.name,
             color: status.color
@@ -48,14 +48,14 @@ export class StatusService {
         return null;
     }*/
 
-    updateStatus(status: Status) {
+    update(status: Status) {
         this.getConectToList().update(status.$key, {
             name: status.name,
             color: status.color
         });
     }
 
-    deleteStatus($key: string) {
+    delete($key: string) {
         this.getConectToList().remove($key);
     }
 }

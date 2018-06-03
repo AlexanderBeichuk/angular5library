@@ -1,6 +1,6 @@
-<p class="h4 mb-4 title">Labels</p>
+<p class="h4 title">Labels</p>
 
-<button type="button" class="btn blue waves-light add-button" (click)="openPopup('Add', resetLabel())" mdbWavesEffect>Add label</button>
+<button type="button" class="btn blue waves-light add-button" (click)="openPopup('add', resetLabel())" mdbWavesEffect>Add label</button>
 
 <div class="label-list">
     <label>All Labels</label>
@@ -16,7 +16,7 @@
                 <button type="button" class="close pull-right" aria-label="Close" (click)="labelModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100" id="myModalLabel">{{event}}</h4>
+                <h4 class="modal-title text-uppercase w-100" id="myModalLabel">{{event}} label</h4>
             </div>
             <form #labelForm="ngForm" (ngSubmit)="addLabel(labelForm)">
             <div class="modal-body">
@@ -27,8 +27,9 @@
                 <input type="text" id="colorInput" name="color" #color="ngModel" [(ngModel)]="label.color" class="form-control" required>
             </div>
             <div class="modal-footer">
+                <button *ngIf="event === 'edit'" type="button" class="btn btn-danger waves-light" aria-status="Close" (click)="deleteLabel(label.$key)" mdbWavesEffect>Delete</button>
                 <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="labelModal.hide()" mdbWavesEffect>Close</button>
-                <button type="submit" class="btn btn-primary relative waves-light" [disabled]="!labelForm.valid" mdbWavesEffect>Save changes</button>
+                <button type="submit" class="btn btn-primary relative waves-light" [disabled]="!labelForm.valid" mdbWavesEffect>Save</button>
             </div>
             </form>
         </div>

@@ -47,7 +47,7 @@ export class BooksListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.bookList = this.bookService.getBookList();
+        this.bookList = this.bookService.getList();
     }
 
     getActiveTab(name) {

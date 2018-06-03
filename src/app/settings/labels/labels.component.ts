@@ -26,25 +26,19 @@ export class LabelsComponent implements OnInit {
     constructor(private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
-        this.labelList = this.labelService.getLabelList();
+        this.labelList = this.labelService.getList();
     }
 
     addLabel(labelForm: NgForm): void {
         debugger;
         if (this.label.$key == null) {
-            this.labelService.addLabel(this.label);
+            this.labelService.add(this.label);
         } else {
-            this.labelService.updateLabel(this.label);
+            this.labelService.update(this.label);
         }
         this.resetForm(labelForm, this.labelModal);
         this.tostr.success('Success');
-        this.labelList = this.labelService.getLabelList();
-    }
-
-    openPopup(event: string, label: Label): void {
-        this.event = event + ' label';
-        this.label = label;
-        this.labelModal.show();
+        this.labelList = this.labelService.getList();
     }
 
     readLabel(label): void {
@@ -53,7 +47,14 @@ export class LabelsComponent implements OnInit {
             name: label.name,
             color: label.color
         };
-        this.openPopup('Edit', label);
+        this.openPopup('edit', label);
+    }
+
+    deleteLabel(key: string): void {
+        this.labelService.delete(key);
+        this.resetLabel();
+        this.labelModal.hide();
+        this.labelList = this.labelService.getList();
     }
 
     resetLabel(): Label {
@@ -62,5 +63,11 @@ export class LabelsComponent implements OnInit {
             name: '',
             color: ''
         }
+    }
+
+    openPopup(event: string, label: Label): void {
+        this.event = event;
+        this.label = label;
+        this.labelModal.show();
     }
 }

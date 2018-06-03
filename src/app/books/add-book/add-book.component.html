@@ -1,5 +1,5 @@
 <div class="add-book-content container">
-    <form #bookForm="ngForm" (ngSubmit)="addLabel(bookForm)">
+    <form #bookForm="ngForm">
         <p class="h4 mb-4 title">Add book</p>
 
         <!-- Default input -->
@@ -13,7 +13,22 @@
         <textarea class="form-control rounded-0" id="descriptionInput" name="description" #name="ngModel" [(ngModel)]="book.description" rows="6"></textarea>
 
         <label for="imageInput">Image</label>
-        <input type="file" id="imageInput" class="form-control">
+        <div *ngIf="currentUpload">
+            <div class="progress">
+                <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+            </div>
+            Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
+        </div>
+        <label>
+            <input id="imageInput" type="file" (change)="detectFiles($event)">
+        </label>
+
+        <button
+            [disabled]="!selectedFiles"
+            (click)="uploadSingle()">
+
+            Upload Single
+        </button>
 
         <label for="countInput">Count</label>
         <div class="counter">
@@ -30,7 +45,7 @@
         <div class="text-right mt-4">
             <button class="btn btn-warning" type="button" (click)="resetForm(bookForm)">Reset form</button>
             <button class="btn btn-warning" type="submit">Cancel</button>
-            <button class="btn blue" type="submit" [disabled]="!bookForm.valid">Add book</button>
+            <button class="btn blue" type="button" [disabled]="!bookForm.valid" (click)="addBook(bookForm)">Add book</button>
         </div>
     </form>
 </div>

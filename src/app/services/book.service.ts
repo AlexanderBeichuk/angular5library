@@ -14,7 +14,7 @@ export class BookService {
         return this.firebase.list('books');
     }
 
-    getBookList() {
+    getList() {
         var x = this.getConectToList();
         var list = [];
         x.snapshotChanges().subscribe(item => {
@@ -27,7 +27,7 @@ export class BookService {
         return list;
     }
 
-    addBook(book: Book) {
+    add(book: Book) {
         this.getConectToList().push({
             name: book.name,
             author: book.author,
@@ -53,7 +53,7 @@ export class BookService {
         return null;
     }*/
 
-    updateBook(book: Book) {
+    update(book: Book) {
         this.getConectToList().update(book.$key, {
             name: book.name,
             author: book.author,
@@ -65,7 +65,7 @@ export class BookService {
         });
     }
 
-    deleteBook($key: string) {
+    delete($key: string) {
         this.getConectToList().remove($key);
     }
 }
