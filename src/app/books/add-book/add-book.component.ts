@@ -6,6 +6,8 @@ import { LabelService } from '../../services/label.service';
 import { ToastrService } from 'ngx-toastr';
 import {BookService} from "../../services/book.service";
 import {FormService} from "../../services/form.service";
+import {Status} from "../../models/status";
+import {StatusService} from "../../services/status.service";
 
 @Component({
   selector: 'app-add-book',
@@ -14,37 +16,16 @@ import {FormService} from "../../services/form.service";
 })
 export class AddBookComponent implements OnInit {
 
-    book: Book = {
-        $key: null,
-        name: '',
-        author: '',
-        imageLink: '',
-        description: '',
-        count: 1,
-        status: '',
-        labels: []
-    };
+    book: Book = this.resetBook();
 
     allLabelList: Label[];
+    allStatusesList: Status[];
 
-    resetForm(): void {
-        this.book = {
-            $key: null,
-            name: '',
-            author: '',
-            imageLink: '',
-            description: '',
-            count: 1,
-            status: '',
-            labels: []
-        };
-        this.allLabelList = this.labelService.getLabelList();
-    }
-
-    constructor(private bookService: BookService, private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
+    constructor(private bookService: BookService, private labelService: LabelService, private statusService: StatusService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
         this.allLabelList = this.labelService.getLabelList();
+        this.allStatusesList = this.statusService.getStatusList();
     }
 
     addLabel(bookForm: NgForm): void {
@@ -58,20 +39,35 @@ export class AddBookComponent implements OnInit {
         this.allLabelList = this.labelService.getLabelList();
     }
 
-    toggleLabelsInArray(arrayFrom, arrayTo, item): void {
-        var index = arrayFrom.indexOf(item);
-        if (index > -1) {
-            arrayFrom.splice(index, 1);
-            arrayTo.push({
-                name: item.name,
-                color: item.color
-            });
-        }
-    }
-
     setCounterOfBooks(count): void {
         if (count > 0 && count < 11) {
             this.book.count = count;
         }
+    }
+
+    resetForm(): void {
+        this.book = this.resetBook();
+        this.allLabelList = this.labelService.getLabelList();
+    }
+
+    resetBook(): Book {
+        return {
+            $key: null,
+            name: '',
+            author: '',
+            imageLink: '',
+            description: '',
+            count: 1,
+            statuses: [],
+            labels: []
+        };
+    }
+
+    setActiveLabels(labels) {
+        this.book.labels = labels;
+    }
+
+    setActiveStatuses(statuses) {
+        this.book.statuses = statuses;
     }
 }

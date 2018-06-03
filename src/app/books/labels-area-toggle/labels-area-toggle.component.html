@@ -1,0 +1,17 @@
+<div class="labels-area">
+    <label>{{labelTitle}}</label>
+    <div class="labels-input row">
+        <div class="col-6">
+            <div class="labels-active">
+                <a class="badge badge-theme" *ngFor="let label of componentLabels.active"
+                [ngStyle]="{'background': label.color}" (click)="toggleLabelsInArray(componentLabels.active, componentLabels.all, label)">{{label.name}}</a>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="labels-all">
+                <a class="badge badge-theme" *ngFor="let label of componentLabels.all"
+                    [ngStyle]="{'background': label.color}" (click)="toggleLabelsInArray(componentLabels.all, componentLabels.active, label)">{{label.name}}</a>
+            </div>
+        </div>
+    </div>
+</div>

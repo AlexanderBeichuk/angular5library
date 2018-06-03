@@ -13,11 +13,7 @@ import {FormService} from "../../services/form.service";
 })
 export class LabelsComponent implements OnInit {
 
-    label:Label = {
-        $key: null,
-        name: '',
-        color: ''
-    };
+    label:Label = this.resetLabel();
 
     labelList: Label[];
 
@@ -45,8 +41,9 @@ export class LabelsComponent implements OnInit {
         this.labelList = this.labelService.getLabelList();
     }
 
-    openPopup(event: string): void {
+    openPopup(event: string, label: Label): void {
         this.event = event + ' label';
+        this.label = label;
         this.labelModal.show();
     }
 
@@ -56,8 +53,14 @@ export class LabelsComponent implements OnInit {
             name: label.name,
             color: label.color
         };
-        this.openPopup('Edit');
+        this.openPopup('Edit', label);
     }
 
-
+    resetLabel(): Label {
+        return {
+            $key: null,
+            name: '',
+            color: ''
+        }
+    }
 }

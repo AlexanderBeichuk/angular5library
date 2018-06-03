@@ -20,6 +20,7 @@ import { AddBookComponent } from './books/add-book/add-book.component';
 import { BooksPanelComponent } from './books/books-panel/books-panel.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LabelsComponent } from './settings/labels/labels.component';
+import { LabelsAreaToggleComponent } from './books/labels-area-toggle/labels-area-toggle.component';
 
 const appRoutes: Routes = [
     {
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
       AddBookComponent,
       BooksPanelComponent,
       SettingsComponent,
-      LabelsComponent
+      LabelsComponent,
+      LabelsAreaToggleComponent
   ],
   imports: [
       BrowserModule,

@@ -23,25 +23,9 @@
             <button type="button" (click)="setCounterOfBooks(book.count+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
         </div>
 
-        <label for="statusInput">Status</label>
-        <input type="text" id="statusInput" class="form-control" name="status" #name="ngModel" [(ngModel)]="book.status">
+        <app-labels-area-toggle [title]="'Statuses'" [labels]="allStatusesList" (active)="setActiveStatuses($event)"></app-labels-area-toggle>
 
-        <label>Labels</label>
-        <div class="labels-input row">
-            <div class="col-6">
-                <div class="labels-active">
-                    <a class="badge badge-theme" *ngFor="let label of book.labels"
-                       [ngStyle]="{'background': label.color}" (click)="toggleLabelsInArray(book.labels, allLabelList, label)">{{label.name}}</a>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="labels-all">
-                    <a class="badge badge-theme" *ngFor="let label of allLabelList"
-                       [ngStyle]="{'background': label.color}" (click)="toggleLabelsInArray(allLabelList, book.labels, label)">{{label.name}}</a>
-                </div>
-            </div>
-        </div>
-
+        <app-labels-area-toggle [title]="'Labels'" [labels]="allLabelList" (active)="setActiveLabels($event)"></app-labels-area-toggle>
 
         <div class="text-right mt-4">
             <button class="btn btn-warning" type="button" (click)="resetForm(bookForm)">Reset form</button>

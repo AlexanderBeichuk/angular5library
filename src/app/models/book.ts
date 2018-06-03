@@ -1,4 +1,5 @@
-import {Label} from "./label";
+import { Label } from "./label";
+import { Status } from "./status"
 
 export class Book {
     $key: string;
@@ -7,6 +8,6 @@ export class Book {
     imageLink: string;
     description: string;
     count: number;
-    status: string;
+    statuses: Status[];
     labels: Label[];
 }

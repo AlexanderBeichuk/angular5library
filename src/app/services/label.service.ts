@@ -33,10 +33,10 @@ export class LabelService {
         });
     }
 
-    readLabel($key: string) {
+    /*readLabel($key: string) {
         var x = this.getConectToList();
+        var result = null;
         x.snapshotChanges().subscribe(item => {
-            debugger;
             item.forEach(element => {
                 var y = element.payload.toJSON();
                 y["$key"] = element.key;
@@ -45,8 +45,8 @@ export class LabelService {
                 }
             });
         });
-        return null;
-     }
+        //return result;
+     }*/
 
     updateLabel(label: Label) {
         this.getConectToList().update(label.$key, {
