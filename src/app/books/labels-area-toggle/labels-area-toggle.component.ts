@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import {Label} from "../../models/label";
 
 @Component({
   selector: 'app-labels-area-toggle',
@@ -21,11 +23,14 @@ export class LabelsAreaToggleComponent implements OnInit {
 
     ngOnInit() {
         this.labelTitle = this.title;
-        this.componentLabels.all = this.labels;
+        this.labels.subscribe(labels => {
+            this.componentLabels.all = labels as Label[];
+        });
+        console.log(this.componentLabels);
     }
 
     toggleLabelsInArray(arrayFrom, arrayTo, item): void {
-        var index = arrayFrom.indexOf(item);
+        let index = arrayFrom.indexOf(item);
         if (index > -1) {
             arrayFrom.splice(index, 1);
             arrayTo.push({

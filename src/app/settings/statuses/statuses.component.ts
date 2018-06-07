@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {Status} from "../../models/status";
-import {NgForm} from "@angular/forms";
-import {FormService} from "../../services/form.service";
-import {ToastrService} from "ngx-toastr";
-import {StatusService} from "../../services/status.service";
+import {Status} from '../../models/status';
+import {NgForm} from '@angular/forms';
+import {FormService} from '../../services/form.service';
+import {ToastrService} from 'ngx-toastr';
+import {StatusService} from '../../services/status.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-statuses',
@@ -15,7 +16,7 @@ export class StatusesComponent implements OnInit {
     status: Status = this.resetStatus();
     selectStatus: Status = this.resetStatus();
 
-    statusList: Status[];
+    statusList: Observable<any>;
 
     @ViewChild('statusModal') statusModal;
 
@@ -27,6 +28,7 @@ export class StatusesComponent implements OnInit {
 
     ngOnInit() {
         this.statusList = this.statusService.getList();
+        console.log(this.statusList);
     }
 
     addStatus(statusForm: NgForm): void {
@@ -37,10 +39,9 @@ export class StatusesComponent implements OnInit {
         }
         this.resetForm(statusForm, this.statusModal);
         this.tostr.success('Success');
-        this.statusList = this.statusService.getList();
     }
 
-    readstatus(status): void {
+    readStatus(status): void {
         this.selectStatus = {
             $key: status.$key,
             name: status.name,
@@ -53,7 +54,6 @@ export class StatusesComponent implements OnInit {
         this.statusService.delete(key);
         this.resetStatus();
         this.statusModal.hide();
-        this.statusList = this.statusService.getList();
     }
 
     openPopup(event: string, status: Status): void {
@@ -67,7 +67,6 @@ export class StatusesComponent implements OnInit {
             $key: null,
             name: '',
             color: ''
-        }
+        };
     }
-
 }

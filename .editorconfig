@@ -7,29 +7,33 @@ indent_size=4
 
 [{.eslintrc,.babelrc,.stylelintrc,jest.config,*.json,*.jsb3,*.jsb2,*.bowerrc}]
 indent_style=space
-indent_size=2
+indent_size=3
 
 [{jshint.json,*.jshintrc}]
 indent_style=space
-indent_size=2
+indent_size=3
 
 [*.less]
 indent_style=space
-indent_size=2
+indent_size=3
 
 [*.scss]
 indent_style=space
-indent_size=2
+indent_size=3
 
 [*.coffee]
 indent_style=space
-indent_size=2
+indent_size=3
 
 [{.analysis_options,*.yml,*.yaml}]
 indent_style=space
-indent_size=2
+indent_size=3
 
 [tslint.json]
 indent_style=space
-indent_size=2
+indent_size=3
+
+[*.js]
+indent_style = space
+indent_size = 3
 

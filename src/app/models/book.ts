@@ -1,5 +1,5 @@
-import { Label } from "./label";
-import { Status } from "./status"
+import { Label } from './label';
+import { Status } from './status';
 
 export class Book {
     $key: string;

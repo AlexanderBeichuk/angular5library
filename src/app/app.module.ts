@@ -3,12 +3,14 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule, Routes } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angular5-social-login';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -18,15 +20,24 @@ import { CabinetComponent } from './cabinet/cabinet.component';
 import { BooksComponent } from './books/books.component';
 import { BooksListComponent } from './books/books-list/books-list.component';
 import { AddBookComponent } from './books/add-book/add-book.component';
-import { BooksPanelComponent } from './books/books-panel/books-panel.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LabelsComponent } from './settings/labels/labels.component';
 import { LabelsAreaToggleComponent } from './books/labels-area-toggle/labels-area-toggle.component';
 import { StatusesComponent } from './settings/statuses/statuses.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
     {
         path: '',
+        redirectTo: '/login',
+        pathMatch: 'full'
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
+        path: 'home',
         component: HomeComponent
     },
     {
@@ -59,6 +70,22 @@ const appRoutes: Routes = [
    }*/
 ];
 
+export function getAuthServiceConfigs() {
+    let config = new AuthServiceConfig(
+        [
+            {
+                id: FacebookLoginProvider.PROVIDER_ID,
+                provider: new FacebookLoginProvider('Your-Facebook-app-id')
+            },
+            {
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider('430783499594-a06omktkcf2uf1t1drq3f8jfafluplt0.apps.googleusercontent.com')
+            },
+        ]
+    );
+    return config;
+}
+
 @NgModule({
   declarations: [
       AppComponent,
@@ -69,11 +96,11 @@ const appRoutes: Routes = [
       BooksComponent,
       BooksListComponent,
       AddBookComponent,
-      BooksPanelComponent,
       SettingsComponent,
       LabelsComponent,
       LabelsAreaToggleComponent,
-      StatusesComponent
+      StatusesComponent,
+      LoginComponent
   ],
   imports: [
       BrowserModule,
@@ -87,10 +114,16 @@ const appRoutes: Routes = [
           preventDuplicates: true,
       }),
       RouterModule.forRoot(appRoutes),
-      FormsModule
+      FormsModule,
+      SocialLoginModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [],
+  providers: [
+      {
+          provide: AuthServiceConfig,
+          useFactory: getAuthServiceConfigs
+      }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

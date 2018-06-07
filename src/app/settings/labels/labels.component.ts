@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 import { LabelService } from '../../services/label.service';
 import { ToastrService } from 'ngx-toastr';
-import {Label} from "../../models/label";
-import {FormService} from "../../services/form.service";
-
+import { Label } from '../../models/label';
+import { FormService } from '../../services/form.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-labels',
@@ -13,10 +13,10 @@ import {FormService} from "../../services/form.service";
 })
 export class LabelsComponent implements OnInit {
 
-    label:Label = this.resetLabel();
-    selectLabel:Label = this.resetLabel();
+    label: Label = this.resetLabel();
+    selectLabel: Label = this.resetLabel();
 
-    labelList: Label[];
+    labelList: Observable<any>;
 
     @ViewChild('labelModal') labelModal;
 
@@ -38,7 +38,6 @@ export class LabelsComponent implements OnInit {
         }
         this.resetForm(labelForm, this.labelModal);
         this.tostr.success('Success');
-        this.labelList = this.labelService.getList();
     }
 
     readLabel(label): void {
@@ -54,7 +53,6 @@ export class LabelsComponent implements OnInit {
         this.labelService.delete(key);
         this.resetLabel();
         this.labelModal.hide();
-        this.labelList = this.labelService.getList();
     }
 
     resetLabel(): Label {
@@ -62,7 +60,7 @@ export class LabelsComponent implements OnInit {
             $key: null,
             name: '',
             color: ''
-        }
+        };
     }
 
     openPopup(event: string, label: Label): void {
@@ -70,4 +68,15 @@ export class LabelsComponent implements OnInit {
         this.label = label;
         this.labelModal.show();
     }
+
+    /*setList() {
+        this.labelService.getConectToList().snapshotChanges().subscribe(item => {
+             = [];
+            item.forEach(element => {
+                var y = element.payload.toJSON();
+                y["$key"] = element.key;
+                this.labelList.push(y as Label);
+            });
+        });
+    }*/
 }

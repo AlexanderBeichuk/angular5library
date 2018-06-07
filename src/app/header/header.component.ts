@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import { AuthorizeService } from '../services/authorize.service';
+
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
     tabs = [
         {
             name: 'Home',
-            path: '',
+            path: '/home',
             active: true
         },
         {
@@ -26,14 +28,15 @@ export class HeaderComponent implements OnInit {
         }
 
     ];
+    currentUser: any = this.authorizeService.currentUser;
 
-    constructor(location: Location) {
-       this.getActiveTab(location.path());
+    constructor(location: Location, private authorizeService: AuthorizeService) {
+        this.getActiveTab(location.path());
     }
 
     getActiveTab(path) {
         this.tabs.map(function (tab) {
-            if (path  === tab.path) {
+            if (path === tab.path) {
                 tab.active = true;
             } else {
                 tab.active = false;
@@ -42,7 +45,9 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.currentUser = this.authorizeService.getUser();
+        console.log(this.currentUser);
+    }
 
 }

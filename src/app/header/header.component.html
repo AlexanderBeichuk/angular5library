@@ -15,11 +15,11 @@
                     <i class="fa fa-search text-white" aria-hidden="true"></i>
                 </form>
             </li>
-            <li class="nav-item account">
+            <li class="nav-item account" *ngIf="authorizeService.currentUser">
                 <a class="nav-link" routerLink="/cabinet">
-                    <span class="name">Alex Beichuk</span>
-                    <div class="avatar mx-auto white">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="avatar mx-auto white" class="img-fluid z-depth-1 rounded-circle">
+                    <span class="name">{{authorizeService.currentUser.name}}</span>
+                    <div class="avatar mx-auto">
+                        <img [src]="authorizeService.currentUser.image" alt="avatar mx-auto white" class="img-fluid z-depth-1">
                     </div>
                 </a>
             </li>

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Book} from "../../models/book";
-import {Label} from "../../models/label";
-import { NgForm } from '@angular/forms'
+import { Book } from '../../models/book';
+import { NgForm } from '@angular/forms';
 import { LabelService } from '../../services/label.service';
 import { ToastrService } from 'ngx-toastr';
-import {BookService} from "../../services/book.service";
-import {FormService} from "../../services/form.service";
+import { BookService } from '../../services/book.service';
+import { FormService } from '../../services/form.service';
 import { UploadService } from '../../services/upload.service';
 import { Upload } from '../../models/upload';
-import {Status} from "../../models/status";
-import {StatusService} from "../../services/status.service";
+import {StatusService} from '../../services/status.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-add-book',
@@ -20,8 +19,8 @@ export class AddBookComponent implements OnInit {
 
     book: Book = this.resetBook();
 
-    allLabelList: Label[];
-    allStatusesList: Status[];
+    allLabelList: Observable<any>;
+    allStatusList: Observable<any>;
     selectedFiles: FileList;
     currentUpload: Upload;
 
@@ -30,11 +29,11 @@ export class AddBookComponent implements OnInit {
 
     ngOnInit() {
         this.allLabelList = this.labelService.getList();
-        this.allStatusesList = this.statusService.getList();
+        this.allStatusList = this.statusService.getList();
     }
 
     addBook(bookForm: NgForm): void {
-        this.book.imageLink = this.currentUpload.url;
+        this.book.imageLink = this.currentUpload ? this.currentUpload.url : null;
         if (bookForm.value.$key == null) {
             this.bookService.add(this.book);
         } else {
@@ -85,6 +84,6 @@ export class AddBookComponent implements OnInit {
     uploadSingle() {
         let file = this.selectedFiles.item(0);
         this.currentUpload = new Upload(file);
-        this.uploadService.pushUpload(this.currentUpload)
+        this.uploadService.pushUpload(this.currentUpload);
     }
 }

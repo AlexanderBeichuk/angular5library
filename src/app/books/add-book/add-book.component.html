@@ -35,7 +35,7 @@
             <button type="button" (click)="setCounterOfBooks(book.count+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
         </div>
 
-        <app-labels-area-toggle [title]="'Statuses'" [labels]="allStatusesList" (active)="setActiveStatuses($event)"></app-labels-area-toggle>
+        <app-labels-area-toggle [title]="'Statuses'" [labels]="allStatusList" (active)="setActiveStatuses($event)"></app-labels-area-toggle>
 
         <app-labels-area-toggle [title]="'Labels'" [labels]="allLabelList" (active)="setActiveLabels($event)"></app-labels-area-toggle>
 

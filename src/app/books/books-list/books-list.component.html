@@ -1,14 +1,26 @@
-<div class="lists-menu row">
+<!--<div class="lists-menu row">
     <div class="tab-item col-2" *ngFor="let tab of tabs">
         <a class="list-group-item justify-content-between align-items-center waves-light" [ngClass]="{'active': tab.active}" (click)="getActiveTab(tab.name)" mdbWavesEffect>
             {{tab.name}}
             <span class="badge badge-primary badge-pill">{{tab.count}}</span>
         </a>
     </div>
+</div>-->
+
+<div class="panel-book">
+    <div *ngIf="filterEnable" class="filters-area">
+        <a class="clear-filters" (click)="clearSortAndFilters()">
+            <i class="fa fa-times-circle"></i>
+        </a>
+        <div class="labels-all">
+            <a class="badge badge-theme" *ngFor="let label of filterLabels" (click)="removeLabelFromFilterFiltering(label.name)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
+        </div>
+    </div>
+    <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
 </div>
 
-<app-books-panel></app-books-panel>
-<!--<div class="books-list">
+
+<div class="books-list">
     <table class="table table-bordered table-responsive-md">
 
         <thead>
@@ -19,56 +31,45 @@
                     <label class="custom-control-label" for="customCheck1"></label>
                 </div>
             </th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th></th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Count</th>
+            <th>Labels</th>
+            <th></th>
         </tr>
         </thead>
-        &lt;!&ndash;Table head&ndash;&gt;
-
-        &lt;!&ndash;Table body&ndash;&gt;
         <tbody>
-        <tr>
-            <th scope="row" class="pr-md-3 pr-5">
+        <tr *ngFor="let book of bookList">
+            <td scope="row" class="pr-md-3 pr-5">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                    <label class="custom-control-label" for="customCheck2"></label>
+                    <input type="checkbox" class="custom-control-input" id="{{book.name}}">
+                    <label class="custom-control-label" for="{{book.name}}"></label>
                 </div>
-            </th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row" class="pr-md-3 pr-5">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                    <label class="custom-control-label" for="customCheck3"></label>
+            </td>
+            <td class="td-image">
+                <img class="image" [src]="book.imageLink || '../../../assets/images/book.png'">
+            </td>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td class="td-count">{{book.count}}</td>
+            <td class="td-labels">
+                <div class="labels-all">
+                    <a class="badge badge-theme" *ngFor="let label of book.labels" (click)="addLabelToFilterFiltering(bookList, 'labels', label)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
+                    <a class="badge badge-theme" *ngFor="let label of book.statuses" (click)="addLabelToFilterFiltering(bookList, 'statuses', label)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
                 </div>
-            </th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@TwBootstrap</td>
-        </tr>
-        <tr>
-            <th scope="row" class="pr-md-3 pr-5">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                    <label class="custom-control-label" for="customCheck4"></label>
-                </div>
-            </th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
+            </td>
+            <td class="actions">
+                <a>
+                    <i class="fa fa-comments"></i>
+                </a>
+                <a>
+                    <i class="fa fa-arrow-down"></i>
+                    <i  *ngIf="false" class="fa fa-arrow-up"></i>
+                </a>
+            </td>
         </tr>
         </tbody>
-        &lt;!&ndash;Table body&ndash;&gt;
-
     </table>
-</div>-->
-
-<div class="tab-item col-2" *ngFor="let book of books">
-    {{book.name}}
-    {{book.author}}
 </div>
 <!--Table-->

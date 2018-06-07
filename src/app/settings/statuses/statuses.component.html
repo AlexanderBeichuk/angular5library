@@ -5,7 +5,7 @@
 <div class="status-list">
     <label>All statuses</label>
     <div class="statuses-all">
-        <a class="badge badge-theme" *ngFor="let status of statusList" (click)="readstatus(status)" [ngStyle]="{'background': status.color}">{{status.name}}</a>
+        <a class="badge badge-theme" *ngFor="let status of statusList | async" (click)="readStatus(status)" [ngStyle]="{'background': status.color}">{{status.name}}</a>
     </div>
 </div>
 
