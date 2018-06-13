@@ -7,7 +7,7 @@ import { BookService } from '../../services/book.service';
 import { FormService } from '../../services/form.service';
 import { UploadService } from '../../services/upload.service';
 import { Upload } from '../../models/upload';
-import {StatusService} from '../../services/status.service';
+import { StatusService } from '../../services/status.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -82,7 +82,7 @@ export class AddBookComponent implements OnInit {
     }
 
     uploadSingle() {
-        let file = this.selectedFiles.item(0);
+        const file = this.selectedFiles.item(0);
         this.currentUpload = new Upload(file);
         this.uploadService.pushUpload(this.currentUpload);
     }

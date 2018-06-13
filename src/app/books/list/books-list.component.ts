@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../../models/book';
 import { BookService } from '../../services/book.service';
-import { Observable } from 'rxjs/Observable';
-import { StatusService } from '../../services/status.service';
+import { AuthorizeService } from '../../services/authorize.service';
 import * as _ from 'lodash';
 
 @Component({
@@ -44,18 +43,21 @@ export class BooksListComponent implements OnInit {
             active: false
         }
     ];
-    filterEnable:boolean = false;
+    filterEnable = false;
     filterLabels: any[] = [];
+    allCheckBox = false;
+    activeBooksArray = [];
 
-    bookList;
-    allBookList;
+    bookList: Book[];
+    allBookList: Book[];
 
-    constructor(private bookService: BookService, private statusService: StatusService) {
+    currentUser: any = this.authorizeService.getUser();
+
+    constructor(private bookService: BookService, private authorizeService: AuthorizeService) {
     }
 
     ngOnInit() {
         this.setAllBooks();
-        console.log(this.bookList);
     }
 
     getActiveTab(name) {
@@ -69,23 +71,14 @@ export class BooksListComponent implements OnInit {
         });
     }
 
-    /*private objectToArray(object): Array<any> {
+    private objectToArray(object): Array<any> {
         if (object) {
             return Object.keys(object).map(function (key) {
                 return object[key];
             });
         }
         return [];
-    }*/
-
-    /*getList() {
-        return ;
-        /!*.map(book => {
-            book.labels = this.objectToArray(book.labels);
-            book.statuses = this.objectToArray(book.statuses);
-            return book;*!/
-        // });
-    }*/
+    }
     addLabelToFilterFiltering(array, field, label): void {
         this.filterLabels.push(label);
         this.bookList = this.filterByLabel(array, field);
@@ -102,7 +95,7 @@ export class BooksListComponent implements OnInit {
         }
     }
     filterByLabel(array, field): any[] {
-        let resArray = [];
+        const resArray = [];
         _.map(array, book => {
             if (book[field] && _.intersectionBy(book[field], this.filterLabels, 'name').length > 0) {
                 resArray.push(book);
@@ -113,9 +106,18 @@ export class BooksListComponent implements OnInit {
         return resArray;
     }
     setAllBooks(): void {
-        this.bookService.getList().subscribe(books => {
-            this.bookList = books as Book[];
-            this.allBookList = this.bookList;
+        this.bookService.getConectToList().snapshotChanges().subscribe(item => {
+            this.bookList = [];
+            this.allBookList = [];
+            item.forEach(element => {
+                const book = element.payload.toJSON();
+                book['$key'] = element.key;
+                book['active'] = false;
+                book['labels'] = this.objectToArray(book['labels']);
+                book['statuses'] = this.objectToArray(book['statuses']);
+                this.bookList.push(book as Book);
+                this.allBookList.push(book as Book);
+            });
         });
     }
 
@@ -125,4 +127,32 @@ export class BooksListComponent implements OnInit {
         this.filterEnable = false;
     }
 
+    toggleAllCheckBox(): void {
+        if (this.activeBooksArray.length > 0) {
+            this.activeBooksArray = [];
+            _.forEach(this.bookList, book => {
+                book.active = false;
+            });
+        } else {
+            _.forEach(this.bookList, book => {
+                book.active = true;
+                this.activeBooksArray.push(book);
+            });
+        }
+    }
+
+    toggleBookCheckBox(book): void {
+        if (book.active) {
+            this.activeBooksArray.push(book);
+        } else {
+            _.remove(this.activeBooksArray, bk => {
+                return bk['$key'] === book['$key'];
+            });
+        }
+        if (this.activeBooksArray.length > 0) {
+            this.allCheckBox = true;
+        } else {
+            this.allCheckBox = false;
+        }
+    }
 }

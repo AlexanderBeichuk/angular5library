@@ -11,12 +11,8 @@ export class BookService {
     constructor(private firebase: AngularFireDatabase) {
     }
 
-    private getConectToList() {
+    getConectToList() {
         return this.firebase.list('books');
-    }
-
-    getList(): Observable<any> {
-        return this.firebase.list('/books').valueChanges();
     }
 
     add(book: Book) {

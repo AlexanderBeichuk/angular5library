@@ -16,7 +16,10 @@
             <a class="badge badge-theme" *ngFor="let label of filterLabels" (click)="removeLabelFromFilterFiltering(label.name)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
         </div>
     </div>
-    <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
+    <div *ngIf="currentUser.role === 'admin'">
+        <app-delete [activeBooks]="activeBooksArray"></app-delete>
+        <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
+    </div>
 </div>
 
 
@@ -27,7 +30,7 @@
         <tr>
             <th class="pr-md-3 pr-5">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="allCheckBox" (change)="toggleAllCheckBox()">
                     <label class="custom-control-label" for="customCheck1"></label>
                 </div>
             </th>
@@ -43,7 +46,7 @@
         <tr *ngFor="let book of bookList">
             <td scope="row" class="pr-md-3 pr-5">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="{{book.name}}">
+                    <input type="checkbox" class="custom-control-input" id="{{book.name}}" [(ngModel)]="book.active" (change)="toggleBookCheckBox(book)">
                     <label class="custom-control-label" for="{{book.name}}"></label>
                 </div>
             </td>
@@ -72,4 +75,3 @@
         </tbody>
     </table>
 </div>
-<!--Table-->

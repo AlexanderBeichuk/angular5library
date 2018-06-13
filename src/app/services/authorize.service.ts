@@ -7,9 +7,7 @@ export class AuthorizeService {
     constructor() {
     }
 
-    currentUser = this.getUser() || null;
     setUser(user): void {
-        this.currentUser = user;
         localStorage.setItem('authorize', JSON.stringify(user));
     }
     getUser(): any {

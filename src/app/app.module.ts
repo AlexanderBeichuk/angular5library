@@ -18,13 +18,14 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { BooksComponent } from './books/books.component';
-import { BooksListComponent } from './books/books-list/books-list.component';
-import { AddBookComponent } from './books/add-book/add-book.component';
+import { BooksListComponent } from './books/list/books-list.component';
+import { AddBookComponent } from './books/add/add-book.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LabelsComponent } from './settings/labels/labels.component';
 import { LabelsAreaToggleComponent } from './books/labels-area-toggle/labels-area-toggle.component';
 import { StatusesComponent } from './settings/statuses/statuses.component';
 import { LoginComponent } from './login/login.component';
+import { DeleteComponent } from './books/delete/delete.component';
 
 const appRoutes: Routes = [
     {
@@ -100,7 +101,8 @@ export function getAuthServiceConfigs() {
       LabelsComponent,
       LabelsAreaToggleComponent,
       StatusesComponent,
-      LoginComponent
+      LoginComponent,
+      DeleteComponent
   ],
   imports: [
       BrowserModule,
