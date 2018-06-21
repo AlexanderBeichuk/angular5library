@@ -27,12 +27,19 @@
             </div>
         </div>
 
-        <label for="countInput">Count</label>
+        <label for="allCountInput">Count</label>
         <div class="counter">
-            <button type="button" (click)="setCounterOfBooks(book.count-1)" class="btn blue button-counter"><i class="fa fa-minus"></i></button>
-            <input type="number" id="countInput" class="form-control col-1 input-counter"
-                   name="count" #name="ngModel" [(ngModel)]="book.count" min="1" max="10">
-            <button type="button" (click)="setCounterOfBooks(book.count+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
+            <button type="button" (click)="setCounterAllBooks(book.allCount-1)" class="btn blue button-counter"><i class="fa fa-minus"></i></button>
+            <input type="number" id="allCountInput" class="form-control col-1 input-counter"
+                   name="allCount" #name="ngModel" [(ngModel)]="book.allCount" min="1" max="10">
+            <button type="button" (click)="setCounterAllBooks(book.allCount+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
+        </div>
+        <label for="availableCountInput">Available count</label>
+        <div class="counter">
+            <button type="button" (click)="setCounterAvailableBooks(book.availableCount-1)" class="btn blue button-counter"><i class="fa fa-minus"></i></button>
+            <input type="number" id="availableCountInput" class="form-control col-1 input-counter"
+                   name="availableCount" #name="ngModel" [(ngModel)]="book.availableCount" min="1" max="10">
+            <button type="button" (click)="setCounterAvailableBooks(book.availableCount+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
         </div>
 
         <app-labels-area-toggle [title]="'Statuses'" [labels]="allStatusList" (active)="setActiveStatuses($event)"></app-labels-area-toggle>

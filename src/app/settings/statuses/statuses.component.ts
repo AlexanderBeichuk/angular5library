@@ -16,7 +16,7 @@ export class StatusesComponent implements OnInit {
     status: Status = this.resetStatus();
     selectStatus: Status = this.resetStatus();
 
-    statusList: Observable<any>;
+    statusList;
 
     @ViewChild('statusModal') statusModal;
 
@@ -27,8 +27,7 @@ export class StatusesComponent implements OnInit {
     constructor(private statusService: StatusService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
-        this.statusList = this.statusService.getList();
-        console.log(this.statusList);
+        this.setList();
     }
 
     addStatus(statusForm: NgForm): void {
@@ -68,5 +67,16 @@ export class StatusesComponent implements OnInit {
             name: '',
             color: ''
         };
+    }
+
+    setList(): void {
+        this.statusService.getConectToList().snapshotChanges().subscribe(item => {
+            this.statusList = [];
+            item.forEach(element => {
+                const status = element.payload.toJSON();
+                status['$key'] = element.key;
+                this.statusList.push(status as Status);
+            });
+        });
     }
 }

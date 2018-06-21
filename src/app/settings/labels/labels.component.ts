@@ -16,7 +16,7 @@ export class LabelsComponent implements OnInit {
     label: Label = this.resetLabel();
     selectLabel: Label = this.resetLabel();
 
-    labelList: Observable<any>;
+    labelList;
 
     @ViewChild('labelModal') labelModal;
 
@@ -27,7 +27,7 @@ export class LabelsComponent implements OnInit {
     constructor(private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
 
     ngOnInit() {
-        this.labelList = this.labelService.getList();
+        this.setList();
     }
 
     addLabel(labelForm: NgForm): void {
@@ -69,14 +69,14 @@ export class LabelsComponent implements OnInit {
         this.labelModal.show();
     }
 
-    /*setList() {
+    setList(): void {
         this.labelService.getConectToList().snapshotChanges().subscribe(item => {
-             = [];
+            this.labelList = [];
             item.forEach(element => {
-                var y = element.payload.toJSON();
-                y["$key"] = element.key;
-                this.labelList.push(y as Label);
+                const label = element.payload.toJSON();
+                label['$key'] = element.key;
+                this.labelList.push(label as Label);
             });
         });
-    }*/
+    }
 }

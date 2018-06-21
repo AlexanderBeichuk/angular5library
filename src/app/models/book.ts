@@ -7,7 +7,8 @@ export class Book {
     author: string;
     imageLink: string;
     description: string;
-    count: number;
+    allCount: number;
+    availableCount: number;
     statuses: Status[];
     labels: Label[];
 }

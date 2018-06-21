@@ -55,7 +55,7 @@
             </td>
             <td>{{book.name}}</td>
             <td>{{book.author}}</td>
-            <td class="td-count">{{book.count}}</td>
+            <td class="td-count">{{book.availableCount}} / {{book.allCount}}</td>
             <td class="td-labels">
                 <div class="labels-all">
                     <a class="badge badge-theme" *ngFor="let label of book.labels" (click)="addLabelToFilterFiltering(bookList, 'labels', label)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
@@ -63,12 +63,12 @@
                 </div>
             </td>
             <td class="actions">
+                <app-comments [book]="book"></app-comments>
                 <a>
-                    <i class="fa fa-comments"></i>
+                    <i class="fa fa-hand-paper-o"></i>
                 </a>
                 <a>
-                    <i class="fa fa-arrow-down"></i>
-                    <i  *ngIf="false" class="fa fa-arrow-up"></i>
+                    <i class="fa fa-hourglass-o"></i>
                 </a>
             </td>
         </tr>

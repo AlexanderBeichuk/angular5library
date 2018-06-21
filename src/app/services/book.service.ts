@@ -21,7 +21,8 @@ export class BookService {
             author: book.author,
             imageLink: book.imageLink,
             description: book.description,
-            count: book.count,
+            allCount: book.allCount,
+            availableCount: book.availableCount,
             statuses: book.statuses,
             labels: book.labels
         });
@@ -47,7 +48,8 @@ export class BookService {
             author: book.author,
             imageLink: book.imageLink,
             description: book.description,
-            count: book.count,
+            allCount: book.allCount,
+            availableCount: book.availableCount,
             status: book.statuses,
             labels: book.labels
         });

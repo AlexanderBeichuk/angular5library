@@ -13,4 +13,7 @@ export class AuthorizeService {
     getUser(): any {
         return JSON.parse(localStorage.getItem('authorize'));
     }
+    clearUser(): any {
+        localStorage.removeItem('authorize');
+    }
 }

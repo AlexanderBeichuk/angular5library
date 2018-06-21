@@ -44,25 +44,35 @@ export class AddBookComponent implements OnInit {
         this.allLabelList = this.labelService.getList();
     }
 
-    setCounterOfBooks(count): void {
+    setCounterAllBooks(count): void {
+        console.log(this.book);
         if (count > 0 && count < 11) {
-            this.book.count = count;
+            this.book.allCount = count;
         }
     }
 
+    setCounterAvailableBooks(count): void {
+        if (count > 0 && count < 11) {
+            this.book.availableCount = count;
+        }
+        if (this.book.availableCount > this.book.allCount) {
+            this.book.availableCount = this.book.allCount;
+        }
+    }
     resetForm(): void {
         this.book = this.resetBook();
         this.allLabelList = this.labelService.getList();
     }
 
-    resetBook(): Book {
+    private resetBook(): Book {
         return {
             $key: null,
             name: '',
             author: '',
             imageLink: '',
             description: '',
-            count: 1,
+            allCount: 1,
+            availableCount: 1,
             statuses: [],
             labels: []
         };

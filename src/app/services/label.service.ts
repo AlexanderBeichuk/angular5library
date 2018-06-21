@@ -10,7 +10,7 @@ export class LabelService {
 
     constructor(private firebase: AngularFireDatabase) { }
 
-    private getConectToList() {
+    getConectToList() {
         return this.firebase.list('labels');
     }
 

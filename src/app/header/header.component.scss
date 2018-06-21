@@ -1,6 +1,10 @@
 .header {
    logo {
-      margin-bottom: 5px;
+      width: 100px;
+      height: 40px;
+      margin: 0 10px 5px 0;
+      background: url(../../assets/images/logo.svg) no-repeat;
+      background-size: contain;
    }
 
    .search__book {
@@ -13,15 +17,38 @@
 
    .account {
       text-align: right;
-      .name {
+      a {
          display: inline-block;
-         margin-right: 10px;
+         .name {
+            display: inline-block;
+            margin-right: 10px;
+         }
+         .avatar {
+            display: inline-block;
+            width: 30px;
+            img {
+               border-radius: 100%;
+            }
+         }
       }
-      .avatar {
-         display: inline-block;
-         width: 30px;
-         img {
-            border-radius: 100%;
+      .dropdown-for-account {
+         a {
+            color: #ffffff;
+            &::after {
+               display: none;
+            }
+         }
+         .dropdown-menu {
+            min-width: 105px;
+            padding: 0;
+            top: 20px;
+            border-radius: 0;
+            .dropdown-item {
+               padding: 3px 5px;
+               &:active, &:hover {
+                  background-color: #c0c0c0;
+               }
+            }
          }
       }
    }

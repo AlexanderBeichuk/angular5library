@@ -11,7 +11,7 @@ export class StatusService {
 
     constructor(private firebase: AngularFireDatabase) { }
 
-    private getConectToList() {
+    getConectToList() {
         return this.firebase.list('statuses');
     }
 

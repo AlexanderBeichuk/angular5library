@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthorizeService } from '../services/authorize.service';
 import * as _ from 'lodash';
+import { AuthService } from 'angular5-social-login';
 
 
 @Component({
@@ -30,15 +31,15 @@ export class HeaderComponent implements OnInit {
         }
 
     ];
-    currentUser: any = this.authorizeService.getUser();
 
-    constructor(location: Location, private authorizeService: AuthorizeService, private router: Router) {
+    constructor(location: Location, private authorizeService: AuthorizeService, private router: Router, private socialAuthService: AuthService) {
         this.getActiveTab([location.path()]);
     }
+    authorize = this.authorizeService;
 
     getActiveTab(path) {
         _.map(this.tabs, tab => {
-            if (_.find(tab.path, pth => {return pth === path[0]}) !== undefined) {
+            if (_.find(tab.path, pth => { return pth === path[0] }) !== undefined) {
                 this.router.navigate([tab.path[0]]);
                 tab.active = true;
             } else {
@@ -49,8 +50,15 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.currentUser = this.authorizeService.getUser();
-        console.log(this.currentUser);
+    }
+
+    signOut(): void {
+        this.socialAuthService.signOut().then(
+            (response) => {
+                this.authorizeService.clearUser();
+                this.router.navigate(['/login']);
+            }
+        );
     }
 
 }

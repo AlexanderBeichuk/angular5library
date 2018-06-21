@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthorizeService } from '../services/authorize.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authorizeService: AuthorizeService, private router: Router) { }
 
   ngOnInit() {
+      if (this.authorizeService.getUser().role !== 'admin') {
+          this.router.navigate(['/home']);
+      }
   }
 
 }

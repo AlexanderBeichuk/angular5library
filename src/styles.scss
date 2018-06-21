@@ -38,3 +38,14 @@ label {
 input.ng-invalid.ng-dirty{
   border: 1px solid red;
 }
+
+.book-action {
+   margin: 0 10px;
+   i {
+      font-size: 30px;
+      transition: .5s;
+      &:hover {
+         color: #007bff;
+      }
+   }
+}

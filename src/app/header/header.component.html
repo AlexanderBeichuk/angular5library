@@ -1,5 +1,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue" class="header">
-    <logo><a class="navbar-brand text-white" (click)="getActiveTab('/home')">Library</a></logo>
+    <logo>
+        <a class="navbar-brand text-white" (click)="getActiveTab('/home')"></a>
+    </logo>
     <links>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" *ngFor="let tab of tabs" [ngClass]="{'active': tab.active}">
@@ -15,13 +17,29 @@
                     <i class="fa fa-search text-white" aria-hidden="true"></i>
                 </form>
             </li>
-            <li class="nav-item account" *ngIf="currentUser">
+            <li class="nav-item account" *ngIf="authorize.getUser()">
                 <a class="nav-link" routerLink="/cabinet">
-                    <span class="name">{{currentUser.name}}</span>
+                    <span class="name">{{authorize.getUser().name}}</span>
                     <div class="avatar mx-auto">
-                        <img [src]="currentUser.image" alt="avatar mx-auto white" class="img-fluid z-depth-1">
+                        <img [src]="authorize.getUser().image" alt="avatar mx-auto" class="img-fluid z-depth-1">
                     </div>
                 </a>
+                <div class="btn-group dropdown-for-account" dropdown>
+                    <a dropdownToggle class="dropdown-toggle waves-light" mdbWavesEffect>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-primary">
+                        <a class="dropdown-item">My books</a>
+                        <a class="dropdown-item" (click)="signOut()">Log out</a>
+                    </div>
+                </div>
+                <!--<div class="btn-group">
+                    <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-angle-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" (click)="logout()">LogOut</a>[
+                    </div>
+                </div>-->
                 <!--<a>
                     <i class="fa fa-sign-out-alt" aria-hidden="true"></i>
                 </a>-->

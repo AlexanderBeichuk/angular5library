@@ -26,6 +26,9 @@ import { LabelsAreaToggleComponent } from './books/labels-area-toggle/labels-are
 import { StatusesComponent } from './settings/statuses/statuses.component';
 import { LoginComponent } from './login/login.component';
 import { DeleteComponent } from './books/delete/delete.component';
+import { CommentsComponent } from './comments/comments.component';
+import { AddCommentComponent } from './comments/add-comment/add-comment.component';
+import { CommentsListComponent } from './comments/comments-list/comments-list.component';
 
 const appRoutes: Routes = [
     {
@@ -102,7 +105,10 @@ export function getAuthServiceConfigs() {
       LabelsAreaToggleComponent,
       StatusesComponent,
       LoginComponent,
-      DeleteComponent
+      DeleteComponent,
+      CommentsComponent,
+      AddCommentComponent,
+      CommentsListComponent
   ],
   imports: [
       BrowserModule,

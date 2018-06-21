@@ -1,0 +1,19 @@
+.comments-modal-dialog {
+   height: 100%;
+   width: 100%;
+   .comments-content {
+      height: 95%;
+      margin-top: 20px;
+      .modal-header, .title-header {
+         display: block;
+         text-align: left;
+
+      }
+      .modal-body {
+         overflow-y: auto;
+      }
+   }
+}
+.add-coomment {
+   width: 100%;
+}

@@ -1,0 +1,10 @@
+<div class="add-coomment-content">
+    <textarea class="form-control rounded-0 text-area"[(ngModel)]="comment.text" rows="3" placeholder="Your comment..."></textarea>
+    <div class="score">
+        <a class="like" (click)="toggleScore(true)" [ngClass]="{'active-score-like': comment.score === true}"><i class="fa fa-thumbs-up"></i></a>
+        <a class="dislike" (click)="toggleScore(false)" [ngClass]="{'active-score-dislike': comment.score === false}"><i class="fa fa-thumbs-down"></i></a>
+    </div>
+    <button class="btn btn-primary rounded-circle send-btn" type="button" (click)="addComment()">
+        <i class="fa fa-angle-right"></i>
+    </button>
+</div>
