@@ -4,7 +4,6 @@ import { LabelService } from '../../services/label.service';
 import { ToastrService } from 'ngx-toastr';
 import { Label } from '../../models/label';
 import { FormService } from '../../services/form.service';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-labels',
@@ -22,7 +21,7 @@ export class LabelsComponent implements OnInit {
 
     event: string;
 
-    resetForm = this.formService.resetForm;
+    private resetForm = this.formService.resetForm;
 
     constructor(private labelService: LabelService, private tostr: ToastrService, private formService: FormService) { }
 

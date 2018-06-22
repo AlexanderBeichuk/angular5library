@@ -8,7 +8,7 @@ export class FormService {
 
     constructor() { }
 
-    resetForm(form?: NgForm, modal?) {
+    resetForm(form, modal?) {
         if (form != null) {
             form.reset();
         }

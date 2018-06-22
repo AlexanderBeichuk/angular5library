@@ -1,0 +1,34 @@
+<a class="book-action" (click)="takeModal.show()"><i class="fa fa-hand-paper-o"></i></a>
+
+<div mdbModal #takeModal="mdb-modal" class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalTake" aria-hidden="true">
+    <div class="modal-dialog take-modal-dialog" role="document">
+        <div class="modal-content take-content">
+            <div class="modal-header">
+                <div class="modal-title w-100 title-header" id="myModalTake">
+                    <h4>{{book.name}}</h4>
+                    <p>{{book.author}}</p>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="takeModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form #takeForm="ngForm" (ngSubmit)="takeBook()">
+                <div class="modal-body row">
+                    <div class="col col-sm-12 col-md-6">
+                        <label>From</label>
+                        <my-date-picker name="fromDate" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" [(ngModel)]="date.from" required></my-date-picker>
+                    </div>
+                    <div class="col col-sm-12 col-md-6">
+                        <label>To</label>
+                        <my-date-picker name="toDate" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" [(ngModel)]="date.to" required></my-date-picker>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="takeModal.hide()" mdbWavesEffect>Close</button>
+                    <button type="submit" class="btn btn-primary relative waves-light" [disabled]="!takeForm.valid || !dateValid" mdbWavesEffect>Take</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

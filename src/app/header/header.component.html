@@ -18,17 +18,14 @@
                 </form>
             </li>
             <li class="nav-item account" *ngIf="authorize.getUser()">
-                <a class="nav-link" routerLink="/cabinet">
-                    <span class="name">{{authorize.getUser().name}}</span>
-                    <div class="avatar mx-auto">
-                        <img [src]="authorize.getUser().image" alt="avatar mx-auto" class="img-fluid z-depth-1">
-                    </div>
-                </a>
                 <div class="btn-group dropdown-for-account" dropdown>
                     <a dropdownToggle class="dropdown-toggle waves-light" mdbWavesEffect>
+                        <span class="name">{{authorize.getUser().name}}</span>
+                        <div class="avatar mx-auto">
+                            <img [src]="authorize.getUser().image" alt="avatar mx-auto" class="img-fluid z-depth-1">
+                        </div>
                         <i class="fa fa-angle-down"></i>
                     </a>
-
                     <div class="dropdown-menu dropdown-primary">
                         <a class="dropdown-item">My books</a>
                         <a class="dropdown-item" (click)="signOut()">Log out</a>

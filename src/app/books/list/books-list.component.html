@@ -55,7 +55,10 @@
             </td>
             <td>{{book.name}}</td>
             <td>{{book.author}}</td>
-            <td class="td-count">{{book.availableCount}} / {{book.allCount}}</td>
+            <td class="td-count">
+                <span [ngClass]="{'green-color': book.availableCount > 1,
+                        'yellow-color': book.availableCount === 1,
+                        'red-color': book.availableCount === 0}">{{book.availableCount}}</span> / <span class="blue-color">{{book.allCount}}</span></td>
             <td class="td-labels">
                 <div class="labels-all">
                     <a class="badge badge-theme" *ngFor="let label of book.labels" (click)="addLabelToFilterFiltering(bookList, 'labels', label)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
@@ -63,13 +66,17 @@
                 </div>
             </td>
             <td class="actions">
-                <app-comments [book]="book"></app-comments>
-                <a>
-                    <i class="fa fa-hand-paper-o"></i>
-                </a>
-                <a>
-                    <i class="fa fa-hourglass-o"></i>
-                </a>
+                <div class="action">
+                    <app-comments [book]="book"></app-comments>
+                </div>
+                <div class="action" *ngIf="book.availableCount > 0">
+                    <app-take-book [book]="book"></app-take-book>
+                </div>
+                <div class="action" *ngIf="book.availableCount === 0">
+                    <a>
+                        <i class="fa fa-hourglass-o"></i>
+                    </a>
+                </div>
             </td>
         </tr>
         </tbody>

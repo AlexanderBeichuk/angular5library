@@ -49,3 +49,16 @@ input.ng-invalid.ng-dirty{
       }
    }
 }
+my-date-picker {
+   .mydp {
+      border: 1px solid #007bff;
+      border-radius: 0;
+      .mydpicon, .markcurrday {
+         color: #007bff;
+      }
+      .markcurrday {
+         font-weight: bold;
+         text-decoration: none;
+      }
+   }
+}

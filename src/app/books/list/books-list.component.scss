@@ -93,10 +93,26 @@
             &.td-count {
                width: 50px;
                text-align: center;
+               span {
+                  font-weight: bold;
+                  &.green-color {
+                     color: #37fa06;
+                  }
+                  &.yellow-color {
+                     color: #ffff00;
+                  }
+                  &.red-color {
+                     color: #ff0000;
+                  }
+                  &.blue-color {
+                     color: #007bff;
+                  }
+               }
             }
             &.actions {
                text-align: center;
-               a {
+               .action {
+                  display: inline-block;
                   margin: 0 10px;
                   i {
                      font-size: 30px;

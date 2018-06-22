@@ -10,6 +10,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from 'angular5-social-login';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { DeleteComponent } from './books/delete/delete.component';
 import { CommentsComponent } from './comments/comments.component';
 import { AddCommentComponent } from './comments/add-comment/add-comment.component';
 import { CommentsListComponent } from './comments/comments-list/comments-list.component';
+import { TakeBookComponent } from './take-book/take-book.component';
 
 const appRoutes: Routes = [
     {
@@ -108,7 +110,8 @@ export function getAuthServiceConfigs() {
       DeleteComponent,
       CommentsComponent,
       AddCommentComponent,
-      CommentsListComponent
+      CommentsListComponent,
+      TakeBookComponent
   ],
   imports: [
       BrowserModule,
@@ -116,6 +119,7 @@ export function getAuthServiceConfigs() {
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFireDatabaseModule,
       HttpClientModule,
+      MyDatePickerModule,
       MDBBootstrapModule.forRoot(),
       ToastrModule.forRoot({
           positionClass: 'toast-bottom-right',

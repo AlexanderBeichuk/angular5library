@@ -5,6 +5,10 @@
       margin: 0 10px 5px 0;
       background: url(../../assets/images/logo.svg) no-repeat;
       background-size: contain;
+      a {
+         width: 100%;
+         height: 100%;
+      }
    }
 
    .search__book {
@@ -17,8 +21,8 @@
 
    .account {
       text-align: right;
-      a {
-         display: inline-block;
+      .dropdown-for-account {
+         margin: 8px 0 0 15px;
          .name {
             display: inline-block;
             margin-right: 10px;
@@ -30,18 +34,19 @@
                border-radius: 100%;
             }
          }
-      }
-      .dropdown-for-account {
          a {
             color: #ffffff;
             &::after {
                display: none;
             }
          }
+         i {
+            margin-left: 5px;
+         }
          .dropdown-menu {
-            min-width: 105px;
+            min-width: 140px;
             padding: 0;
-            top: 20px;
+            top: 35px;
             border-radius: 0;
             .dropdown-item {
                padding: 3px 5px;

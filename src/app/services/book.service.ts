@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Book } from '../models/book';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class BookService {
         this.getConectToList().push({
             name: book.name,
             author: book.author,
-            imageLink: book.imageLink,
+            imageLink: book.imageLink || '',
             description: book.description,
             allCount: book.allCount,
             availableCount: book.availableCount,
@@ -46,7 +45,7 @@ export class BookService {
         this.getConectToList().update(book.$key, {
             name: book.name,
             author: book.author,
-            imageLink: book.imageLink,
+            imageLink: book.imageLink || '',
             description: book.description,
             allCount: book.allCount,
             availableCount: book.availableCount,
