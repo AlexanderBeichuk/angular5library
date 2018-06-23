@@ -3,6 +3,7 @@ import { Book } from '../../models/book';
 import { BookService } from '../../services/book.service';
 import { AuthorizeService } from '../../services/authorize.service';
 import * as _ from 'lodash';
+import { HelperService } from '../../services/helper.service';
 
 @Component({
   selector: 'app-books-list',
@@ -53,7 +54,7 @@ export class BooksListComponent implements OnInit {
 
     currentUser: any = this.authorizeService.getUser();
 
-    constructor(private bookService: BookService, private authorizeService: AuthorizeService) {
+    constructor(private bookService: BookService, private authorizeService: AuthorizeService, private helperService: HelperService) {
     }
 
     ngOnInit() {
@@ -71,14 +72,6 @@ export class BooksListComponent implements OnInit {
         });
     }
 
-    private objectToArray(object): Array<any> {
-        if (object) {
-            return Object.keys(object).map(function (key) {
-                return object[key];
-            });
-        }
-        return [];
-    }
     addLabelToFilterFiltering(array, field, label): void {
         this.filterLabels.push(label);
         this.bookList = this.filterByLabel(array, field);
@@ -113,8 +106,8 @@ export class BooksListComponent implements OnInit {
                 const book = element.payload.toJSON();
                 book['$key'] = element.key;
                 book['active'] = false;
-                book['labels'] = this.objectToArray(book['labels']);
-                book['statuses'] = this.objectToArray(book['statuses']);
+                book['labels'] = this.helperService.objectToArray(book['labels']);
+                book['statuses'] = this.helperService.objectToArray(book['statuses']);
                 this.bookList.push(book as Book);
                 this.allBookList.push(book as Book);
             });

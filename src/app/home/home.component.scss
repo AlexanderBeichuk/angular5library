@@ -1,1 +1,16 @@
-
+.home {
+   .page-title {
+      font-weight: 100;
+   }
+   .book {
+      .name {
+         margin-top: 10px;
+         font-size: 26px;
+         font-weight: 100;
+      }
+      .image-cover {
+         height: 210px;
+         margin: 0 auto;
+      }
+   }
+}

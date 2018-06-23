@@ -49,6 +49,16 @@ input.ng-invalid.ng-dirty{
       }
    }
 }
+
+.labels-all {
+   .badge-theme {
+      padding: 7px;
+      margin: 3px;
+      font-size: 14px;
+      border-radius: 0;
+   }
+}
+
 my-date-picker {
    .mydp {
       border: 1px solid #007bff;
