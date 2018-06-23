@@ -40,7 +40,7 @@ export class TakeBookComponent implements OnInit {
     constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService, private formService: FormService){}
 
     ngOnInit(){
-        this.resetTake();
+        this.selectTake = this.resetTake();
         console.log(this.book);
     }
 
