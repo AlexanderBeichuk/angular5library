@@ -41,7 +41,6 @@ export class TakeBookComponent implements OnInit {
 
     ngOnInit(){
         this.selectTake = this.resetTake();
-        console.log(this.book);
     }
 
     takeBook(): void {
