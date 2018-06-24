@@ -21,8 +21,9 @@
                     {{book.description}}
                 </p>
                 <p>by <a><strong>{{book.author}}</strong></a></p>
-                <a class="btn btn-primary btn-md">Read more</a>
+                <!--<a class="btn btn-primary btn-md">Read more</a>-->
                 <app-comments [book]="book"></app-comments>
+                <app-take-book [book]="book"></app-take-book>
             </div>
             <div class="col-12 col-md-5" *ngIf="index % 2 === 1">
                 <div class="view overlay mb-lg-0 mb-4 animated bounce">
