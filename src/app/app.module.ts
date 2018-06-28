@@ -30,7 +30,9 @@ import { DeleteComponent } from './books/delete/delete.component';
 import { CommentsComponent } from './comments/comments.component';
 import { AddCommentComponent } from './comments/add-comment/add-comment.component';
 import { CommentsListComponent } from './comments/comments-list/comments-list.component';
-import { TakeBookComponent } from './take-book/take-book.component';
+import { TakeBookComponent } from './books/take-book/take-book.component';
+import { MyBooksComponent } from './books/my-books/my-books.component';
+import { DescriptionBookComponent } from './books/description-book/description-book.component';
 
 const appRoutes: Routes = [
     {
@@ -53,6 +55,10 @@ const appRoutes: Routes = [
     {
         path: 'books',
         component: BooksComponent
+    },
+    {
+        path: 'books/my',
+        component: MyBooksComponent
     },
     {
         path: 'book/add',
@@ -111,7 +117,9 @@ export function getAuthServiceConfigs() {
       CommentsComponent,
       AddCommentComponent,
       CommentsListComponent,
-      TakeBookComponent
+      TakeBookComponent,
+      MyBooksComponent,
+      DescriptionBookComponent
   ],
   imports: [
       BrowserModule,

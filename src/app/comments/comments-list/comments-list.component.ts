@@ -26,7 +26,7 @@ export class CommentsListComponent implements OnInit {
             item.forEach(element => {
                 const comment = element.payload.toJSON();
                 comment['$key'] = element.key;
-                if (comment['book'] === this.book['$key']) {
+                if (comment['book'] === this.book['$key'] || comment['book'] === this.book['id']) {
                     this.commentList.push(comment as Comment);
                 }
             });

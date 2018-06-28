@@ -2,11 +2,11 @@ import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import { NgForm, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
-import { TakeBook } from '../models/takeBook';
-import { BookService } from '../services/book.service';
-import { TakeBookService } from '../services/take-book.service';
-import { AuthorizeService } from '../services/authorize.service';
-import { FormService } from '../services/form.service';
+import { TakeBook } from '../../models/takeBook';
+import { BookService } from '../../services/book.service';
+import { TakeBookService } from '../../services/take-book.service';
+import { AuthorizeService } from '../../services/authorize.service';
+import { FormService } from '../../services/form.service';
 
 @Component({
     selector: 'app-take-book',
@@ -57,7 +57,7 @@ export class TakeBookComponent implements OnInit {
     fillData(): void {
         this.selectTake.endDate = this.date.to.jsdate.toString();
         this.selectTake.startDate = this.date.from.jsdate.toString();
-        this.selectTake.book = this.book['$key'];
+        this.selectTake.book = this.book;
         this.selectTake.user = this.authorizeService.getUser().id;
     }
 
@@ -76,7 +76,7 @@ export class TakeBookComponent implements OnInit {
             $key: null,
             startDate: null,
             endDate: null,
-            book: '',
+            book: null,
             user: '',
         };
     }

@@ -13,43 +13,54 @@ import { AuthService } from 'angular5-social-login';
 })
 export class HeaderComponent implements OnInit {
 
-    tabs = [
+    private allTabs = [
         {
             name: 'Home',
-            path: ['/home', '', '/login'],
+            pathes: ['/home', '', '/login'],
+            roles: ['user', 'admin'],
             active: true
         },
         {
             name: 'Books',
-            path: ['/books'],
+            pathes: ['/books'],
+            roles: ['user', 'admin'],
             active: false
         },
         {
             name: 'Settings',
-            path: ['/settings'],
+            pathes: ['/settings'],
+            roles: ['admin'],
             active: false
         }
 
     ];
-
-    constructor(location: Location, private authorizeService: AuthorizeService, private router: Router, private socialAuthService: AuthService) {
-        this.getActiveTab([location.path()]);
-    }
+    showTabs = [];
     authorize = this.authorizeService;
 
+    constructor(private location: Location, private authorizeService: AuthorizeService, private router: Router, private socialAuthService: AuthService) {}
+
+    ngOnInit() {
+        this.getShowTabs();
+        this.getActiveTab([this.location.path()]);
+    }
+
+    getShowTabs() {
+        _.forEach(this.allTabs, tab => {
+            if (_.find(tab.roles, role => { return role === this.authorize.getUser().role })) {
+                this.showTabs.push(tab);
+            }
+        });
+    }
+
     getActiveTab(path) {
-        _.map(this.tabs, tab => {
-            if (_.find(tab.path, pth => { return pth === path[0] }) !== undefined) {
-                this.router.navigate([tab.path[0]]);
+        _.forEach(this.showTabs, tab => {
+            if (_.find(tab.pathes, pth => { return pth === path[0] }) !== undefined) {
+                this.router.navigate([tab.pathes[0]]);
                 tab.active = true;
             } else {
                 tab.active = false;
             }
-            return tab;
         });
-    }
-
-    ngOnInit() {
     }
 
     signOut(): void {

@@ -30,7 +30,7 @@ export class AddCommentComponent implements OnInit {
         if (this.comment.text) {
             this.comment = {
                 $key: '',
-                book: this.book['$key'],
+                book: this.book['$key'] || this.book['id'],
                 date: new Date(),
                 text: this.comment.text,
                 user: this.authorizeService.getUser(),

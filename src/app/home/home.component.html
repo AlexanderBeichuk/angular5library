@@ -16,7 +16,9 @@
                     <a class="badge badge-theme" *ngFor="let label of book.labels" [ngStyle]="{'background': label.color}">{{label.name}}</a>
                     <a class="badge badge-theme" *ngFor="let label of book.statuses" [ngStyle]="{'background': label.color}">{{label.name}}</a>
                 </div>
-                <p class="mb-3 name">{{book.name}}</p>
+                <div class="mb-3 name">
+                    <app-description-book [title]="book.name" [book]="book"></app-description-book>
+                </div>
                 <p>
                     {{book.description}}
                 </p>

@@ -13,12 +13,12 @@ export class TakeBookService {
         return this.firebase.list('takeBooks');
     }
 
-    add(book: TakeBook) {
+    add(takeBook: TakeBook) {
         this.getConectToList().push({
-            startDate: book.startDate,
-            endDate: book.endDate,
-            book: book.book,
-            user: book.user,
+            startDate: takeBook.startDate,
+            endDate: takeBook.endDate,
+            book: this.getBook(takeBook.book),
+            user: takeBook.user,
         });
     }
 
@@ -36,16 +36,29 @@ export class TakeBookService {
      return null;
      }*/
 
-    update(book: TakeBook) {
-        this.getConectToList().update(book.$key, {
-            startDate: book.startDate,
-            endDate: book.endDate,
-            book: book.book,
-            user: book.user,
+    update(takeBook: TakeBook) {
+        this.getConectToList().update(takeBook.$key, {
+            startDate: takeBook.startDate,
+            endDate: takeBook.endDate,
+            book: this.getBook(takeBook.book),
+            user: takeBook.user,
         });
     }
 
     delete($key: string) {
         this.getConectToList().remove($key);
+    }
+
+    private getBook(book) {
+        return {
+            name: book.name,
+            author: book.author,
+            imageLink: book.imageLink,
+            description: book.description,
+            allCount: book.allCount,
+            availableCount: book.availableCount,
+            statuses: book.statuses,
+            labels: book.labels
+        };
     }
 }

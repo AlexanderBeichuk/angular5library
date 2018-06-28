@@ -1,11 +1,11 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue" class="header">
     <logo>
-        <a class="navbar-brand text-white" (click)="getActiveTab(tabs[0].path)"></a>
+        <a class="navbar-brand text-white" (click)="getActiveTab(showTabs[0].pathes)"></a>
     </logo>
     <links>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" *ngFor="let tab of tabs" [ngClass]="{'active': tab.active}">
-                <a class="nav-link" (click)="getActiveTab(tab.path)">{{tab.name}}</a>
+            <li class="nav-item" *ngFor="let tab of showTabs" [ngClass]="{'active': tab.active}">
+                <a class="nav-link" (click)="getActiveTab(tab.pathes)">{{tab.name}}</a>
             </li>
         </ul>
         <ul class="navbar-nav nav-flex-icons">
@@ -27,7 +27,8 @@
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <div class="dropdown-menu dropdown-primary">
-                        <a class="dropdown-item">My books</a>
+                        <a class="dropdown-item" routerLink='/profile'>Profile</a>
+                        <a class="dropdown-item" routerLink='/books/my'>My books</a>
                         <a class="dropdown-item" (click)="signOut()">Log out</a>
                     </div>
                 </div>

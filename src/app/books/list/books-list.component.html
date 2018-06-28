@@ -53,7 +53,9 @@
             <td class="td-image">
                 <img class="image" [src]="book.imageLink || '../../../assets/images/book.png'">
             </td>
-            <td>{{book.name}}</td>
+            <td>
+                <app-description-book [book]="book" [title]="book.name"></app-description-book>
+            </td>
             <td>{{book.author}}</td>
             <td class="td-count">
                 <span [ngClass]="{'green-color': book.availableCount > 1,
