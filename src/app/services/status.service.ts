@@ -29,7 +29,6 @@ export class StatusService {
     /*readStatus($key: string) {
         var x = this.getConectToList();
         x.snapshotChanges().subscribe(item => {
-            debugger;
             item.forEach(element => {
                 var y = element.payload.toJSON();
                 y["$key"] = element.key;

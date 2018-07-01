@@ -5,7 +5,7 @@
     <links>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" *ngFor="let tab of showTabs" [ngClass]="{'active': tab.active}">
-                <a class="nav-link" (click)="getActiveTab(tab.pathes)">{{tab.name}}</a>
+                <a *ngIf="showTabByRole(tab)" class="nav-link" (click)="getActiveTab(tab.pathes)">{{tab.name}}</a>
             </li>
         </ul>
         <ul class="navbar-nav nav-flex-icons">

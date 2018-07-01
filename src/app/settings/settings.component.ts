@@ -12,9 +12,6 @@ export class SettingsComponent implements OnInit {
   constructor(private authorizeService: AuthorizeService, private router: Router) { }
 
   ngOnInit() {
-      if (this.authorizeService.getUser().role !== 'admin') {
-          this.router.navigate(['/home']);
-      }
   }
 
 }

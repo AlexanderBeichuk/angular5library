@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     private allTabs = [
         {
             name: 'Home',
-            pathes: ['/home', '', '/login'],
+            pathes: ['/home'],
             roles: ['user', 'admin'],
             active: true
         },
@@ -44,15 +44,17 @@ export class HeaderComponent implements OnInit {
         this.getActiveTab([this.location.path()]);
     }
 
-    getShowTabs() {
+    getShowTabs(): void {
         _.forEach(this.allTabs, tab => {
-            if (_.find(tab.roles, role => { return role === this.authorize.getUser().role })) {
-                this.showTabs.push(tab);
-            }
+            this.showTabs.push(tab);
         });
     }
 
-    getActiveTab(path) {
+    showTabByRole(tab): object {
+        return this.authorize.getUser() && _.find(tab.roles, role => { return role === this.authorize.getUser().role });
+    }
+
+    getActiveTab(path): void {
         _.forEach(this.showTabs, tab => {
             if (_.find(tab.pathes, pth => { return pth === path[0] }) !== undefined) {
                 this.router.navigate([tab.pathes[0]]);
