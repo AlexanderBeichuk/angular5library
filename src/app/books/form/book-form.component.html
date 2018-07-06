@@ -1,0 +1,62 @@
+<form #bookForm="ngForm" class="book-form">
+    <p class="h4 mb-4 title">{{event}} book</p>
+
+    <!-- Default input -->
+    <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="book.$key">
+    <label for="titleInput">Title</label>
+    <input type="text" id="titleInput" name="name" #name="ngModel" [(ngModel)]="book.name" class="form-control" required>
+
+    <label for="authorInput">Author</label>
+    <input type="text" id="authorInput" name="author" #name="ngModel" [(ngModel)]="book.author" class="form-control">
+
+    <label for="descriptionInput">Description</label>
+    <textarea class="form-control rounded-0" id="descriptionInput" name="description" #name="ngModel" [(ngModel)]="book.description" rows="6"></textarea>
+
+    <label for="imageInput">Image</label>
+    <input id="imageInput" class="form-control col-12 col-md-4" type="file" (change)="detectFiles($event)" title="">
+
+    <div class="upload-image row">
+        <div *ngIf="currentUpload" class="progress-content col-12 col-md-4">
+            <div class="progress">
+                <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+            </div>
+            <span *ngIf="currentUpload?.progress < 100; else span_complete">Progress: {{currentUpload?.progress - currentUpload?.progress % 1}}%</span>
+            <ng-template #span_complete>
+                <span class="font-weight-bold text-success">Complete</span>
+            </ng-template>
+        </div>
+    </div>
+    <div class="upload-image-content">
+        <div *ngIf="book.imageLink !== ''; else defaultImage">
+            <img [src]="book.imageLink">
+        </div>
+        <ng-template #defaultImage>
+            <img src="../../../assets/images/book.png">
+        </ng-template>
+    </div>
+
+    <label for="allCountInput">Count</label>
+    <div class="counter">
+        <button type="button" (click)="setCounterAllBooks(book.allCount-1)" class="btn blue button-counter"><i class="fa fa-minus"></i></button>
+        <input type="number" id="allCountInput" class="form-control col-1 input-counter"
+               name="allCount" #name="ngModel" [(ngModel)]="book.allCount" min="1" max="10">
+        <button type="button" (click)="setCounterAllBooks(book.allCount+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
+    </div>
+    <label for="availableCountInput">Available count</label>
+    <div class="counter">
+        <button type="button" (click)="setCounterAvailableBooks(book.availableCount-1)" class="btn blue button-counter"><i class="fa fa-minus"></i></button>
+        <input type="number" id="availableCountInput" class="form-control col-1 input-counter"
+               name="availableCount" #name="ngModel" [(ngModel)]="book.availableCount" min="1" max="10">
+        <button type="button" (click)="setCounterAvailableBooks(book.availableCount+1)" class="btn blue button-counter"><i class="fa fa-plus"></i></button>
+    </div>
+
+    <app-labels-area-toggle [title]="'Statuses'" [activeLabels]="book.statuses" [labels]="allStatusList" (active)="setActiveStatuses($event)"></app-labels-area-toggle>
+
+    <app-labels-area-toggle [title]="'Labels'" [activeLabels]="book.labels" [labels]="allLabelList" (active)="setActiveLabels($event)"></app-labels-area-toggle>
+
+    <div class="text-right mt-4">
+        <button class="btn btn-warning" type="button" (click)="resetForm(bookForm)">Reset form</button>
+        <button class="btn btn-warning" type="submit">Cancel</button>
+        <button class="btn blue" type="button" [disabled]="!bookForm.valid" (click)="addBook(bookForm)">{{event}} book</button>
+    </div>
+</form>

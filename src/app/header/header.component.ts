@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthorizeService } from '../services/authorize.service';
 import * as _ from 'lodash';
 import { AuthService } from 'angular5-social-login';
+import {SearchService} from '../services/search.service';
 
 
 @Component({
@@ -36,8 +37,9 @@ export class HeaderComponent implements OnInit {
     ];
     showTabs = [];
     authorize = this.authorizeService;
+    search: string;
 
-    constructor(private location: Location, private authorizeService: AuthorizeService, private router: Router, private socialAuthService: AuthService) {}
+    constructor(private location: Location, private authorizeService: AuthorizeService, private router: Router, private socialAuthService: AuthService, private searchService: SearchService) {}
 
     ngOnInit() {
         this.getShowTabs();
@@ -72,6 +74,11 @@ export class HeaderComponent implements OnInit {
                 this.router.navigate(['/login']);
             }
         );
+    }
+
+    setSearch(): void {
+        this.router.navigate(['/books']);
+        this.searchService.setSeasch(this.search);
     }
 
 }

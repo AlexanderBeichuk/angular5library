@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import {Label} from "../../models/label";
+import { Label } from '../../models/label';
+import * as _ from 'lodash';
+import {HelperService} from '../../services/helper.service';
 
 @Component({
   selector: 'app-labels-area-toggle',
@@ -11,6 +12,7 @@ export class LabelsAreaToggleComponent implements OnInit {
 
     @Input() title;
     @Input() labels;
+    @Input() activeLabels;
     @Output() active = new EventEmitter();
 
     labelTitle: string = null;
@@ -19,18 +21,15 @@ export class LabelsAreaToggleComponent implements OnInit {
         all: []
     };
 
-    constructor() { }
+    constructor(private helperService: HelperService) { }
 
     ngOnInit() {
         this.labelTitle = this.title;
-        this.labels.subscribe(labels => {
-            this.componentLabels.all = labels as Label[];
-        });
-        console.log(this.componentLabels);
+        this.subscribeAllLabels();
     }
 
     toggleLabelsInArray(arrayFrom, arrayTo, item): void {
-        let index = arrayFrom.indexOf(item);
+        const index = arrayFrom.indexOf(item);
         if (index > -1) {
             arrayFrom.splice(index, 1);
             arrayTo.push({
@@ -41,4 +40,12 @@ export class LabelsAreaToggleComponent implements OnInit {
         this.active.emit(this.componentLabels.active);
     }
 
+    private subscribeAllLabels(): void {
+        this.labels.subscribe(labels => {
+            this.activeLabels = this.helperService.objectToArray(this.activeLabels);
+            this.componentLabels.active = this.activeLabels;
+            this.componentLabels.all = this.activeLabels.length > 0 ? _.intersection(labels, this.activeLabels) : labels as Label[];
+
+        });
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import * as _ from 'lodash';
 import { CommentService } from '../../services/comment.service';
@@ -12,6 +12,7 @@ import { TakeBookService } from '../../services/take-book.service';
 export class DeleteComponent implements OnInit {
 
     @Input() activeBooks;
+    @Output() emitDeleteBooks = new EventEmitter();
     @ViewChild('deleteModal') deleteModal;
 
     constructor(private bookService: BookService, private commentService: CommentService, private takeBookService: TakeBookService) {
@@ -50,6 +51,7 @@ export class DeleteComponent implements OnInit {
             this.deleteBookTakeList(book);
             this.bookService.delete(book['$key']);
         });
+        this.emitDeleteBooks.emit(false);
         this.deleteModal.hide();
     }
 

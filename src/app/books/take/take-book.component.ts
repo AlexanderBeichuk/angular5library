@@ -37,9 +37,9 @@ export class TakeBookComponent implements OnInit {
         disableUntil: { year: this.todayDate.getFullYear(), month: this.todayDate.getMonth() + 1, day: this.todayDate.getDate() - 1 }
     };
 
-    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService, private formService: FormService){}
+    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService, private formService: FormService) {}
 
-    ngOnInit(){
+    ngOnInit() {
         this.selectTake = this.resetTake();
     }
 
@@ -80,5 +80,4 @@ export class TakeBookComponent implements OnInit {
             user: '',
         };
     }
-
 }

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthorizeService } from '../services/authorize.service';
 import {UserService} from '../services/user.service';
 import { User } from '../models/user';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-login',

@@ -4,6 +4,7 @@ import { BookService } from '../../services/book.service';
 import { AuthorizeService } from '../../services/authorize.service';
 import * as _ from 'lodash';
 import { HelperService } from '../../services/helper.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-books-list',
@@ -54,8 +55,7 @@ export class BooksListComponent implements OnInit {
 
     currentUser: any = this.authorizeService.getUser();
 
-    constructor(private bookService: BookService, private authorizeService: AuthorizeService, private helperService: HelperService) {
-    }
+    constructor(private bookService: BookService, private authorizeService: AuthorizeService, private helperService: HelperService, public searchService: SearchService) {}
 
     ngOnInit() {
         this.setAllBooks();
@@ -75,7 +75,6 @@ export class BooksListComponent implements OnInit {
     addLabelToFilterFiltering(array, field, label): void {
         this.filterLabels.push(label);
         this.bookList = this.filterByLabel(array, field);
-        console.log(this.bookList);
     }
     removeLabelFromFilterFiltering(labelName): void {
         _.remove(this.filterLabels, label => {
@@ -147,5 +146,10 @@ export class BooksListComponent implements OnInit {
         } else {
             this.allCheckBox = false;
         }
+    }
+
+    setAllCheckBox(allCheckBox): void {
+        this.allCheckBox = allCheckBox;
+        this.activeBooksArray = [];
     }
 }

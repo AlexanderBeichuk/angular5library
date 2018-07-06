@@ -51,6 +51,7 @@ export class TakeBookService {
 
     private getBook(book) {
         return {
+            id: book['$key'],
             name: book.name,
             author: book.author,
             imageLink: book.imageLink,

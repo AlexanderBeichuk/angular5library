@@ -17,7 +17,7 @@
         </div>
     </div>
     <div *ngIf="currentUser.role === 'admin'">
-        <app-delete [activeBooks]="activeBooksArray"></app-delete>
+        <app-delete (emitDeleteBooks)="setAllCheckBox($emit)" [activeBooks]="activeBooksArray"></app-delete>
         <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
     </div>
 </div>
@@ -43,7 +43,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let book of bookList">
+        <tr *ngFor="let book of bookList | filter:searchService.getSearch()">
             <td scope="row" class="pr-md-3 pr-5">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="{{book.name}}" [(ngModel)]="book.active" (change)="toggleBookCheckBox(book)">
@@ -54,7 +54,8 @@
                 <img class="image" [src]="book.imageLink || '../../../assets/images/book.png'">
             </td>
             <td>
-                <app-description-book [book]="book" [title]="book.name"></app-description-book>
+
+                <app-description-book [title]="book.name" [book]="book"></app-description-book>
             </td>
             <td>{{book.author}}</td>
             <td class="td-count">
@@ -77,6 +78,11 @@
                 <div class="action" *ngIf="book.availableCount === 0">
                     <a>
                         <i class="fa fa-hourglass-o"></i>
+                    </a>
+                </div>
+                <div class="action" *ngIf="currentUser.role === 'admin'">
+                    <a routerLink="/book/edit/{{book['$key']}}">
+                        <i class="fa fa-edit"></i>
                     </a>
                 </div>
             </td>

@@ -1,0 +1,30 @@
+.book-form {
+   padding: 10px 20px;
+   .title {
+      text-transform: uppercase;
+   }
+   .upload-image {
+      .progress-content {
+         padding-right: 0;
+         .progress {
+            margin-top: 10px;
+            border-radius: 0;
+         }
+      }
+   }
+   .upload-image-content {
+      img {
+         margin-top: 15px;
+         max-width: 180px;
+      }
+   }
+   .counter {
+      .button-counter {
+         margin-top: 1px;
+      }
+      .input-counter {
+         display: inline-block;
+         min-width: 150px;
+      }
+   }
+}
