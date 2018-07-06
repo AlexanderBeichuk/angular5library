@@ -1,0 +1,47 @@
+.user-list {
+   margin-top: 20px;
+   .table {
+      thead {
+         th {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 20px;
+            text-transform: uppercase;
+            &:first-child {
+               width: 50px;
+            }
+         }
+      }
+      tbody {
+         tr {
+            min-height: 135px;
+            cursor: pointer;
+            &:hover {
+               background: #ced4da;
+            }
+         }
+         td {
+            font-size: 16px;
+            vertical-align: middle;
+            p {
+               margin-bottom: 0;
+            }
+            &.td-user {
+               min-width: 220px;
+               .image {
+                  display: inline-block;
+                  width: 30px;
+                  margin-right: 10px;
+               }
+            }
+            &.td-role {
+               width: 40px;
+               text-align: center;
+            }
+            &.td-id {
+               width: 100px;
+            }
+         }
+      }
+   }
+}

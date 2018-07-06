@@ -19,8 +19,6 @@ export class TakeBookComponent implements OnInit {
     @ViewChild('takeModal') takeModal;
 
     selectTake: TakeBook = this.resetTake();
-    takeForm: FormGroup;
-    private resetForm = this.formService.resetForm;
     date = {
         from: null,
         to: null
@@ -50,7 +48,7 @@ export class TakeBookComponent implements OnInit {
             this.book.availableCount = this.book.availableCount - 1;
             this.bookService.update(this.book);
         }
-        this.resetForm(this.takeForm, this.takeModal);
+        this.takeModal.hide();
         this.tostr.success('You take ' + this.book.name + ' book!');
     }
 

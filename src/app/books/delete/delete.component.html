@@ -1,4 +1,4 @@
-<button *ngIf="activeBooks.length > 0" type="button" class="btn btn-danger rounded-circle delete-books-button" (click)="deleteModal.show();" mdbWavesEffect><i class="fa fa-trash fa-lg"></i></button>
+<button *ngIf="activeBooks.length > 0" type="button" class="btn btn-danger rounded-circle delete-books-button" (click)="deleteModal.show()" mdbTooltip="DELETE BOOK" placement="bottom" mdbWavesEffect><i class="fa fa-trash fa-lg"></i></button>
 
 <div mdbModal #deleteModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-statusledby="deleteModal" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">

@@ -1,5 +1,21 @@
 <div class="settings-content container">
-    <app-labels></app-labels>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <p class="h4 title">Labels</p>
+            <app-labels></app-labels>
+        </div>
+        <div class="col-12 col-md-6">
+            <p class="h4 title">Statuses</p>
+            <app-statuses></app-statuses>
+        </div>
+    </div>
     <hr/>
-    <app-statuses></app-statuses>
+    <div class="row">
+        <div class="col-12">
+            <p class="h4 title">Users</p>
+            <button type="button" class="btn blue waves-light" routerLink='/users' mdbWavesEffect>Show more</button>
+            <app-user-list [count]="10"></app-user-list>
+        </div>
+    </div>
+    <hr/>
 </div>

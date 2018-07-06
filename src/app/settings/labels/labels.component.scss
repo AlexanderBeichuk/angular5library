@@ -1,16 +1,12 @@
-.title {
-   text-transform: uppercase;
-   font-weight: 100;
-}
 .label-list {
-  padding: 10px 5px;
-  .labels-all {
-    padding: 10px;
-    .badge-theme {
-      padding: 7px;
-      margin: 0 3px;
-      font-size: 14px;
-      border-radius: 0;
-    }
-  }
+   padding: 10px 5px;
+   .labels-all {
+      padding: 10px;
+      .badge-theme {
+         padding: 7px;
+         margin: 0 3px 5px 3px;
+         font-size: 14px;
+         border-radius: 0;
+      }
+   }
 }

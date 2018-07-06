@@ -38,58 +38,10 @@ import { ReturnBookComponent } from './books/return/return-book.component';
 import { BookFormComponent } from './books/form/book-form.component';
 import { EditBookComponent } from './books/edit/edit-book.component';
 import { TakenListComponent } from './books/taken-list/taken-list.component';
-
-const appRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: '/login',
-        pathMatch: 'full'
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-        path: 'cabinet',
-        component: CabinetComponent
-    },
-    {
-        path: 'books',
-        component: BooksComponent
-    },
-    {
-        path: 'books/my',
-        component: MyBooksComponent
-    },
-    {
-        path: 'book/add',
-        component: AddBookComponent
-    },
-    {
-        path: 'book/edit/:id',
-        component: EditBookComponent
-    },
-    {
-        path: 'settings',
-        component: SettingsComponent
-    }
-  /*{
-   path: 'hero/:id',
-   component: HeroDetailComponent
-   },
-   {
-   path: 'heroes',
-   component: HeroListComponent,
-   data: { title: 'Heroes List' }
-   },
-   {
-   path: '**', component: PageNotFoundComponent
-   }*/
-];
+import { UserListComponent } from './settings/user-list/user-list.component';
+import { UsersComponent } from './users/users.component';
+import { appRoutes } from './route';
+import { UserComponent } from './user/user.component';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -133,6 +85,9 @@ export function getAuthServiceConfigs() {
       BookFormComponent,
       EditBookComponent,
       TakenListComponent,
+      UserListComponent,
+      UsersComponent,
+      UserComponent,
   ],
   imports: [
       BrowserModule,

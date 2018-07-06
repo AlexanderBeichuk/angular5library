@@ -1,5 +1,5 @@
 <div class="books-list">
-    <table class="table table-bordered table-responsive-md">
+    <table class="table table-bordered table-responsive-md" *ngIf="myBookList && myBookList.length > 0; else noneBooks">
 
         <thead>
         <tr>
@@ -35,4 +35,8 @@
         </tr>
         </tbody>
     </table>
+
+    <ng-template #noneBooks>
+        <p class="none-books">List is empty</p>
+    </ng-template>
 </div>

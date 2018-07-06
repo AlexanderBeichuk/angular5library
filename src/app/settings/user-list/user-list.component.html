@@ -1,0 +1,29 @@
+<div class="user-list">
+    <table class="table table-bordered table-responsive-md">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Id</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of userList" routerLink='/user/{{user.id}}'>
+            <td class="td-user">
+                <img class="image rounded-circle" [src]="user.image">
+                <span>{{user.name}}</span>
+            </td>
+            <td>
+                <p>{{user.email}}</p>
+            </td>
+            <td class="td-role">
+                <p>{{user.role}}</p>
+            </td>
+            <td class="td-id">
+                <p>{{user.id}}</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

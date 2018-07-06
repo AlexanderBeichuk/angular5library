@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {TakeBookService} from '../../services/take-book.service';
+import {TakeBook} from '../../models/takeBook';
 
 @Component({
   selector: 'app-taken-list',
@@ -7,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TakenListComponent implements OnInit {
 
-    @Input() userId;
+    @Input() user;
     myBookList;
 
     constructor(private takeBookService: TakeBookService) {}
@@ -22,7 +24,7 @@ export class TakenListComponent implements OnInit {
             item.forEach(element => {
                 const takeBook: any = element.payload.toJSON();
                 takeBook['$key'] = element.key;
-                if (takeBook['user'] === this.userId) {
+                if (takeBook['user'] === this.user.id) {
                     takeBook.startDateStr = this.DateToStringFormat(new Date(takeBook.startDate));
                     takeBook.endDateStr = this.DateToStringFormat(new Date(takeBook.endDate));
                     this.myBookList.push(takeBook as TakeBook);

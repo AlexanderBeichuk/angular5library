@@ -1,9 +1,6 @@
-<p class="h4 title">Labels</p>
-
 <button type="button" class="btn blue waves-light add-button" (click)="openPopup('add', resetLabel())" mdbWavesEffect>Add label</button>
 
 <div class="label-list">
-    <label>All Labels</label>
     <div class="labels-all">
         <a class="badge badge-theme" *ngFor="let label of labelList" (click)="readLabel(label)" [ngStyle]="{'background': label.color}">{{label.name}}</a>
     </div>

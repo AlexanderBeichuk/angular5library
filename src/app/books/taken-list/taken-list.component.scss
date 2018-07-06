@@ -13,6 +13,9 @@
          }
       }
       tbody {
+         tr {
+            min-height: 135px;
+         }
          td {
             font-size: 20px;
             &.td-image {
@@ -42,5 +45,10 @@
             }
          }
       }
+   }
+   .none-books {
+      text-align: center;
+      font-weight: 300;
+      font-size: 20px;
    }
 }

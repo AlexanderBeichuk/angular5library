@@ -18,7 +18,7 @@
     </div>
     <div *ngIf="currentUser.role === 'admin'">
         <app-delete (emitDeleteBooks)="setAllCheckBox($emit)" [activeBooks]="activeBooksArray"></app-delete>
-        <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
+        <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbTooltip="ADD BOOK" placement="bottom" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
     </div>
 </div>
 
@@ -81,7 +81,7 @@
                     </a>
                 </div>
                 <div class="action" *ngIf="currentUser.role === 'admin'">
-                    <a routerLink="/book/edit/{{book['$key']}}">
+                    <a routerLink="/book/edit/{{book['$key']}}" mdbTooltip="EDIT BOOK" placement="bottom">
                         <i class="fa fa-edit"></i>
                     </a>
                 </div>
