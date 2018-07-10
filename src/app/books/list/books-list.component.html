@@ -24,7 +24,7 @@
 
 
 <div class="books-list">
-    <table class="table table-bordered table-responsive-md">
+    <table *ngIf="(bookList | filter:searchService.getSearch())?.length > 0; else ozHref" class="table table-bordered table-responsive-md">
 
         <thead>
         <tr>
@@ -72,21 +72,31 @@
                 <div class="action">
                     <app-comments [book]="book"></app-comments>
                 </div>
-                <div class="action" *ngIf="book.availableCount > 0">
+                <div class="action">
                     <app-take-book [book]="book"></app-take-book>
                 </div>
-                <div class="action" *ngIf="book.availableCount === 0">
-                    <a>
-                        <i class="fa fa-hourglass-o"></i>
-                    </a>
-                </div>
-                <div class="action" *ngIf="currentUser.role === 'admin'">
-                    <a routerLink="/book/edit/{{book['$key']}}" mdbTooltip="EDIT BOOK" placement="bottom">
-                        <i class="fa fa-edit"></i>
-                    </a>
-                </div>
+                <span *ngIf="currentUser.role === 'admin'">
+                    <div class="action">
+                        <a routerLink="/book/edit/{{book['$key']}}" mdbTooltip="EDIT BOOK" placement="bottom">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="action">
+                        <a routerLink="/book/wait/{{book['$key']}}" mdbTooltip="WAITING LIST" placement="bottom">
+                            <i class="fa fa-list-ol"></i>
+                        </a>
+                    </div>
+                </span>
             </td>
         </tr>
         </tbody>
     </table>
+    <ng-template #ozHref>
+        <div *ngIf="bookList?.length > 0" class="search-oz">
+            <a href='https://oz.by/search/?q={{searchService.getSearch()}}' target="_blank">
+                <span>Search on</span>
+                <img src="../../../assets/images/oz.png">
+            </a>
+        </div>
+    </ng-template>
 </div>

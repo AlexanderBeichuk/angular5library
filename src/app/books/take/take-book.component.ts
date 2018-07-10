@@ -1,12 +1,11 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
-import { NgForm, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 import { TakeBook } from '../../models/takeBook';
 import { BookService } from '../../services/book.service';
 import { TakeBookService } from '../../services/take-book.service';
 import { AuthorizeService } from '../../services/authorize.service';
-import { FormService } from '../../services/form.service';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-take-book',
@@ -24,6 +23,8 @@ export class TakeBookComponent implements OnInit {
         to: null
     };
     dateValid = false;
+    currentUser: object;
+    takenBook = false;
 
     private todayDate = new Date();
     myDatePickerOptions: IMyDpOptions = {
@@ -35,10 +36,12 @@ export class TakeBookComponent implements OnInit {
         disableUntil: { year: this.todayDate.getFullYear(), month: this.todayDate.getMonth() + 1, day: this.todayDate.getDate() - 1 }
     };
 
-    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService, private formService: FormService) {}
+    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService) {}
 
     ngOnInit() {
+        this.setTakenBooks();
         this.selectTake = this.resetTake();
+        this.currentUser = this.authorizeService.getUser();
     }
 
     takeBook(): void {
@@ -77,5 +80,22 @@ export class TakeBookComponent implements OnInit {
             book: null,
             user: '',
         };
+    }
+
+    private setTakenBooks(): void {
+        this.takeBookService.getConectToList().snapshotChanges().subscribe(item => {
+            this.takenBook = false;
+            item.forEach(element => {
+                const takeBook = element.payload.toJSON();
+                takeBook['$key'] = element.key;
+                this.findTakenBook(takeBook);
+            });
+        });
+    }
+
+    findTakenBook(takeBook): void {
+        if (takeBook.book.id === this.book['$key']) {
+            this.takenBook = true;
+        }
     }
 }

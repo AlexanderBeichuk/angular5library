@@ -1,47 +1,30 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { TakeBook } from '../models/takeBook';
+import { WaitBook } from '../models/reserveBook';
+import {BookService} from './book.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WaitBookService {
-    constructor(private firebase: AngularFireDatabase) {
+    constructor(private firebase: AngularFireDatabase, private bookService: BookService) {
     }
 
     getConectToList() {
-        return this.firebase.list('takeBooks');
+        return this.firebase.list('waitBooks');
     }
 
-    add(book: TakeBook) {
+    add(book: WaitBook) {
         this.getConectToList().push({
-            startDate: book.startDate,
-            endDate: book.endDate,
-            book: book.book,
             user: book.user,
+            book: this.bookService.getBook(book.book),
         });
     }
 
-    /*readBook($key: string) {
-     var x = this.getConectToList();
-     x.snapshotChanges().subscribe(item => {
-     item.forEach(element => {
-     var y = element.payload.toJSON();
-     y["$key"] = element.key;
-     if (y["$key"] === $key) {
-     return y;
-     }
-     });
-     });
-     return null;
-     }*/
-
-    update(book: TakeBook) {
+    update(book: WaitBook) {
         this.getConectToList().update(book.$key, {
-            startDate: book.startDate,
-            endDate: book.endDate,
-            book: book.book,
             user: book.user,
+            book: this.bookService.getBook(book.book),
         });
     }
 

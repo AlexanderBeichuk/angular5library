@@ -57,4 +57,18 @@ export class BookService {
     delete($key: string) {
         this.getConectToList().remove($key);
     }
+
+    getBook(book) {
+        return {
+            id: book['$key'],
+            name: book.name,
+            author: book.author,
+            imageLink: book.imageLink,
+            description: book.description,
+            allCount: book.allCount,
+            availableCount: book.availableCount,
+            statuses: book.statuses,
+            labels: book.labels
+        };
+    }
 }

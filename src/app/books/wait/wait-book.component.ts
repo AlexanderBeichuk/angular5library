@@ -1,0 +1,55 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthorizeService } from '../../services/authorize.service';
+import { ToastrService } from 'ngx-toastr';
+import {WaitBookService} from '../../services/wait-book.service';
+import {WaitBook} from '../../models/reserveBook';
+import * as _ from 'lodash';
+
+
+@Component({
+    selector: 'app-wait-book',
+    templateUrl: './wait-book.component.html',
+    styleUrls: ['./wait-book.component.scss']
+})
+export class WaitBookComponent implements OnInit {
+
+    @Input() book;
+    reservations: WaitBook[];
+
+    constructor(private authorizeService: AuthorizeService, private toast: ToastrService, private waitBookService: WaitBookService) {
+    }
+
+    ngOnInit() {
+        this.setReservation();
+    }
+
+    reserveBook(): void {
+        this.waitBookService.add({
+            $key: null,
+            book: this.book,
+            user: this.authorizeService.getUser().id
+        });
+        this.toast.success('You add ' + this.book.name + ' to waiting list!');
+    }
+
+    private setReservation(): void {
+        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+            this.reservations = [];
+            item.forEach(element => {
+                const reservation = element.payload.toJSON();
+                reservation['$key'] = element.key;
+                this.reservations.push(reservation as WaitBook);
+            });
+        });
+    }
+
+    findReservationBook(): boolean {
+        let find = false;
+        _.map(this.reservations, reservation => {
+            if (reservation.user === this.authorizeService.getUser().id && reservation.book.id === this.book['$key']) {
+                find = true;
+            }
+        });
+        return find;
+    }
+}

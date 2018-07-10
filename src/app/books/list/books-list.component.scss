@@ -105,7 +105,6 @@
                }
             }
             &.actions {
-               text-align: center;
                .action {
                   display: inline-block;
                   margin: 0 10px;
@@ -118,6 +117,28 @@
                   }
                }
             }
+         }
+      }
+   }
+   .search-oz {
+      text-align: center;
+      a {
+         width: fit-content;
+         color: #000000;
+         &:hover {
+            text-decoration-line: underline;
+            img {
+               opacity: .8;
+            }
+         }
+         span {
+            font-size: 26px;
+            font-weight: 100;
+         }
+         img {
+            width: 50px;
+            margin-left: 10px;
+            vertical-align: text-bottom;
          }
       }
    }

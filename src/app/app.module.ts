@@ -42,6 +42,7 @@ import { UserListComponent } from './settings/user-list/user-list.component';
 import { UsersComponent } from './users/users.component';
 import { appRoutes } from './route';
 import { UserComponent } from './user/user.component';
+import { WaitBookComponent } from './books/wait/wait-book.component';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -88,6 +89,7 @@ export function getAuthServiceConfigs() {
       UserListComponent,
       UsersComponent,
       UserComponent,
+      WaitBookComponent,
   ],
   imports: [
       BrowserModule,

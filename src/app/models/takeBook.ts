@@ -1,4 +1,3 @@
-
 export class TakeBook {
     $key: string;
     startDate: string;
