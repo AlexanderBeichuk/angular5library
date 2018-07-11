@@ -1,0 +1,46 @@
+<div class="wait-list">
+    <div *ngIf="user">
+        <table *ngIf="bookList.length > 0; else emptyList" class="table table-bordered table-responsive-md">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let book of bookList">
+                    <td class="td-image">
+                        <img class="image" [src]="book.imageLink || '../../../assets/images/book.png'">
+                    </td>
+                    <td>
+                        <app-description-book [title]="book.name" [book]="book"></app-description-book>
+                    </td>
+                    <td>{{book.author}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #emptyList>
+            <p class="none-waiting">Waiting list is empty</p>
+        </ng-template>
+    </div>
+    <div *ngIf="book">
+        <div *ngIf="userList.length > 0; else emptyList">
+            <img class="title-book image" [src]="book.imageLink">
+            <p class="h4 title-book">{{book.name}} <span class="h5">{{book.author}}</span></p>
+            <table class="table table-bordered table-responsive-md">
+                <tbody>
+                <tr *ngFor="let person of userList">
+                    <td class="td-user">
+                        <img class="image rounded-circle" [src]="person.image">
+                        <span>{{person.name}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #emptyList>
+            <p class="none-waiting">Waiting list is empty</p>
+        </ng-template>
+    </div>
+</div>

@@ -43,6 +43,8 @@ import { UsersComponent } from './users/users.component';
 import { appRoutes } from './route';
 import { UserComponent } from './user/user.component';
 import { WaitBookComponent } from './books/wait/wait-book.component';
+import { WaitListComponent } from './wait-list-book/wait-list/wait-list.component';
+import { WaitListBookComponent } from './wait-list-book/wait-list-book.component';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -90,6 +92,8 @@ export function getAuthServiceConfigs() {
       UsersComponent,
       UserComponent,
       WaitBookComponent,
+      WaitListComponent,
+      WaitListBookComponent,
   ],
   imports: [
       BrowserModule,

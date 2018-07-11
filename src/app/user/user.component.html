@@ -3,5 +3,8 @@
         <img class="image rounded-circle" [src]="currentUser.image">
         <p class="h4 title">{{currentUser.name}} <span class="role">{{currentUser.role}}</span></p>
     </div>
+    <p class="title">Taken</p>
     <app-taken-list [user]="currentUser"></app-taken-list>
+    <p class="title">Waiting</p>
+    <app-wait-list [user]="currentUser"></app-wait-list>
 </div>

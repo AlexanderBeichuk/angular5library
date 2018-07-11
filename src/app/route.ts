@@ -9,6 +9,7 @@ import {HomeComponent} from './home/home.component';
 import {AddBookComponent} from './books/add/add-book.component';
 import {UsersComponent} from './users/users.component';
 import {UserComponent} from './user/user.component';
+import {WaitListBookComponent} from './wait-list-book/wait-list-book.component';
 
 export const appRoutes: Routes = [
     {
@@ -43,6 +44,10 @@ export const appRoutes: Routes = [
     {
         path: 'book/edit/:id',
         component: EditBookComponent
+    },
+    {
+        path: 'book/wait/:id',
+        component: WaitListBookComponent
     },
     {
         path: 'settings',
