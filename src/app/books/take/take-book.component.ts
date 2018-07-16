@@ -5,6 +5,8 @@ import { TakeBook } from '../../models/takeBook';
 import { BookService } from '../../services/book.service';
 import { TakeBookService } from '../../services/take-book.service';
 import { AuthorizeService } from '../../services/authorize.service';
+import {WaitBookService} from '../../services/wait-book.service';
+import {WaitBook} from '../../models/reserveBook';
 import * as _ from 'lodash';
 
 @Component({
@@ -23,8 +25,9 @@ export class TakeBookComponent implements OnInit {
         to: null
     };
     dateValid = false;
-    currentUser: object;
-    takenBook = false;
+    currentUser;
+    takenBook = null;
+    private waitingList;
 
     private todayDate = new Date();
     myDatePickerOptions: IMyDpOptions = {
@@ -36,7 +39,7 @@ export class TakeBookComponent implements OnInit {
         disableUntil: { year: this.todayDate.getFullYear(), month: this.todayDate.getMonth() + 1, day: this.todayDate.getDate() - 1 }
     };
 
-    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService) {}
+    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService, private waitBookService: WaitBookService) {}
 
     ngOnInit() {
         this.setTakenBooks();
@@ -50,16 +53,33 @@ export class TakeBookComponent implements OnInit {
             this.takeBookService.add(this.selectTake);
             this.book.availableCount = this.book.availableCount - 1;
             this.bookService.update(this.book);
+            this.removeWaitingByUserBook(this.currentUser.id, this.book['$key']);
         }
         this.takeModal.hide();
         this.tostr.success('You take ' + this.book.name + ' book!');
     }
 
-    fillData(): void {
+    private fillData(): void {
         this.selectTake.endDate = this.date.to.jsdate.toString();
         this.selectTake.startDate = this.date.from.jsdate.toString();
         this.selectTake.book = this.book;
         this.selectTake.user = this.authorizeService.getUser().id;
+    }
+
+    private removeWaitingByUserBook(userId, bookId): void {
+        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+            let removeWaitBook = null;
+            item.forEach(element => {
+                const waitBook: any = element.payload.toJSON();
+                waitBook['$key'] = element.key;
+                if (waitBook.book.id === bookId && waitBook.user === userId) {
+                    removeWaitBook = waitBook;
+                }
+            });
+            if (removeWaitBook !== null) {
+                this.waitBookService.delete(removeWaitBook['$key']);
+            }
+        });
     }
 
     onDateChanged(event: IMyDateModel) {
@@ -84,18 +104,41 @@ export class TakeBookComponent implements OnInit {
 
     private setTakenBooks(): void {
         this.takeBookService.getConectToList().snapshotChanges().subscribe(item => {
-            this.takenBook = false;
+            this.takenBook = null;
             item.forEach(element => {
                 const takeBook = element.payload.toJSON();
                 takeBook['$key'] = element.key;
                 this.findTakenBook(takeBook);
             });
+            this.findBookWaiting();
         });
     }
 
-    findTakenBook(takeBook): void {
-        if (takeBook.book.id === this.book['$key']) {
-            this.takenBook = true;
+    private findTakenBook(takeBook): void {
+        if (takeBook.book.id === this.book['$key'] && takeBook.user === this.authorizeService.getUser().id) {
+            this.takenBook = takeBook;
         }
+    }
+
+    private findBookWaiting(): void {
+        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+            this.waitingList = [];
+            item.forEach(element => {
+                const waitBook: any = element.payload.toJSON();
+                waitBook['$key'] = element.key;
+                this.waitingList.push(waitBook as WaitBook);
+            });
+        });
+    }
+
+    getCountWaitingForMe(): number {
+        const userLength = _.findIndex(this.waitingList, waitBook => {
+                return waitBook.user === this.authorizeService.getUser().id && waitBook.book.id === this.book['$key'];
+            }) + 1;
+        return userLength === 0 ? this.getWaitingListLength() : userLength;
+    }
+
+    private getWaitingListLength(): number {
+        return this.waitingList ? this.waitingList.length + 1 : 0;
     }
 }

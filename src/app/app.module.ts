@@ -5,7 +5,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,6 +45,7 @@ import { UserComponent } from './user/user.component';
 import { WaitBookComponent } from './books/wait/wait-book.component';
 import { WaitListComponent } from './wait-list-book/wait-list/wait-list.component';
 import { WaitListBookComponent } from './wait-list-book/wait-list-book.component';
+import { SortTableComponent } from './books/sort-table/sort-table.component';
 
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
@@ -94,6 +95,7 @@ export function getAuthServiceConfigs() {
       WaitBookComponent,
       WaitListComponent,
       WaitListBookComponent,
+      SortTableComponent,
   ],
   imports: [
       BrowserModule,

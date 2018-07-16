@@ -1,6 +1,6 @@
-<a class="book-action" *ngIf="book.availableCount > 0 && !takenBook" (click)="takeModal.show()" mdbTooltip="TAKE BOOK" placement="bottom"><i class="fa fa-hand-rock-o"></i></a>
-<app-wait-book *ngIf="book.availableCount === 0 && !takenBook" [book]="book"></app-wait-book>
-<app-return-book *ngIf="takenBook" [takeBook]="book"></app-return-book>
+<a class="book-action" *ngIf="book.availableCount > 0 && !takenBook && book.availableCount >= getCountWaitingForMe()" (click)="takeModal.show()" mdbTooltip="TAKE BOOK" placement="bottom"><i class="fa fa-hand-rock-o"></i></a>
+<app-wait-book *ngIf="!(book.availableCount > 0 && !takenBook && book.availableCount >= getCountWaitingForMe())" [taken]="takenBook" [book]="book"></app-wait-book>
+<app-return-book *ngIf="takenBook" [takeBook]="takenBook"></app-return-book>
 
 <div mdbModal #takeModal="mdb-modal" class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalTake" aria-hidden="true">
     <div class="modal-dialog take-modal-dialog" role="document">

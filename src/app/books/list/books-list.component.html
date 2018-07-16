@@ -17,7 +17,7 @@
         </div>
     </div>
     <div *ngIf="currentUser.role === 'admin'">
-        <app-delete (emitDeleteBooks)="setAllCheckBox($emit)" [activeBooks]="activeBooksArray"></app-delete>
+        <app-delete (emitDeleteBooks)="setAllCheckBox($event)" [activeBooks]="activeBooksArray"></app-delete>
         <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbTooltip="ADD BOOK" placement="bottom" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
     </div>
 </div>
@@ -35,9 +35,18 @@
                 </div>
             </th>
             <th></th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Count</th>
+            <th>
+                Title
+                <app-sort-table (listOutput)="sortList($event)" [list]="bookList" [field]="'name'"></app-sort-table>
+            </th>
+            <th>
+                Author
+                <app-sort-table (listOutput)="sortList($event)" [list]="bookList" [field]="'author'"></app-sort-table>
+            </th>
+            <th>
+                Count
+                <app-sort-table (listOutput)="sortList($event)" [list]="bookList" [field]="'availableCount'"></app-sort-table>
+            </th>
             <th>Labels</th>
             <th></th>
         </tr>
@@ -75,15 +84,15 @@
                 <div class="action">
                     <app-take-book [book]="book"></app-take-book>
                 </div>
+                <div class="action">
+                    <a routerLink="/book/wait/{{book['$key']}}" mdbTooltip="WAITING LIST" placement="bottom">
+                        <i class="fa fa-list-ol"></i>
+                    </a>
+                </div>
                 <span *ngIf="currentUser.role === 'admin'">
                     <div class="action">
                         <a routerLink="/book/edit/{{book['$key']}}" mdbTooltip="EDIT BOOK" placement="bottom">
                             <i class="fa fa-edit"></i>
-                        </a>
-                    </div>
-                    <div class="action">
-                        <a routerLink="/book/wait/{{book['$key']}}" mdbTooltip="WAITING LIST" placement="bottom">
-                            <i class="fa fa-list-ol"></i>
                         </a>
                     </div>
                 </span>

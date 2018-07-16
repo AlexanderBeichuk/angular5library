@@ -1,5 +1,5 @@
 
-<a *ngIf="!findReservationBook(); else reserve" class="book-action" (click)="reserveBook()" mdbTooltip="RESERVE" placement="bottom"><i class="fa fa-clock-o"></i></a>
-<ng-template #reserve>
-    <a class="book-action" mdbTooltip="YOU RESERVED THIS BOOK" placement="bottom"><i class="fa fa-user-o"></i></a>
-</ng-template>
+<a *ngIf="!findReservation() && !taken" class="book-action" (click)="reserveBook()" mdbTooltip="RESERVE" placement="bottom"><i class="fa fa-clock-o"></i></a>
+<div *ngIf="findReservation() && !taken">
+    <a class="book-action" (click)="deleteReservation()" mdbTooltip="YOU RESERVED THIS BOOK. CANCEL RESERVATION" placement="bottom"><i class="fa fa-user-o"></i></a>
+</div>

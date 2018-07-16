@@ -31,5 +31,4 @@ export class WaitListBookComponent implements OnInit {
             });
         });
     }
-
 }

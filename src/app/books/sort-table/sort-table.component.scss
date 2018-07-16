@@ -1,0 +1,11 @@
+a {
+   display: inline-block;
+   vertical-align: text-bottom;
+   font-size: 12px;
+   i {
+      display: block;
+      &.active {
+         color: #2196f3;
+      }
+   }
+}

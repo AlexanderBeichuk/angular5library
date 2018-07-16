@@ -152,4 +152,8 @@ export class BooksListComponent implements OnInit {
         this.allCheckBox = allCheckBox;
         this.activeBooksArray = [];
     }
+
+    sortList(bookList): void {
+        this.bookList = bookList;
+    }
 }

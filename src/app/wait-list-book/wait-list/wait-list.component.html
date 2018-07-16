@@ -6,6 +6,7 @@
                     <th></th>
                     <th>Title</th>
                     <th>Author</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +18,9 @@
                         <app-description-book [title]="book.name" [book]="book"></app-description-book>
                     </td>
                     <td>{{book.author}}</td>
+                    <td>
+                        <app-wait-book [book]="book" [user]="user"></app-wait-book>
+                    </td>
                 </tr>
             </tbody>
         </table>

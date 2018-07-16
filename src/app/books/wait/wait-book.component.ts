@@ -14,6 +14,8 @@ import * as _ from 'lodash';
 export class WaitBookComponent implements OnInit {
 
     @Input() book;
+    @Input() taken;
+    @Input() user;
     reservations: WaitBook[];
 
     constructor(private authorizeService: AuthorizeService, private toast: ToastrService, private waitBookService: WaitBookService) {
@@ -27,9 +29,10 @@ export class WaitBookComponent implements OnInit {
         this.waitBookService.add({
             $key: null,
             book: this.book,
-            user: this.authorizeService.getUser().id
+            user: this.user.id || this.authorizeService.getUser().id
         });
         this.toast.success('You add ' + this.book.name + ' to waiting list!');
+        console.log('reserve');
     }
 
     private setReservation(): void {
@@ -43,13 +46,28 @@ export class WaitBookComponent implements OnInit {
         });
     }
 
-    findReservationBook(): boolean {
+    findReservation(): boolean {
         let find = false;
+        this.user = this.user || this.authorizeService.getUser();
         _.map(this.reservations, reservation => {
-            if (reservation.user === this.authorizeService.getUser().id && reservation.book.id === this.book['$key']) {
+            if (reservation.user === this.user.id && reservation.book.id === (this.book['$key'] || this.book.id)) {
                 find = true;
             }
+            return reservation;
         });
         return find;
+    }
+
+    deleteReservation(): void {
+        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+            item.forEach(element => {
+                const reservation: any = element.payload.toJSON();
+                reservation['$key'] = element.key;
+                if (reservation.user === this.user.id && reservation.book.id === (this.book['$key'] || this.book.id)) {
+                    console.log('delete');
+                    this.waitBookService.delete(reservation['$key']);
+                }
+            });
+        });
     }
 }
