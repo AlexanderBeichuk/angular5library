@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {Book} from '../../models/book';
 import {BookService} from '../../services/book.service';
 import * as _ from 'lodash';
+import {AuthorizeService} from '../../services/authorize.service';
 
 @Component({
     selector: 'app-wait-list-book',
@@ -12,8 +13,9 @@ import * as _ from 'lodash';
 export class WaitListBookComponent implements OnInit {
 
     book: Book;
+    currentUser = this.authorizeService.getUser();
 
-    constructor(private bookService: BookService, private router: Router) {
+    constructor(private bookService: BookService, private router: Router, private authorizeService: AuthorizeService) {
     }
 
     ngOnInit() {

@@ -17,6 +17,7 @@ export class WaitBookComponent implements OnInit {
     @Input() taken;
     @Input() user;
     reservations: WaitBook[];
+    countReservation: number;
 
     constructor(private authorizeService: AuthorizeService, private toast: ToastrService, private waitBookService: WaitBookService) {
     }
@@ -48,10 +49,14 @@ export class WaitBookComponent implements OnInit {
 
     findReservation(): boolean {
         let find = false;
+        this.countReservation = 0;
         this.user = this.user || this.authorizeService.getUser();
         _.map(this.reservations, reservation => {
-            if (reservation.user === this.user.id && reservation.book.id === (this.book['$key'] || this.book.id)) {
-                find = true;
+            if (reservation.book.id === (this.book['$key'] || this.book.id)) {
+                this.countReservation += 1;
+                if (reservation.user === this.user.id) {
+                    find = true;
+                }
             }
             return reservation;
         });
