@@ -1,0 +1,68 @@
+<div class="books-list">
+    <p class="title d-inline-block">Taken</p>
+    <p class="sort-label d-inline-block">Sort by:</p>
+    <select *ngIf="selectSortSelected" class="browser-default select-sort" #selectSort (change)="selectSortChange(selectSort.value)">
+        <option value="default" [attr.selected]="selectSortSelected === 'default' ? true : null">default</option>
+        <option value="endDate" [attr.selected]="selectSortSelected === 'endDate' ? true : null">end date</option>
+        <option value="startDate" [attr.selected]="selectSortSelected === 'startDate' ? true : null">start date</option>
+        <option value="book.name" [attr.selected]="selectSortSelected === 'book.name' ? true : null">title</option>
+        <option value="book.author" [attr.selected]="selectSortSelected === 'book.author' ? true : null">author</option>
+    </select>
+    <table class="table table-bordered table-responsive-md" *ngIf="!cardOrientation && myBookList && myBookList.length > 0">
+
+        <thead>
+        <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>From - To</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let myBook of myBookList">
+            <td class="td-image">
+                <img class="image" [src]="myBook.book.imageLink || '../../../assets/images/book.png'">
+            </td>
+            <td>
+                <app-description-book [book]="myBook.book" [title]="myBook.book.name"></app-description-book>
+            </td>
+            <td>{{myBook.book.author}}</td>
+            <td class="td-from-to">
+                <p>
+                    {{myBook.startDateStr}} - {{myBook.endDateStr}}
+                </p>
+            </td>
+            <td class="actions">
+                <div class="action">
+                    <app-comments [book]="myBook.book"></app-comments>
+                </div>
+                <div class="action">
+                    <app-return-book [takeBook]="myBook"></app-return-book>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="cards row" *ngIf="cardOrientation && myBookList && myBookList.length > 0">
+        <div class="card-book card" [ngClass]="{'delayed': myBook.endDate < currentDate}" *ngFor="let myBook of myBookList">
+            <div class="row">
+                <div class="col-4">
+                    <img class="image" [src]="myBook.book.imageLink || '../../../assets/images/book.png'">
+                </div>
+                <div class="col-8 description">
+                    <app-description-book class="name" [book]="myBook.book" [title]="myBook.book.name"></app-description-book>
+                    <p class="author">{{myBook.book.author}}</p>
+                    <p class="date">From: {{myBook.startDateStr}}</p>
+                    <p class="date" [ngClass]="{'delayed': myBook.endDate < currentDate}">To: {{myBook.endDateStr}}</p>
+                    <app-comments [book]="myBook.book"></app-comments>
+                    <app-return-book [takeBook]="myBook"></app-return-book>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p *ngIf="!myBookList || myBookList.length === 0" class="none-books">Taken list is empty</p>
+</div>
+

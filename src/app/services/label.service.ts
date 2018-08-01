@@ -33,11 +33,11 @@ export class LabelService {
                 var y = element.payload.toJSON();
                 y["$key"] = element.key;
                 if (y["$key"] === $key) {
-                    return y;
+                    return-book y;
                 }
             });
         });
-        //return result;
+        //return-book result;
      }*/
 
     update(label: Label) {

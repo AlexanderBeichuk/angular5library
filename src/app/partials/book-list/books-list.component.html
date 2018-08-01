@@ -1,0 +1,92 @@
+<div class="panel-book">
+    <div *ngIf="currentUser.role === 'admin'">
+        <button type="button" class="btn blue rounded-circle waves-light add-book-button" routerLink="/book/add" mdbTooltip="ADD BOOK" placement="bottom" mdbWavesEffect><i class="fa fa-plus fa-lg"></i></button>
+    </div>
+</div>
+
+
+<div class="books-list">
+    <table class="table table-bordered table-responsive-md">
+
+        <thead>
+        <tr>
+            <th></th>
+            <th>
+                Title
+                <app-sort-table (listOutput)="sortList($event)" [list]="bookList" [field]="'name'"></app-sort-table>
+            </th>
+            <th>
+                Count
+                <app-sort-table (listOutput)="sortList($event)" [list]="bookList" [field]="'availableCount'"></app-sort-table>
+            </th>
+            <th class="labels">
+                Labels
+                <ng-multiselect-dropdown *ngIf="showAllLabels" class="labels-dropdown"
+                                      [placeholder]="'All labels'"
+                                      [data]="labelList"
+                                      [(ngModel)]="dropdownSelectLabels"
+                                      [settings]="setLabelSettings()"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onDeSelect)="OnItemDeSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                      (onDeSelectAll)="onDeSelectAll($event)">
+
+                </ng-multiselect-dropdown>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody *ngIf="(bookList | filter:searchService.getSearch())?.length > 0">
+        <tr *ngFor="let book of bookList | filter:searchService.getSearch()">
+            <td class="td-image">
+                <img class="image" [src]="book.imageLink || '../../../assets/images/book.png'">
+            </td>
+            <td>
+                <app-description-book [title]="book.name" [book]="book"></app-description-book>
+                <p class="author">{{book.author}}</p>
+            </td>
+            <td class="td-count">
+                <span [ngClass]="{'green-color': book.availableCount > 1,
+                        'yellow-color': book.availableCount === 1,
+                        'red-color': book.availableCount === 0}">{{book.availableCount}}</span> / <span class="blue-color">{{book.allCount}}</span></td>
+            <td class="td-labels">
+                <div class="labels-all">
+                    <a class="badge badge-theme" *ngFor="let label of book.labels">{{label.name}}</a>
+                    <a class="badge badge-theme" *ngFor="let label of book.statuses">{{label.name}}</a>
+                </div>
+            </td>
+            <td class="actions">
+                <div class="action">
+                    <app-comments [book]="book"></app-comments>
+                </div>
+                <div class="action">
+                    <app-take-book [book]="book"></app-take-book>
+                </div>
+                <div class="action">
+                    <a routerLink="/book/wait/{{book['$key']}}" mdbTooltip="WAITING LIST" placement="bottom">
+                        <i class="fa fa-list-ol"></i>
+                    </a>
+                </div>
+                <span *ngIf="currentUser.role === 'admin'">
+                    <div class="action">
+                        <a routerLink="/book/edit/{{book['$key']}}" mdbTooltip="EDIT BOOK" placement="bottom">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                    <div class="action">
+                        <app-delete [book]="book"></app-delete>
+                    </div>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <ng-template *ngIf="(bookList | filter:searchService.getSearch())?.length === 0">
+        <div *ngIf="bookList?.length > 0" class="search-oz">
+            <a href='https://oz.by/search/?q={{searchService.getSearch()}}' target="_blank">
+                <span>Search on</span>
+                <img src="../../../assets/images/oz.png">
+            </a>
+        </div>
+    </ng-template>
+</div>

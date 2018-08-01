@@ -1,15 +1,15 @@
-import {MyBooksComponent} from './books/my/my-books.component';
-import {LoginComponent} from './login/login.component';
-import {CabinetComponent} from './cabinet/cabinet.component';
-import {BooksComponent} from './books/books.component';
-import {EditBookComponent} from './books/edit/edit-book.component';
+import {MyBooksComponent} from './pages/my-book-list/my-books.component';
+import {LoginComponent} from './pages/login/login.component';
+import {CabinetComponent} from './pages/cabinet/cabinet.component';
+import {BooksComponent} from './pages/books/books.component';
+import {EditBookComponent} from './partials/edit-book/edit-book.component';
 import {Routes} from '@angular/router';
-import {SettingsComponent} from './settings/settings.component';
-import {HomeComponent} from './home/home.component';
-import {AddBookComponent} from './books/add/add-book.component';
-import {UsersComponent} from './users/users.component';
-import {UserComponent} from './user/user.component';
-import {WaitListBookComponent} from './wait-list-book/wait-list-book.component';
+import {SettingsComponent} from './pages/settings/settings.component';
+import {HomeComponent} from './pages/home/home.component';
+import {AddBookComponent} from './partials/add-book/add-book.component';
+import {UsersComponent} from './pages/users/users.component';
+import {UserComponent} from './pages/user/user.component';
+import {WaitListBookComponent} from './pages/wait-list-book/wait-list-book.component';
 
 export const appRoutes: Routes = [
     {

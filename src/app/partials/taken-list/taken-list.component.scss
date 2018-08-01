@@ -1,0 +1,92 @@
+.books-list {
+   .title {
+      margin: 10px;
+      font-size: 24px;
+      text-transform: uppercase;
+      font-weight: 100;
+   }
+   .sort-label {
+      margin: 0 5px 0 15px;
+      font-size: 16px;
+      font-weight: 100;
+   }
+   .select-sort {
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #337ab7;
+      cursor: pointer;
+   }
+   .table {
+      thead {
+         th {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 20px;
+            text-transform: uppercase;
+            &:first-child {
+               width: 50px;
+            }
+         }
+      }
+      tbody {
+         tr {
+            min-height: 135px;
+         }
+         td {
+            font-size: 20px;
+            &.td-image {
+               text-align: center;
+               width: 150px;
+               .image {
+                  width: 100px;
+               }
+            }
+            &.td-from-to {
+               width: 235px;
+               text-align: center;
+            }
+            &.actions {
+               text-align: center;
+               .action {
+                  display: inline-block;
+                  margin: 0 10px;
+                  i {
+                     font-size: 30px;
+                     transition: .5s;
+                     &:hover {
+                        color: #007bff;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+   .none-books {
+      text-align: center;
+      font-weight: 300;
+      font-size: 20px;
+   }
+   .cards {
+      .card-book {
+         .description {
+            .author {
+               font-size: 14px;
+            }
+            .date {
+               font-size: 14px;
+               font-weight: 100;
+               margin-bottom: 5px;
+            }
+         }
+         &.delayed {
+            &.card {
+               box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.4);
+            }
+            .delayed.date {
+               color: #ff0000;
+            }
+         }
+      }
+   }
+}

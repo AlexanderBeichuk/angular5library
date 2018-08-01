@@ -1,0 +1,24 @@
+.modal-dialog {
+   text-align: left;
+   .book-info {
+      img {
+         width: 100%;
+      }
+      p {
+         margin-bottom: 10px;
+         &.author {
+            font-size: 16px;
+         }
+      }
+   }
+}
+
+.delete-book-button {
+   i {
+      font-size: 30px;
+      transition: .5s;
+      &:hover {
+         color: #007bff;
+      }
+   }
+}

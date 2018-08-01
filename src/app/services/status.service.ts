@@ -33,11 +33,11 @@ export class StatusService {
                 var y = element.payload.toJSON();
                 y["$key"] = element.key;
                 if (y["$key"] === $key) {
-                    return y;
+                    return-book y;
                 }
             });
         });
-        return null;
+        return-book null;
     }*/
 
     update(status: Status) {

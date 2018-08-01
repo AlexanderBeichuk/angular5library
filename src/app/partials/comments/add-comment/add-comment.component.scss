@@ -1,0 +1,41 @@
+.add-comment-content {
+   position: relative;
+   .score {
+      position: absolute;
+      top: 50px;
+      a {
+         margin: 0 5px;
+         font-size: 22px;
+         color: #c0c0c0;
+         &.active-score-like {
+            color: #28a745;
+         }
+         &.active-score-dislike {
+            color: #dc3545;
+         }
+         /*&:hover {
+            color: #007bff;
+         }*/
+      }
+   }
+   .text-area {
+      line-height: 1;
+   }
+   .send-btn {
+      position: absolute;
+      height: 35px;
+      width: 35px;
+      bottom: -15px;
+      right: -15px;
+      i {
+         font-size: 20px;
+      }
+      &.disabled {
+         background: #c0c0c0;
+         opacity: 1;
+      }
+      &.enabled {
+         background: #2196f3;
+      }
+   }
+}

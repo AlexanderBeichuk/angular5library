@@ -3,7 +3,7 @@ import { User } from './user';
 export class Comment {
     $key: string;
     book: string;
-    date: Date;
+    date: string;
     text: string;
     user: User;
     score: boolean;

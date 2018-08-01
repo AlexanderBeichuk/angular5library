@@ -1,0 +1,8 @@
+<div class="user-page">
+    <div class="user-info" *ngIf="currentUser">
+        <img class="image rounded-circle" [src]="currentUser.image">
+        <p class="h4 title">{{currentUser.name}} <span class="role">{{currentUser.role}}</span></p>
+    </div>
+    <app-taken-list [user]="currentUser" [selectSortSelected]="'default'"></app-taken-list>
+    <app-wait-list [user]="currentUser"></app-wait-list>
+</div>

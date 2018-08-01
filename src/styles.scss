@@ -76,3 +76,53 @@ my-date-picker {
 .toast-container .toast {
    border-radius: 0;
 }
+
+.labels {
+   .multiselect-dropdown {
+      text-transform: none;
+      font-size: 14px;
+      .dropdown-btn {
+         height: 25px;
+         border: none !important;
+         border-radius: 0 !important;
+         .selected-item {
+            border-radius: 0 !important;
+            &:hover {
+               box-shadow: none !important;
+            }
+         }
+      }
+      .dropdown-list {
+         margin-top: 5px;
+         border: none;
+         border-radius: 0;
+         .item2 {
+            max-height: none !important;
+         }
+      }
+   }
+}
+.labels-all a {
+   background: #337ab7;
+}
+.cards {
+   .card-book {
+      display: inline-block;
+      width: 47%;
+      margin: 0 5px 10px 5px;
+      padding: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+      .image {
+         width: 100%;
+      }
+      .description {
+         padding-left: 30px;
+         .name {
+            a {
+               font-size: 18px !important;
+               font-weight: bold !important;
+            }
+         }
+      }
+   }
+}

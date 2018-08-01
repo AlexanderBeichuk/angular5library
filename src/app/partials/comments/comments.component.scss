@@ -1,0 +1,42 @@
+.book-action {
+   position: relative;
+   .comments-count {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      padding: 2px 5px;
+      background: #37fa06;
+      border-radius: 100%;
+      font-size: 10px;
+      font-weight: bold;
+   }
+}
+.comments-modal-dialog {
+   height: 100%;
+   width: 100%;
+   .comments-content {
+      height: 95%;
+      margin-top: 20px;
+      .modal-header, .title-header {
+         display: block;
+         text-align: left;
+         img {
+            width: 70px;
+            display: inline-block;
+         }
+         h4 {
+            font-size: 24px;
+         }
+         p {
+            font-size: 20px;
+            font-weight: 300;
+         }
+      }
+      .modal-body {
+         overflow-y: auto;
+      }
+   }
+}
+.add-coomment {
+   width: 100%;
+}
