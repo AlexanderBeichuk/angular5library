@@ -1,5 +1,10 @@
-<a *ngIf="!findReservation() && !taken" class="book-action" (click)="reserveBook()" mdbTooltip="RESERVE" placement="bottom"><i class="fa fa-clock-o"></i></a>
+<a *ngIf="!findReservation() && !taken" class="book-action" (click)="reserveBook()" mdbTooltip="RESERVE" placement="bottom">
+    <i class="fa fa-clock-o"></i>
+    <span class="reservations-count" [ngClass]="{'none': getCountReservationByBook() === 0}">{{getCountReservationByBook()}}</span>
+</a>
 <span *ngIf="findReservation() && !taken">
-    <a class="book-action" (click)="deleteReservation()" mdbTooltip="YOU RESERVED THIS BOOK. CANCEL RESERVATION" placement="bottom"><i class="fa fa-user-o"></i></a>
+    <a class="book-action" (click)="deleteReservation()" mdbTooltip="YOU RESERVED THIS BOOK. CANCEL RESERVATION" placement="bottom">
+        <i class="fa fa-user-o"></i>
+        <span class="reservations-count" [ngClass]="{'none': getCountReservationByBook() === 0}">{{getCountReservationByBook()}}</span>
+    </a>
 </span>
-{{countReservation}}

@@ -37,7 +37,7 @@ import { MyBooksComponent } from './pages/my-book-list/my-books.component';
 import { DescriptionBookComponent } from './partials/description-book/description-book.component';
 import { ReturnBookComponent } from './partials/return-book/return-book.component';
 import { BookFormComponent } from './partials/form-book/book-form.component';
-import { EditBookComponent } from './partials/edit-book/edit-book.component';
+import { EditBookComponent } from './pages/edit-book/edit-book.component';
 import { TakenListComponent } from './partials/taken-list/taken-list.component';
 import { UserListComponent } from './partials/user-list/user-list.component';
 import { UsersComponent } from './pages/users/users.component';

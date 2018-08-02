@@ -1,13 +1,15 @@
 <div class="books-list">
     <p class="title d-inline-block">Taken</p>
-    <p class="sort-label d-inline-block">Sort by:</p>
-    <select *ngIf="selectSortSelected" class="browser-default select-sort" #selectSort (change)="selectSortChange(selectSort.value)">
-        <option value="default" [attr.selected]="selectSortSelected === 'default' ? true : null">default</option>
-        <option value="endDate" [attr.selected]="selectSortSelected === 'endDate' ? true : null">end date</option>
-        <option value="startDate" [attr.selected]="selectSortSelected === 'startDate' ? true : null">start date</option>
-        <option value="book.name" [attr.selected]="selectSortSelected === 'book.name' ? true : null">title</option>
-        <option value="book.author" [attr.selected]="selectSortSelected === 'book.author' ? true : null">author</option>
-    </select>
+    <div *ngIf="myBookList && myBookList.length > 0" class="d-inline-block">
+        <p class="sort-label d-inline-block">Sort by:</p>
+        <select *ngIf="selectSortSelected" class="browser-default select-sort" #selectSort (change)="selectSortChange(selectSort.value)">
+            <option value="default" [attr.selected]="selectSortSelected === 'default' ? true : null">default</option>
+            <option value="endDate" [attr.selected]="selectSortSelected === 'endDate' ? true : null">end date</option>
+            <option value="startDate" [attr.selected]="selectSortSelected === 'startDate' ? true : null">start date</option>
+            <option value="book.name" [attr.selected]="selectSortSelected === 'book.name' ? true : null">title</option>
+            <option value="book.author" [attr.selected]="selectSortSelected === 'book.author' ? true : null">author</option>
+        </select>
+    </div>
     <table class="table table-bordered table-responsive-md" *ngIf="!cardOrientation && myBookList && myBookList.length > 0">
 
         <thead>
@@ -29,7 +31,7 @@
             </td>
             <td>{{myBook.book.author}}</td>
             <td class="td-from-to">
-                <p>
+                <p [ngClass]="{'delayed date': myBook.endDate < currentDate}">
                     {{myBook.startDateStr}} - {{myBook.endDateStr}}
                 </p>
             </td>

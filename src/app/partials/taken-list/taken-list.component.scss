@@ -79,14 +79,14 @@
                margin-bottom: 5px;
             }
          }
-         &.delayed {
-            &.card {
-               box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.4);
-            }
-            .delayed.date {
-               color: #ff0000;
-            }
-         }
+      }
+   }
+   .delayed {
+      &.card {
+         box-shadow: 0 4px 8px 0 rgba(255, 0, 0, 0.4);
+      }
+      .delayed.date, &.date {
+         color: #ff0000;
       }
    }
 }

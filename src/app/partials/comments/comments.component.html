@@ -1,6 +1,6 @@
 <a class="book-action" (click)="commentsModal.show()" mdbTooltip="ADD COMMENT" placement="bottom">
     <i class="fa fa-comments-o"></i>
-    <span *ngIf="commentList" class="comments-count">{{commentList.length}}</span>
+    <span *ngIf="commentList" class="comments-count" [ngClass]="{'none': commentList.length === 0}">{{commentList.length}}</span>
 </a>
 
 <div mdbModal #commentsModal="mdb-modal" class="modal fade right" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalComments" aria-hidden="true">

@@ -45,8 +45,8 @@
     </div>
     <div *ngIf="book">
         <div *ngIf="userList.length > 0; else emptyList">
-            <img class="title-book image" [src]="book.imageLink">
-            <p class="h4 title-book">{{book.name}} <span class="h5">{{book.author}}</span></p>
+            <img class="title-book image d-inline-block" [src]="book.imageLink || '../../assets/images/book.png'">
+            <p class="h4 title-book d-inline-block">{{book.name}} <span class="h5">{{book.author}}</span></p>
             <table class="table table-bordered table-responsive-md">
                 <tbody>
                 <tr *ngFor="let person of userList">

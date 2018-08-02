@@ -75,6 +75,11 @@
    }
 }
 .title-book {
+   &.image {
+      width: 100px;
+      margin-right: 10px;
+      vertical-align: baseline;
+   }
    span {
       margin-left: 10px;
       font-size: 16px;

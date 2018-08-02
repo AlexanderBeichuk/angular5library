@@ -126,11 +126,12 @@ export class TakeBookComponent implements OnInit {
             item.forEach(element => {
                 const waitBook: any = element.payload.toJSON();
                 waitBook['$key'] = element.key;
-                this.waitingList.push(waitBook as WaitBook);
+                if (waitBook.book.id === this.book['$key']) {
+                    this.waitingList.push(waitBook as WaitBook);
+                }
             });
         });
     }
-
     getCountWaitingForMe(): number {
         const userLength = _.findIndex(this.waitingList, waitBook => {
                 return waitBook.user === this.authorizeService.getUser().id && waitBook.book.id === this.book['$key'];

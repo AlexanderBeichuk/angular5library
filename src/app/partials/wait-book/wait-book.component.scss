@@ -1,0 +1,17 @@
+a {
+   position: relative;
+   .reservations-count {
+      position: absolute;
+      bottom: -9px;
+      right: -5px;
+      padding: 2px 7px;
+      background: #337ab7;
+      color: #ffffff;
+      border-radius: 100%;
+      font-size: 10px;
+      font-weight: bold;
+      &.none {
+         background: #808080;
+      }
+   }
+}

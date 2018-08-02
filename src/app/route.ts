@@ -2,7 +2,7 @@ import {MyBooksComponent} from './pages/my-book-list/my-books.component';
 import {LoginComponent} from './pages/login/login.component';
 import {CabinetComponent} from './pages/cabinet/cabinet.component';
 import {BooksComponent} from './pages/books/books.component';
-import {EditBookComponent} from './partials/edit-book/edit-book.component';
+import {EditBookComponent} from './pages/edit-book/edit-book.component';
 import {Routes} from '@angular/router';
 import {SettingsComponent} from './pages/settings/settings.component';
 import {HomeComponent} from './pages/home/home.component';

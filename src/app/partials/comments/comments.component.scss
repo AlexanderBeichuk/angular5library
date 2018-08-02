@@ -10,6 +10,9 @@
       border-radius: 100%;
       font-size: 10px;
       font-weight: bold;
+      &.none {
+         background: #808080;
+      }
    }
 }
 .comments-modal-dialog {

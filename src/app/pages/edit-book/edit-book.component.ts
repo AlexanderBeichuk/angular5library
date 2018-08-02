@@ -25,7 +25,7 @@ export class EditBookComponent implements OnInit {
             item.forEach(element => {
                 const book: any = element.payload.toJSON();
                 book['$key'] = element.key;
-                if (book['$key'] === _.split(this.router.url, '/book/edit-book/')[1]) {
+                if (book['$key'] === _.split(this.router.url, '/book/edit/')[1]) {
                     this.book = book;
                 }
             });

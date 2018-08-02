@@ -30,7 +30,7 @@ export class BookFormComponent implements OnInit {
                 private uploadService: UploadService, private tostr: ToastrService, private router: Router) { }
 
     ngOnInit() {
-        this.book = this.book ? this.book : this.resetBook();
+        this.book = this.book || this.resetBook();
         this.allLabelList = this.labelService.getList();
         this.allStatusList = this.statusService.getList();
         this.event = _.split(this.router.url, '/')[2];

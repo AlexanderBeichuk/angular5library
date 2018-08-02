@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AuthorizeService } from '../../services/authorize.service';
+import {Component, OnInit, Input} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {WaitBookService} from '../../services/wait-book.service';
 import {WaitBook} from '../../models/reserveBook';
@@ -16,10 +15,10 @@ export class WaitBookComponent implements OnInit {
     @Input() book;
     @Input() taken;
     @Input() user;
-    reservations: WaitBook[];
-    countReservation: number;
 
-    constructor(private authorizeService: AuthorizeService, private toast: ToastrService, private waitBookService: WaitBookService) {
+    reservations: WaitBook[];
+
+    constructor(private toast: ToastrService, private waitBookService: WaitBookService) {
     }
 
     ngOnInit() {
@@ -30,9 +29,9 @@ export class WaitBookComponent implements OnInit {
         this.waitBookService.add({
             $key: null,
             book: this.book,
-            user: this.user.id || this.authorizeService.getUser().id
+            user: this.user.id
         });
-        this.toast.success('You add-book ' + this.book.name + ' to waiting book-list!');
+        this.toast.success('You add ' + this.book.name + ' to waiting list!');
         console.log('reserve');
     }
 
@@ -48,19 +47,18 @@ export class WaitBookComponent implements OnInit {
     }
 
     findReservation(): boolean {
-        let find = false;
-        this.countReservation = 0;
-        this.user = this.user || this.authorizeService.getUser();
-        _.map(this.reservations, reservation => {
-            if (reservation.book.id === (this.book['$key'] || this.book.id)) {
-                this.countReservation += 1;
-                if (reservation.user === this.user.id) {
-                    find = true;
-                }
-            }
-            return reservation;
+        return _.find(this.reservations, reservation => {
+            return reservation.book.id === (this.book['$key'] || this.book.id) && reservation.user === this.user.id;
         });
-        return find;
+    }
+
+    getCountReservationByBook(): any[] {
+        const filterByBook = _.filter(this.reservations, reservation => {
+            return reservation.book.id === (this.book['$key'] || this.book.id);
+        });
+        return _.findIndex(filterByBook, reservation => {
+            return reservation.user === this.user.id;
+        }) + 1 || filterByBook.length;
     }
 
     deleteReservation(): void {

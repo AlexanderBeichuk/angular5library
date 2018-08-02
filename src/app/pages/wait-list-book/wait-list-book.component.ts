@@ -27,7 +27,7 @@ export class WaitListBookComponent implements OnInit {
             item.forEach(element => {
                 const book: any = element.payload.toJSON();
                 book['$key'] = element.key;
-                if (book['$key'] === _.split(this.router.url, '/book/wait-book/')[1]) {
+                if (book['$key'] === _.split(this.router.url, '/book/wait/')[1]) {
                     this.book = book;
                 }
             });
