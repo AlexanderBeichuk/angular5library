@@ -1,6 +1,6 @@
 <section class="my-5 container home">
 
-    <h2 class="h1-responsive text-center my-5 page-title">Mifort lib</h2>
+ <!--   <h2 class="h1-responsive text-center my-5 page-title">Mifort lib</h2>
     <div *ngFor="let book of bookList; let index = index">
         <div class="row book">
             <div class="col-12 col-md-5" *ngIf="index % 2 === 0">
@@ -23,7 +23,7 @@
                     {{book.description}}
                 </p>
                 <p>by <a><strong>{{book.author}}</strong></a></p>
-                <!--<a class="btn btn-primary btn-md">Read more</a>-->
+                &lt;!&ndash;<a class="btn btn-primary btn-md">Read more</a>&ndash;&gt;
                 <app-comments [book]="book"></app-comments>
                 <app-take-book [book]="book"></app-take-book>
             </div>
@@ -37,5 +37,8 @@
             </div>
         </div>
         <hr class="my-5" *ngIf="index !== bookList.length-1">
-    </div>
+    </div>-->
+    <audio #remoteAudio></audio>
+    <button *ngIf="incomingCall" (click)="answer(remoteAudio)">Answer</button>
+    <button (click)="call(remoteAudio)">Call</button>
 </section>

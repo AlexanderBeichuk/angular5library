@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book';
 import { HelperService } from '../../services/helper.service';
+import {YayFonFactory} from 'node_modules/@efendizadeh/yayfon-web-sdk/lib/YayFonFactory';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,15 @@ import { HelperService } from '../../services/helper.service';
 export class HomeComponent implements OnInit {
 
     bookList;
+    incomingCall = false;
+    connection;
 
     constructor(private bookService: BookService, private helperService: HelperService) {
     }
 
     ngOnInit() {
         this.setAllBooks();
+        this.aa();
     }
 
     private setAllBooks(): void {
@@ -30,6 +34,61 @@ export class HomeComponent implements OnInit {
                 book['statuses'] = this.helperService.objectToArray(book['statuses']);
                 this.bookList.push(book as Book);
             });
+        });
+    }
+
+    aa() {
+        const clientData = {
+            login: 'alexander.beichuk_gmail.com',
+            password: 'CMJqZHdLNUID1faojoJDNJQILHEeClmSrvJAYKqMD9tGvaL5',
+            displayName: undefined,
+        };
+
+        this.connection = new YayFonFactory(clientData, (call, userName) => {
+            this.reactionOnCall(call, userName);
+        });
+        this.connection.start();
+    }
+
+    reactionOnCall(call, userName) {
+        const isIncoming = call.isIncomingCall();
+        if (isIncoming) {
+            call.onEnd(() => {
+               console.log('end');
+            });
+            call.onFail(() => {
+                console.log('onFail');
+            });
+            call.onProgress(() => {
+                this.incomingCall = true;
+                console.log('onProgress');
+            });
+        }
+
+        if (!isIncoming) {
+            call.onEnd(() => {
+                console.log('end');
+            });
+            call.onFail(() => {
+                console.log('onFail');
+            });
+            call.onAnswer(() => {
+                console.log('onAnswer');
+            });
+        }
+    }
+
+    answer(remoteAudio) {
+        this.connection.getAgentCall().answer(function (e) {
+            remoteAudio.srcObject = e.stream;
+            remoteAudio.play();
+        });
+    }
+
+    call(remoteAudio) {
+        this.connection.call('+375299601611', function (e) {
+            remoteAudio.srcObject = e.stream;
+            remoteAudio.play();
         });
     }
 }
