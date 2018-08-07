@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book';
 import { HelperService } from '../../services/helper.service';
-import {YayFonFactory} from 'node_modules/@efendizadeh/yayfon-web-sdk/lib/YayFonFactory';
+import {YayFonFactory} from '@efendizadeh/yayfon-web-sdk/lib/YayFonFactory';
 
 @Component({
   selector: 'app-home',
@@ -44,20 +44,18 @@ export class HomeComponent implements OnInit {
             displayName: undefined,
         };
 
-        this.connection = new YayFonFactory(clientData, (call, userName) => {
-            this.reactionOnCall(call, userName);
-        });
+        this.connection = new YayFonFactory(clientData, this.onCall);
         this.connection.start();
     }
 
-    reactionOnCall(call, userName) {
+    onCall(call, userName) {
         const isIncoming = call.isIncomingCall();
         if (isIncoming) {
             call.onEnd(() => {
                console.log('end');
             });
-            call.onFail(() => {
-                console.log('onFail');
+            call.onFail((e) => {
+                console.log('onFail', e);
             });
             call.onProgress(() => {
                 this.incomingCall = true;
@@ -69,8 +67,8 @@ export class HomeComponent implements OnInit {
             call.onEnd(() => {
                 console.log('end');
             });
-            call.onFail(() => {
-                console.log('onFail');
+            call.onFail((e) => {
+                console.log('onFail', e);
             });
             call.onAnswer(() => {
                 console.log('onAnswer');
@@ -86,7 +84,7 @@ export class HomeComponent implements OnInit {
     }
 
     call(remoteAudio) {
-        this.connection.call('+375299601611', function (e) {
+        this.connection.call('375299601611', function (e) {
             remoteAudio.srcObject = e.stream;
             remoteAudio.play();
         });
