@@ -111,6 +111,10 @@
    }
    .search-oz {
       text-align: center;
+      .reset-filter {
+         text-align: left;
+         font-weight: 100;
+      }
       a {
          width: fit-content;
          color: #000000;

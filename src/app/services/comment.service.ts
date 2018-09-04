@@ -9,12 +9,12 @@ export class CommentService {
     constructor(private firebase: AngularFireDatabase) {
     }
 
-    getConectToList() {
+    getConnectToList() {
         return this.firebase.list('comments');
     }
 
     add(comment: Comment) {
-        this.getConectToList().push({
+        this.getConnectToList().push({
             book: comment.book,
             date: comment.date,
             text: comment.text,
@@ -24,7 +24,7 @@ export class CommentService {
     }
 
     update(comment: Comment) {
-        this.getConectToList().update(comment.$key, {
+        this.getConnectToList().update(comment.$key, {
             book: comment.book,
             date: comment.date,
             text: comment.text,
@@ -34,6 +34,6 @@ export class CommentService {
     }
 
     delete($key: string) {
-        this.getConectToList().remove($key);
+        this.getConnectToList().remove($key);
     }
 }

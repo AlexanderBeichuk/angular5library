@@ -3,6 +3,8 @@ import { ToastrService } from 'ngx-toastr';
 import {WaitBookService} from '../../services/wait-book.service';
 import {WaitBook} from '../../models/reserveBook';
 import * as _ from 'lodash';
+import {EventService} from '../../services/event.service';
+import {Event} from '../../models/event';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class WaitBookComponent implements OnInit {
 
     reservations: WaitBook[];
 
-    constructor(private toast: ToastrService, private waitBookService: WaitBookService) {
+    constructor(private toast: ToastrService, private waitBookService: WaitBookService, private eventService: EventService) {
     }
 
     ngOnInit() {
@@ -32,11 +34,15 @@ export class WaitBookComponent implements OnInit {
             user: this.user.id
         });
         this.toast.success('You add ' + this.book.name + ' to waiting list!');
-        console.log('reserve');
+        this.eventService.add(new Event(
+            this.user.id,
+            `reserved ${this.book.name}`,
+            new Date().toString()
+        ));
     }
 
     private setReservation(): void {
-        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.waitBookService.getConnectToList().snapshotChanges().subscribe(item => {
             this.reservations = [];
             item.forEach(element => {
                 const reservation = element.payload.toJSON();
@@ -62,13 +68,17 @@ export class WaitBookComponent implements OnInit {
     }
 
     deleteReservation(): void {
-        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.waitBookService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const reservation: any = element.payload.toJSON();
                 reservation['$key'] = element.key;
                 if (reservation.user === this.user.id && reservation.book.id === (this.book['$key'] || this.book.id)) {
-                    console.log('delete');
                     this.waitBookService.delete(reservation['$key']);
+                    this.eventService.add(new Event(
+                        this.user.id,
+                        `canceled reservarvation on ${this.book.name}`,
+                        new Date().toString()
+                    ));
                 }
             });
         });

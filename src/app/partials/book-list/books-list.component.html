@@ -6,7 +6,7 @@
 
 
 <div class="books-list">
-    <table class="table table-bordered table-responsive-md">
+    <table class="table table-bordered table-responsive-md" *ngIf="(bookList | filter:searchService.getSearch())?.length > 0">
 
         <thead>
         <tr>
@@ -36,7 +36,7 @@
             <th></th>
         </tr>
         </thead>
-        <tbody *ngIf="(bookList | filter:searchService.getSearch())?.length > 0">
+        <tbody>
         <tr *ngFor="let book of bookList | filter:searchService.getSearch()">
             <td class="td-image">
                 <img class="image" [src]="book.imageLink || '../../../assets/images/book.png'">
@@ -81,12 +81,13 @@
         </tr>
         </tbody>
     </table>
-    <ng-template *ngIf="(bookList | filter:searchService.getSearch())?.length === 0">
-        <div *ngIf="bookList?.length > 0" class="search-oz">
-            <a href='https://oz.by/search/?q={{searchService.getSearch()}}' target="_blank">
-                <span>Search on</span>
-                <img src="../../../assets/images/oz.png">
-            </a>
+    <div class="container search-oz" *ngIf="(bookList | filter:searchService.getSearch())?.length === 0">
+        <div class="reset-filter">
+            <a (click)="resetSearchFilter()">Reset filter</a>
         </div>
-    </ng-template>
+        <a href='https://oz.by/search/?q={{searchService.getSearch()}}' target="_blank">
+            <span>Search on</span>
+            <img src="../../../assets/images/oz.png">
+        </a>
+    </div>
 </div>

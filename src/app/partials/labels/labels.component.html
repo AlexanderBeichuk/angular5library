@@ -19,9 +19,6 @@
             <div class="modal-body">
                 <label for="titleInput">Title</label>
                 <input type="text" id="titleInput" name="name" #name="ngModel" [(ngModel)]="selectLabel.name" class="form-control" required>
-
-                <label for="colorInput">Color</label>
-                <input type="text" id="colorInput" name="color" #color="ngModel" [(ngModel)]="selectLabel.color" class="form-control" required>
             </div>
             <div class="modal-footer">
                 <button *ngIf="event === 'edit'" type="button" class="btn btn-danger waves-light" aria-status="Close" (click)="deleteLabel(label.$key)" mdbWavesEffect>Delete</button>

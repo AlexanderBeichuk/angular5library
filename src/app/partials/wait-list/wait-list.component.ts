@@ -27,8 +27,8 @@ export class WaitListComponent implements OnInit {
     }
 
     private setWaitList(): void {
-        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
-            let userIdList = [];
+        this.waitBookService.getConnectToList().snapshotChanges().subscribe(item => {
+            const userIdList = [];
             item.forEach(element => {
                 const wb: any = element.payload.toJSON();
                 wb['$key'] = element.key;
@@ -38,11 +38,11 @@ export class WaitListComponent implements OnInit {
                     this.bookList.push(wb.book as Book);
                 }
             });
-            this.getUsersById(userIdList);
+            this.getUserListById(userIdList);
         });
     }
 
-    private getUsersById(userIdList): void {
+    private getUserListById(userIdList): void {
         this.userService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const user: any = element.payload.toJSON();
@@ -51,6 +51,7 @@ export class WaitListComponent implements OnInit {
                     this.userList.push(user as User);
                 }
             });
+            _.reverse(this.userList);
         });
     }
 }

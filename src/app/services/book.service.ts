@@ -10,12 +10,12 @@ export class BookService {
     constructor(private firebase: AngularFireDatabase) {
     }
 
-    getConectToList() {
+    getConnectToList() {
         return this.firebase.list('books');
     }
 
     add(book: Book) {
-        this.getConectToList().push({
+        this.getConnectToList().push({
             name: book.name,
             author: book.author,
             imageLink: book.imageLink || '',
@@ -42,7 +42,7 @@ export class BookService {
     }*/
 
     update(book: Book) {
-        this.getConectToList().update(book.$key, {
+        this.getConnectToList().update(book.$key, {
             name: book.name,
             author: book.author,
             imageLink: book.imageLink || '',
@@ -55,7 +55,7 @@ export class BookService {
     }
 
     delete($key: string) {
-        this.getConectToList().remove($key);
+        this.getConnectToList().remove($key);
     }
 
     getBook(book) {

@@ -10,6 +10,9 @@ import { Upload } from '../../models/upload';
 import { StatusService } from '../../services/status.service';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
+import {EventService} from '../../services/event.service';
+import {Event} from '../../models/event';
+import {AuthorizeService} from '../../services/authorize.service';
 
 @Component({
   selector: 'app-book-form',
@@ -27,7 +30,9 @@ export class BookFormComponent implements OnInit {
     event: string;
 
     constructor(private bookService: BookService, private labelService: LabelService, private statusService: StatusService,
-                private uploadService: UploadService, private tostr: ToastrService, private router: Router) { }
+                private uploadService: UploadService, private eventService: EventService, private authorizeService: AuthorizeService,
+                private tostr: ToastrService,
+                private router: Router) { }
 
     ngOnInit() {
         this.book = this.book || this.resetBook();
@@ -39,8 +44,18 @@ export class BookFormComponent implements OnInit {
     addBook(bookForm: NgForm): void {
         if (bookForm.value.$key == null) {
             this.bookService.add(this.book);
+            this.eventService.add(new Event(
+                this.authorizeService.getUser().id,
+                `added book ${this.book.name}`,
+                new Date().toString()
+            ));
         } else {
             this.bookService.update(this.book);
+            this.eventService.add(new Event(
+                this.authorizeService.getUser().id,
+                `updated book ${this.book.name}`,
+                new Date().toString()
+            ));
         }
         /*this.resetForm();*/
         this.tostr.success('Success');

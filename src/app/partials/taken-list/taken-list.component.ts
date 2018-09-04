@@ -26,7 +26,7 @@ export class TakenListComponent implements OnInit {
     }
 
     private setMyTakeBookList() {
-        this.takeBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.takeBookService.getConnectToList().snapshotChanges().subscribe(item => {
             this.myBookList = [];
             item.forEach(element => {
                 const takeBook: any = element.payload.toJSON();

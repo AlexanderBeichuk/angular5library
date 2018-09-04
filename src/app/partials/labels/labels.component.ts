@@ -42,10 +42,9 @@ export class LabelsComponent implements OnInit {
     readLabel(label): void {
         this.selectLabel = {
             $key: label.$key,
-            name: label.name,
-            color: label.color
+            name: label.name
         };
-        this.openPopup('edit-book', label);
+        this.openPopup('edit', label);
     }
 
     deleteLabel(key: string): void {
@@ -57,8 +56,7 @@ export class LabelsComponent implements OnInit {
     resetLabel(): Label {
         return {
             $key: null,
-            name: '',
-            color: ''
+            name: ''
         };
     }
 
@@ -69,7 +67,7 @@ export class LabelsComponent implements OnInit {
     }
 
     setList(): void {
-        this.labelService.getConectToList().snapshotChanges().subscribe(item => {
+        this.labelService.getConnectToList().snapshotChanges().subscribe(item => {
             this.labelList = [];
             item.forEach(element => {
                 const label = element.payload.toJSON();

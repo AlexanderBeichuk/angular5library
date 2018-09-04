@@ -23,7 +23,7 @@ export class WaitListBookComponent implements OnInit {
     }
 
     readBook(): void {
-        this.bookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.bookService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const book: any = element.payload.toJSON();
                 book['$key'] = element.key;

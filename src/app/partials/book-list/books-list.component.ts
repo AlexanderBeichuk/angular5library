@@ -83,7 +83,9 @@ export class BooksListComponent implements OnInit {
         if (this.dropdownSelectLabels.length < 1) {
             this.clearSortAndFilters();
         } else {
-            this.bookList = _.concat(this.filterByLabels(this.allBookList, 'labels', null), this.filterByLabels(this.allBookList, 'statuses', null));
+            this.bookList = _.uniq(
+                _.concat(this.filterByLabels(this.allBookList, 'labels', null), this.filterByLabels(this.allBookList, 'statuses', null))
+            );
         }
     }
 
@@ -103,7 +105,7 @@ export class BooksListComponent implements OnInit {
     }
 
     setAllBooks(): void {
-        this.bookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.bookService.getConnectToList().snapshotChanges().subscribe(item => {
             this.bookList = [];
             this.allBookList = [];
             item.forEach(element => {
@@ -129,7 +131,7 @@ export class BooksListComponent implements OnInit {
     }
 
     private setLabelStatusList(): void {
-        this.statusService.getConectToList().snapshotChanges().subscribe(item => {
+        this.statusService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const status = element.payload.toJSON();
                 status['id'] = element.key + '-field-statuses';
@@ -139,7 +141,7 @@ export class BooksListComponent implements OnInit {
         });
     }
     private setLabelList(): void {
-        this.labelService.getConectToList().snapshotChanges().subscribe(item => {
+        this.labelService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const label = element.payload.toJSON();
                 label['id'] = element.key + '-field-labels';
@@ -176,6 +178,11 @@ export class BooksListComponent implements OnInit {
         this.bookList = this.allBookList;
     }
     onDeSelectAll(labels: any) {
+        this.clearSortAndFilters();
+    }
+
+    resetSearchFilter() {
+        this.searchService.setSeasch('');
         this.clearSortAndFilters();
     }
 }

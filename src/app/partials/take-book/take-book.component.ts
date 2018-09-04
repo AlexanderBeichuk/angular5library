@@ -8,6 +8,8 @@ import { AuthorizeService } from '../../services/authorize.service';
 import {WaitBookService} from '../../services/wait-book.service';
 import {WaitBook} from '../../models/reserveBook';
 import * as _ from 'lodash';
+import {EventService} from '../../services/event.service';
+import {Event} from '../../models/event';
 
 @Component({
     selector: 'app-take-book',
@@ -39,7 +41,8 @@ export class TakeBookComponent implements OnInit {
         disableUntil: { year: this.todayDate.getFullYear(), month: this.todayDate.getMonth() + 1, day: this.todayDate.getDate() - 1 }
     };
 
-    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService, private authorizeService: AuthorizeService, private waitBookService: WaitBookService) {}
+    constructor(private tostr: ToastrService, private bookService: BookService, private takeBookService: TakeBookService,
+    private eventService: EventService, private authorizeService: AuthorizeService, private waitBookService: WaitBookService) {}
 
     ngOnInit() {
         this.setTakenBooks();
@@ -56,7 +59,12 @@ export class TakeBookComponent implements OnInit {
             this.removeWaitingByUserBook(this.currentUser.id, this.book['$key']);
         }
         this.takeModal.hide();
-        this.tostr.success('You take-book ' + this.book.name + ' book!');
+        this.tostr.success('You taked book ' + this.book.name + ' book!');
+        this.eventService.add(new Event(
+            this.currentUser.id,
+            `taked ${this.book.name}`,
+            new Date().toString()
+        ));
     }
 
     private fillData(): void {
@@ -67,7 +75,7 @@ export class TakeBookComponent implements OnInit {
     }
 
     private removeWaitingByUserBook(userId, bookId): void {
-        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.waitBookService.getConnectToList().snapshotChanges().subscribe(item => {
             let removeWaitBook = null;
             item.forEach(element => {
                 const waitBook: any = element.payload.toJSON();
@@ -103,7 +111,7 @@ export class TakeBookComponent implements OnInit {
     }
 
     private setTakenBooks(): void {
-        this.takeBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.takeBookService.getConnectToList().snapshotChanges().subscribe(item => {
             this.takenBook = null;
             item.forEach(element => {
                 const takeBook = element.payload.toJSON();
@@ -121,7 +129,7 @@ export class TakeBookComponent implements OnInit {
     }
 
     private findBookWaiting(): void {
-        this.waitBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.waitBookService.getConnectToList().snapshotChanges().subscribe(item => {
             this.waitingList = [];
             item.forEach(element => {
                 const waitBook: any = element.payload.toJSON();

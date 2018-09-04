@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { CommentService } from '../../../services/comment.service';
 import {AuthorizeService} from '../../../services/authorize.service';
+import {HelperService} from '../../../services/helper.service';
 
 @Component({
     selector: 'app-comments-list',
@@ -13,8 +14,9 @@ export class CommentsListComponent implements OnInit {
     @Output() outputList = new EventEmitter();
     commentList = [];
     currentUser = this.authorizeService.getUser();
+    dateFormat = this.helperService.dateFormat;
 
-    constructor(private commentService: CommentService, private authorizeService: AuthorizeService) {
+    constructor(private commentService: CommentService, private authorizeService: AuthorizeService, private helperService: HelperService) {
     }
 
     ngOnInit() {
@@ -22,7 +24,7 @@ export class CommentsListComponent implements OnInit {
     }
 
     private setAllComments(): void {
-        this.commentService.getConectToList().snapshotChanges().subscribe(item => {
+        this.commentService.getConnectToList().snapshotChanges().subscribe(item => {
             this.commentList = [];
             item.forEach(element => {
                 const comment = element.payload.toJSON();
@@ -37,11 +39,5 @@ export class CommentsListComponent implements OnInit {
 
     removeComment(comment): void {
         this.commentService.delete(comment['$key']);
-    }
-
-    dateFormat(date): string {
-        date = new Date(date);
-        return (date.getDate() > 9 ? date.getDate() : '0' + date.getDate()) + '/' +
-            (date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1)) + '/' + date.getFullYear();
     }
 }

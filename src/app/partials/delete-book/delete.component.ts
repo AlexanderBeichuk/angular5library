@@ -21,7 +21,7 @@ export class DeleteComponent implements OnInit {
     }
 
     private deleteBookComments(book): void {
-        this.commentService.getConectToList().snapshotChanges().subscribe(item => {
+        this.commentService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const comment = element.payload.toJSON();
                 comment['$key'] = element.key;
@@ -33,7 +33,7 @@ export class DeleteComponent implements OnInit {
     }
 
     private deleteBookTakeList(book): void {
-        this.takeBookService.getConectToList().snapshotChanges().subscribe(item => {
+        this.takeBookService.getConnectToList().snapshotChanges().subscribe(item => {
             item.forEach(element => {
                 const record = element.payload.toJSON();
                 record['$key'] = element.key;

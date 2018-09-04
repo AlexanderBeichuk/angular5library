@@ -19,9 +19,6 @@
                 <div class="modal-body">
                     <status for="titleInput">Title</status>
                     <input type="text" id="titleInput" name="name" #name="ngModel" [(ngModel)]="selectStatus.name" class="form-control" required>
-
-                    <status for="colorInput">Color</status>
-                    <input type="text" id="colorInput" name="color" #color="ngModel" [(ngModel)]="selectStatus.color" class="form-control" required>
                 </div>
                 <div class="modal-footer">
                     <button *ngIf="event === 'edit'" type="button" class="btn btn-danger waves-light" aria-status="Close" (click)="deleteStatus(status.$key)" mdbWavesEffect>Delete</button>

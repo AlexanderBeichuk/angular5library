@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommentService } from '../../../services/comment.service';
 import { Comment } from '../../../models/comment';
 import { AuthorizeService } from '../../../services/authorize.service';
+import {Event} from '../../../models/event';
+import {EventService} from '../../../services/event.service';
 
 @Component({
     selector: 'app-add-comment',
@@ -20,7 +22,7 @@ export class AddCommentComponent implements OnInit {
         score: null
     };
 
-    constructor(private commentService: CommentService, private authorizeService: AuthorizeService) {
+    constructor(private commentService: CommentService, private eventService: EventService, private authorizeService: AuthorizeService) {
     }
 
     ngOnInit() {
@@ -37,6 +39,11 @@ export class AddCommentComponent implements OnInit {
                 score: this.comment.score
             };
             this.commentService.add(this.comment);
+            this.eventService.add(new Event(
+                this.authorizeService.getUser().id,
+                `commented ${this.book.name} \"${this.comment.text}\"`,
+                new Date().toString()
+            ));
             this.comment.text = '';
             this.comment.score = null;
         }

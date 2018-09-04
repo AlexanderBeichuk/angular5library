@@ -44,9 +44,8 @@ export class StatusesComponent implements OnInit {
         this.selectStatus = {
             $key: status.$key,
             name: status.name,
-            color: status.color
         };
-        this.openPopup('edit-book', status);
+        this.openPopup('edit', status);
     }
 
     deleteStatus(key: string): void {
@@ -64,13 +63,12 @@ export class StatusesComponent implements OnInit {
     resetStatus(): Status {
         return {
             $key: null,
-            name: '',
-            color: ''
+            name: ''
         };
     }
 
     setList(): void {
-        this.statusService.getConectToList().snapshotChanges().subscribe(item => {
+        this.statusService.getConnectToList().snapshotChanges().subscribe(item => {
             this.statusList = [];
             item.forEach(element => {
                 const status = element.payload.toJSON();

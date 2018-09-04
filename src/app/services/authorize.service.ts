@@ -8,10 +8,10 @@ export class AuthorizeService {
     }
 
     setUser(user): void {
-        localStorage.setItem('authorize', JSON.stringify(user));
+        localStorage.setItem('authorize', btoa(JSON.stringify(user)));
     }
     getUser(): any {
-        return JSON.parse(localStorage.getItem('authorize'));
+        return JSON.parse(atob(localStorage.getItem('authorize')));
     }
     clearUser(): any {
         localStorage.removeItem('authorize');

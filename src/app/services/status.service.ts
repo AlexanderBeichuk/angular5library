@@ -11,7 +11,7 @@ export class StatusService {
 
     constructor(private firebase: AngularFireDatabase) { }
 
-    getConectToList() {
+    getConnectToList() {
         return this.firebase.list('statuses');
     }
 
@@ -20,34 +20,18 @@ export class StatusService {
     }
 
     add(status: Status) {
-        this.getConectToList().push({
-            name: status.name,
-            color: status.color
+        this.getConnectToList().push({
+            name: status.name
         });
     }
 
-    /*readStatus($key: string) {
-        var x = this.getConectToList();
-        x.snapshotChanges().subscribe(item => {
-            item.forEach(element => {
-                var y = element.payload.toJSON();
-                y["$key"] = element.key;
-                if (y["$key"] === $key) {
-                    return-book y;
-                }
-            });
-        });
-        return-book null;
-    }*/
-
     update(status: Status) {
-        this.getConectToList().update(status.$key, {
-            name: status.name,
-            color: status.color
+        this.getConnectToList().update(status.$key, {
+            name: status.name
         });
     }
 
     delete($key: string) {
-        this.getConectToList().remove($key);
+        this.getConnectToList().remove($key);
     }
 }

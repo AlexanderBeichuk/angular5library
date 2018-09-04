@@ -2,15 +2,16 @@
    .page-title {
       font-weight: 100;
    }
-   .book {
-      .name {
-         margin-top: 10px;
-         font-size: 26px;
-         font-weight: 100;
-      }
-      .image-cover {
-         height: 210px;
-         margin: 0 auto;
+   .list-group {
+      .list-group-item {
+         color: #000000;
+         font-size: 12px;
+         .name {
+            font-weight: bold;
+         }
+         .description {
+            font-weight: 100;
+         }
       }
    }
 }
